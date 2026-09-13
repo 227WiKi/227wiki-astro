@@ -1,0 +1,53 @@
+---
+import type { CollectionEntry } from "astro:content";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardPanel,
+  CardTitle,
+} from "@/components/ui/card";
+import { resourceUrl } from "@/lib/assets";
+
+interface Props {
+  member: CollectionEntry<"members">;
+}
+
+const { member } = Astro.props;
+const displayName = member.data.nameZh ?? member.data.nameJa;
+const showJapaneseName = displayName !== member.data.nameJa;
+const avatarUrl = member.data.avatar ? resourceUrl(member.data.avatar) : undefined;
+const statusLabel = member.data.status === "active" ? "在籍" : "已毕业";
+---
+
+<article>
+  <a
+    href={`/member/${member.id}/`}
+    class="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+  >
+    <Card className="h-full transition-shadow hover:shadow-sm">
+      <CardHeader className="grid grid-cols-[4rem_1fr] items-center gap-4">
+        <div class="relative row-span-2 size-16 overflow-hidden rounded-xl bg-muted" aria-hidden="true">
+          <span class="absolute inset-0 grid place-items-center font-semibold text-muted-foreground">
+            {displayName.slice(0, 1)}
+          </span>
+          {avatarUrl && (
+            <img
+              src={avatarUrl}
+              alt=""
+              class="relative size-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+          )}
+        </div>
+        <CardTitle><h2>{displayName}</h2></CardTitle>
+        {showJapaneseName && <CardDescription>{member.data.nameJa}</CardDescription>}
+      </CardHeader>
+      <CardPanel className="flex items-center justify-between gap-4 text-sm">
+        <span class="text-muted-foreground">{statusLabel}</span>
+        <span class="font-medium">查看成员资料</span>
+      </CardPanel>
+    </Card>
+  </a>
+</article>

@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  member: CollectionEntry<"members">;
+}
+
+const { member } = Astro.props;
+const facts = [
+  member.data.birthday && {
+    term: "生日",
+    value: `${member.data.birthday.month}月${member.data.birthday.day}日`,
+  },
+  member.data.birthplace && { term: "出生地", value: member.data.birthplace },
+  member.data.heightCm && { term: "身高", value: `${member.data.heightCm} cm` },
+  member.data.bloodType && { term: "血型", value: `${member.data.bloodType}型` },
+].filter((fact): fact is { term: string; value: string } => Boolean(fact));
+---
+
+{facts.length > 0 && (
+  <section aria-labelledby="profile-facts-heading" class="flex flex-col gap-4">
+    <h2 id="profile-facts-heading" class="font-heading text-xl font-semibold">基本资料</h2>
+    <dl class="grid gap-px overflow-hidden rounded-xl border bg-border sm:grid-cols-2">
+      {facts.map((fact) => (
+        <div class="grid grid-cols-[5rem_1fr] gap-4 bg-background px-4 py-3">
+          <dt class="text-sm text-muted-foreground">{fact.term}</dt>
+          <dd class="text-sm font-medium">{fact.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+)}

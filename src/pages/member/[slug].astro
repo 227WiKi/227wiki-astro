@@ -1,0 +1,36 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import MemberHeader from "@/components/wiki/MemberHeader.astro";
+import ProfileFacts from "@/components/wiki/ProfileFacts.astro";
+import SocialLinks from "@/components/wiki/SocialLinks.astro";
+import WikiArticle from "@/components/wiki/WikiArticle.astro";
+
+interface Props {
+  member: CollectionEntry<"members">;
+}
+
+export async function getStaticPaths() {
+  const members = await getCollection("members");
+
+  return members.map((member) => ({
+    params: { slug: member.id },
+    props: { member },
+  }));
+}
+
+const { member } = Astro.props;
+const displayName = member.data.nameZh ?? member.data.nameJa;
+const { Content } = await render(member);
+---
+
+<BaseLayout title={displayName} description={`${displayName}的 22/7 成员资料。`}>
+  <div class="flex flex-col gap-10">
+    <MemberHeader member={member} />
+    <ProfileFacts member={member} />
+    <SocialLinks member={member} />
+    <WikiArticle>
+      <Content />
+    </WikiArticle>
+  </div>
+</BaseLayout>

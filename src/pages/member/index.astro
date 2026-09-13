@@ -1,4 +1,25 @@
 ---
-import SectionLanding from "@/components/prototype/SectionLanding.astro";
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import MemberCard from "@/components/wiki/MemberCard.astro";
+
+const members = await getCollection("members");
+members.sort((a, b) => {
+  const nameA = a.data.nameZh ?? a.data.nameJa;
+  const nameB = b.data.nameZh ?? b.data.nameJa;
+  return nameA.localeCompare(nameB, "zh-CN");
+});
 ---
-<SectionLanding sectionKey="member" />
+
+<BaseLayout title="Member" description="22/7 成员索引。">
+  <div class="flex flex-col gap-8">
+    <header class="flex flex-col gap-2">
+      <h1 class="font-heading text-3xl font-semibold tracking-tight">Member</h1>
+      <p class="text-muted-foreground">22/7 成员</p>
+    </header>
+
+    <div class="grid gap-4 sm:grid-cols-2">
+      {members.map((member) => <MemberCard member={member} />)}
+    </div>
+  </div>
+</BaseLayout>

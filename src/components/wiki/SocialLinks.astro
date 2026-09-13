@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  member: CollectionEntry<"members">;
+}
+
+const { member } = Astro.props;
+const hasLinks = Boolean(member.data.officialProfileUrl) || member.data.socials.length > 0;
+---
+
+{hasLinks && (
+  <section aria-labelledby="social-links-heading" class="flex flex-col gap-4">
+    <h2 id="social-links-heading" class="font-heading text-xl font-semibold">官方链接</h2>
+    <ul class="flex flex-wrap gap-3">
+      {member.data.officialProfileUrl && (
+        <li>
+          <a
+            href={member.data.officialProfileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex rounded-lg border px-3 py-2 text-sm font-medium hover:bg-accent"
+          >
+            官方成员资料
+          </a>
+        </li>
+      )}
+      {member.data.socials.map((social) => (
+        <li>
+          <a
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex rounded-lg border px-3 py-2 text-sm font-medium hover:bg-accent"
+            data-platform={social.platform}
+          >
+            {social.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
