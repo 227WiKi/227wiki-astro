@@ -1,0 +1,18 @@
+---
+import { Card, CardHeader, CardTitle, CardDescription, CardPanel } from "@/components/ui/card";
+import type { SectionDefinition } from "@/config/site";
+interface Props { section: SectionDefinition; }
+const { section } = Astro.props;
+---
+<!-- Intentionally no client directive: Coss React primitives render at build time. -->
+<Card>
+  <CardHeader>
+    <CardTitle><h3>{section.title}</h3></CardTitle>
+    <CardDescription>{section.description}</CardDescription>
+  </CardHeader>
+  <CardPanel>
+    <ul class="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+      {section.links.map((link) => <li><a href={link.path} class="underline underline-offset-4 hover:text-muted-foreground">{link.title}</a></li>)}
+    </ul>
+  </CardPanel>
+</Card>

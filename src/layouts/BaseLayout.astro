@@ -1,0 +1,38 @@
+---
+import "@/styles/global.css";
+import SiteHeader from "@/components/SiteHeader.astro";
+import SiteFooter from "@/components/SiteFooter.astro";
+import { siteName, siteUrl } from "@/config/site";
+
+interface Props { title: string; description: string; }
+const { title, description } = Astro.props;
+const pageTitle = title + " | " + siteName;
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content="zh_CN" />
+  </head>
+  <body>
+    <div class="isolate flex min-h-screen flex-col">
+      <a href="#main" class="sr-only focus:not-sr-only focus:p-4">跳转到正文</a>
+      <SiteHeader />
+      <main id="main" class="mx-auto w-full max-w-5xl flex-1 px-6 py-10" tabindex="-1">
+        <slot />
+      </main>
+      <SiteFooter />
+    </div>
+  </body>
+</html>

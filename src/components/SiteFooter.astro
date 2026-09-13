@@ -1,0 +1,10 @@
+---
+import { githubUrl, siteName } from "@/config/site";
+---
+<footer class="border-t">
+  <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-6 text-sm text-muted-foreground">
+    <span>{siteName}</span>
+    <a href={githubUrl} class="hover:underline underline-offset-4">GitHub</a>
+    <small>Copyright © {new Date().getFullYear()} {siteName}</small>
+  </div>
+</footer>
