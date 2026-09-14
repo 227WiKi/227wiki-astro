@@ -1,18 +1,20 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import SectionCard from "@/components/prototype/SectionCard.astro";
-import { sections, siteName } from "@/config/site";
+import PageHeader from "@/components/wiki/common/PageHeader.astro";
+import SectionCard from "@/components/wiki/common/SectionCard.astro";
+import { navigationGroups, siteName } from "@/config/site";
 ---
-<BaseLayout title="Architecture Prototype" description="22/7 WiKi v2 Phase 0：Astro static-first 与 Coss UI 架构验证。">
-  <div class="flex flex-col gap-8">
-    <div class="flex flex-col gap-2">
-      <h1 class="font-heading text-3xl font-semibold tracking-tight">{siteName} v2</h1>
-      <p class="text-muted-foreground">Architecture Prototype</p>
-    </div>
+<BaseLayout title={siteName} description="22/7 相关资料的非官方粉丝维基与档案。">
+  <div class="flex flex-col gap-10">
+    <PageHeader title={siteName} description="22/7 相关资料的非官方粉丝维基与档案。" />
+
     <section id="sections" aria-labelledby="sections-heading" class="flex flex-col gap-4">
-      <h2 id="sections-heading" class="text-lg font-semibold">Sections</h2>
+      <div class="flex flex-col gap-1">
+        <p class="text-sm font-medium text-(--wiki-brand)">Browse</p>
+        <h2 id="sections-heading" class="font-heading text-2xl font-semibold tracking-tight">内容分类</h2>
+      </div>
       <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {sections.map((section) => <SectionCard section={section} />)}
+        {navigationGroups.map((group) => <SectionCard group={group} />)}
       </div>
     </section>
   </div>

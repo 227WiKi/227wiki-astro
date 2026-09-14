@@ -5,6 +5,7 @@ import MemberHeader from "@/components/wiki/MemberHeader.astro";
 import ProfileFacts from "@/components/wiki/ProfileFacts.astro";
 import SocialLinks from "@/components/wiki/SocialLinks.astro";
 import WikiArticle from "@/components/wiki/WikiArticle.astro";
+import Breadcrumbs from "@/components/wiki/common/Breadcrumbs.astro";
 
 interface Props {
   member: CollectionEntry<"members">;
@@ -26,6 +27,13 @@ const { Content } = await render(member);
 
 <BaseLayout title={displayName} description={`${displayName}的 22/7 成员资料。`}>
   <div class="flex flex-col gap-10">
+    <Breadcrumbs
+      items={[
+        { label: "首页", href: "/" },
+        { label: "Member", href: "/member/" },
+        { label: displayName },
+      ]}
+    />
     <MemberHeader member={member} />
     <ProfileFacts member={member} />
     <SocialLinks member={member} />

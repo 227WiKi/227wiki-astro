@@ -1,0 +1,20 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Breadcrumbs from "@/components/wiki/common/Breadcrumbs.astro";
+import PageHeader from "@/components/wiki/common/PageHeader.astro";
+---
+
+<BaseLayout title="404" description="请求的页面不存在。" noindex>
+  <div class="flex flex-col gap-8">
+    <Breadcrumbs items={[{ label: "首页", href: "/" }, { label: "404" }]} />
+    <PageHeader eyebrow="404" title="页面不存在" description="你访问的页面可能已被移动，或地址有误。" />
+    <div>
+      <a
+        href="/"
+        class="inline-flex min-h-10 items-center rounded-lg border px-4 py-2 text-sm font-medium outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        返回首页
+      </a>
+    </div>
+  </div>
+</BaseLayout>

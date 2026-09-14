@@ -18,27 +18,65 @@ export const sectionPages = {
 } as const;
 
 export type SectionKey = keyof typeof sectionPages;
-export type SectionDefinition = {
+export type NavigationLink = {
+  key: SectionKey;
   title: string;
+  path: string;
   description: string;
-  links: readonly { title: string; path: string }[];
 };
 
-const singleSection = (key: SectionKey): SectionDefinition => ({
-  title: sectionPages[key].title,
-  description: sectionPages[key].description,
-  links: [sectionPages[key]],
+export type NavigationGroup = {
+  key: string;
+  label: string;
+  description: string;
+  links: readonly NavigationLink[];
+};
+
+const navigationLink = (key: SectionKey): NavigationLink => ({
+  key,
+  ...sectionPages[key],
 });
 
-export const sections: readonly SectionDefinition[] = [
-  singleSection("member"),
-  singleSection("character"),
-  { title: "Music", description: "歌曲与音乐发行。", links: [sectionPages.songs, sectionPages.discography] },
-  singleSection("live"),
-  singleSection("anime"),
-  singleSection("tv"),
-  singleSection("radio"),
-  singleSection("web"),
-  singleSection("game"),
-  singleSection("blog"),
+export const navigationGroups: readonly NavigationGroup[] = [
+  {
+    key: "people",
+    label: "人物",
+    description: "22/7 的成员与角色资料。",
+    links: [navigationLink("member"), navigationLink("character")],
+  },
+  {
+    key: "music",
+    label: "音乐",
+    description: "歌曲与单曲、专辑发行资料。",
+    links: [navigationLink("songs"), navigationLink("discography")],
+  },
+  {
+    key: "live",
+    label: "Live",
+    description: "演唱会与现场活动档案。",
+    links: [navigationLink("live")],
+  },
+  {
+    key: "media",
+    label: "媒体",
+    description: "动画、电视、广播与网络节目。",
+    links: [
+      navigationLink("anime"),
+      navigationLink("tv"),
+      navigationLink("radio"),
+      navigationLink("web"),
+    ],
+  },
+  {
+    key: "game",
+    label: "Game",
+    description: "22/7 游戏相关档案。",
+    links: [navigationLink("game")],
+  },
+  {
+    key: "archive",
+    label: "Archive",
+    description: "成员博客等历史资料。",
+    links: [navigationLink("blog")],
+  },
 ];

@@ -1,0 +1,32 @@
+---
+import { Card, CardDescription, CardHeader, CardPanel, CardTitle } from "@/components/ui/card";
+import type { NavigationGroup } from "@/config/site";
+
+interface Props {
+  group: NavigationGroup;
+}
+
+const { group } = Astro.props;
+---
+
+<!-- Coss React primitives render to static HTML; this component has no client directive. -->
+<Card className="h-full">
+  <CardHeader>
+    <CardTitle><h2>{group.label}</h2></CardTitle>
+    <CardDescription>{group.description}</CardDescription>
+  </CardHeader>
+  <CardPanel>
+    <ul class="flex flex-wrap gap-2">
+      {group.links.map((link) => (
+        <li>
+          <a
+            href={link.path}
+            class="inline-flex min-h-10 items-center rounded-lg border px-3 py-2 text-sm font-medium outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            {link.title}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </CardPanel>
+</Card>

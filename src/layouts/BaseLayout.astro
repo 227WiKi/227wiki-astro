@@ -1,12 +1,17 @@
 ---
 import "@/styles/global.css";
-import SiteHeader from "@/components/SiteHeader.astro";
-import SiteFooter from "@/components/SiteFooter.astro";
+import SiteHeader from "@/components/site/SiteHeader.astro";
+import SiteFooter from "@/components/site/SiteFooter.astro";
 import { siteName, siteUrl } from "@/config/site";
 
-interface Props { title: string; description: string; }
-const { title, description } = Astro.props;
-const pageTitle = title + " | " + siteName;
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+}
+
+const { title, description, noindex = false } = Astro.props;
+const pageTitle = title === siteName ? siteName : `${title} | ${siteName}`;
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 ---
 <!doctype html>
@@ -24,12 +29,22 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:locale" content="zh_CN" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
   </head>
   <body>
     <div class="isolate flex min-h-screen flex-col">
-      <a href="#main" class="sr-only focus:not-sr-only focus:p-4">跳转到正文</a>
+      <a
+        href="#main"
+        class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-background focus:px-4 focus:py-2 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-ring"
+      >
+        跳转到正文
+      </a>
       <SiteHeader />
-      <main id="main" class="mx-auto w-full max-w-5xl flex-1 px-6 py-10" tabindex="-1">
+      <main
+        id="main"
+        class="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6 sm:py-10 lg:px-8"
+        tabindex="-1"
+      >
         <slot />
       </main>
       <SiteFooter />

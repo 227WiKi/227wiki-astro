@@ -1,0 +1,23 @@
+---
+import { githubUrl, siteName } from "@/config/site";
+---
+
+<footer class="border-t bg-muted/30">
+  <div class="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-8 text-sm text-muted-foreground sm:px-6 md:flex-row md:items-end md:justify-between lg:px-8">
+    <div class="flex flex-col gap-1">
+      <p class="font-heading font-semibold text-foreground">{siteName}</p>
+      <p>22/7 相关资料的非官方粉丝维基与档案。</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
+      <a
+        href={githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rounded-sm underline-offset-4 hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        GitHub
+      </a>
+      <small>Copyright © {new Date().getFullYear()} {siteName}</small>
+    </div>
+  </div>
+</footer>

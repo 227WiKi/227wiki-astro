@@ -1,0 +1,22 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Breadcrumbs from "@/components/wiki/common/Breadcrumbs.astro";
+import PageHeader from "@/components/wiki/common/PageHeader.astro";
+import { sectionPages, type SectionKey } from "@/config/site";
+
+interface Props {
+  sectionKey: SectionKey;
+}
+
+const section = sectionPages[Astro.props.sectionKey];
+---
+
+<BaseLayout title={section.title} description={section.description}>
+  <div class="flex flex-col gap-8">
+    <Breadcrumbs items={[{ label: "首页", href: "/" }, { label: section.title }]} />
+    <PageHeader title={section.title} description={section.description} />
+    <section class="rounded-xl border bg-muted/30 p-6 text-sm text-muted-foreground" aria-label={`${section.title} 内容状态`}>
+      <p>相关内容正在整理中。</p>
+    </section>
+  </div>
+</BaseLayout>
