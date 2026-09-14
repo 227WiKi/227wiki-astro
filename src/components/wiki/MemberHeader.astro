@@ -4,39 +4,44 @@ import { resourceUrl } from "@/lib/assets";
 
 interface Props {
   member: CollectionEntry<"members">;
+  compact?: boolean;
 }
 
-const { member } = Astro.props;
-const displayName = member.data.nameZh ?? member.data.nameJa;
-const showJapaneseName = displayName !== member.data.nameJa;
+const { member, compact = false } = Astro.props;
+const primaryName = member.data.nameJa;
+const secondaryName =
+  member.data.nameZh && member.data.nameZh !== primaryName ? member.data.nameZh : undefined;
 const avatarUrl = member.data.avatar ? resourceUrl(member.data.avatar) : undefined;
 const statusLabel = member.data.status === "active" ? "在籍" : "已毕业";
-const alternateNames = [member.data.nameKana, member.data.nameRomanized].filter(Boolean);
 ---
 
-<header class="grid gap-6 sm:grid-cols-[10rem_1fr] sm:items-center">
-  <div class="relative aspect-square w-40 overflow-hidden rounded-2xl border bg-muted" aria-hidden="true">
-    <span class="absolute inset-0 grid place-items-center text-4xl font-semibold text-muted-foreground">
-      {displayName.slice(0, 1)}
-    </span>
-    {avatarUrl && (
-      <img
-        src={avatarUrl}
-        alt=""
-        class="relative size-full object-cover"
-        width="320"
-        height="320"
-        decoding="async"
-      />
-    )}
-  </div>
+{compact ? (
+  <header class="flex flex-col items-start gap-1">
+    <h1 class="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">{primaryName}</h1>
+    {secondaryName && <p class="text-lg text-muted-foreground">{secondaryName}</p>}
+  </header>
+) : (
+  <header class="grid gap-6 sm:grid-cols-[10rem_1fr] sm:items-center">
+    <div class="relative aspect-square w-40 overflow-hidden rounded-2xl border bg-muted" aria-hidden="true">
+      <span class="absolute inset-0 grid place-items-center text-4xl font-semibold text-muted-foreground">
+        {primaryName.slice(0, 1)}
+      </span>
+      {avatarUrl && (
+        <img
+          src={avatarUrl}
+          alt=""
+          class="relative size-full object-cover"
+          width="320"
+          height="320"
+          decoding="async"
+        />
+      )}
+    </div>
 
-  <div class="flex flex-col items-start gap-2">
-    <span class="rounded-md border bg-muted px-2 py-1 text-xs font-medium">{statusLabel}</span>
-    <h1 class="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">{displayName}</h1>
-    {showJapaneseName && <p class="text-lg text-muted-foreground">{member.data.nameJa}</p>}
-    {alternateNames.length > 0 && (
-      <p class="text-sm text-muted-foreground">{alternateNames.join(" · ")}</p>
-    )}
-  </div>
-</header>
+    <div class="flex flex-col items-start gap-2">
+      <span class="rounded-md border bg-muted px-2 py-1 text-xs font-medium">{statusLabel}</span>
+      <h1 class="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">{primaryName}</h1>
+      {secondaryName && <p class="text-lg text-muted-foreground">{secondaryName}</p>}
+    </div>
+  </header>
+)}

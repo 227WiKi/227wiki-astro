@@ -1,0 +1,17 @@
+---
+import type { SongData } from "@/lib/songs";
+interface Props { links: SongData["listeningLinks"]; }
+const { links } = Astro.props;
+---
+
+<section aria-labelledby="listening">
+  <h2 id="listening">试听</h2>
+  {links.length > 0 ? (
+    <div class="flex flex-wrap gap-3">
+      {links.map((link) => (
+        <a href={link.url} target="_blank" rel="noopener noreferrer" data-provider={link.provider}
+          class="inline-flex min-h-11 items-center rounded-lg border px-3 py-2 text-sm font-medium transition-colors hover:bg-accent">{link.label}</a>
+      ))}
+    </div>
+  ) : <p class="text-sm text-muted-foreground">试听链接暂未收录。</p>}
+</section>

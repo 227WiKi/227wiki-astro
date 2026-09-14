@@ -2,8 +2,10 @@
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import MemberHeader from "@/components/wiki/MemberHeader.astro";
-import ProfileFacts from "@/components/wiki/ProfileFacts.astro";
-import SocialLinks from "@/components/wiki/SocialLinks.astro";
+import WikiArticleLayout from "@/components/wiki/article/WikiArticleLayout.astro";
+import ContextNav from "@/components/wiki/article/ContextNav.astro";
+import FloatingTOC from "@/components/wiki/article/FloatingTOC.astro";
+import MemberInfobox from "@/components/wiki/member/MemberInfobox.astro";
 import WikiArticle from "@/components/wiki/WikiArticle.astro";
 import Breadcrumbs from "@/components/wiki/common/Breadcrumbs.astro";
 
@@ -22,23 +24,34 @@ export async function getStaticPaths() {
 
 const { member } = Astro.props;
 const displayName = member.data.nameZh ?? member.data.nameJa;
-const { Content } = await render(member);
+const { Content, headings } = await render(member);
+const siblings = await getCollection("members");
+const contextItems = siblings
+  .sort((a, b) => (a.data.nameZh ?? a.data.nameJa).localeCompare(b.data.nameZh ?? b.data.nameJa, "zh-CN"))
+  .map((entry) => ({
+    label: entry.data.nameZh ?? entry.data.nameJa,
+    href: `/member/${entry.id}/`,
+    current: entry.id === member.id,
+  }));
 ---
 
-<BaseLayout title={displayName} description={`${displayName}的 22/7 成员资料。`}>
-  <div class="flex flex-col gap-10">
-    <Breadcrumbs
-      items={[
-        { label: "首页", href: "/" },
-        { label: "Member", href: "/member/" },
-        { label: displayName },
-      ]}
-    />
-    <MemberHeader member={member} />
-    <ProfileFacts member={member} />
-    <SocialLinks member={member} />
+<BaseLayout title={displayName} description={`${displayName}的 22/7 成员资料。`} wide>
+  <WikiArticleLayout infoboxWidth="wide">
+    <ContextNav slot="context" title="成员" collapsedLabel="其他成员" items={contextItems} />
+    <Fragment slot="header">
+      <Breadcrumbs
+        items={[
+          { label: "首页", href: "/" },
+          { label: "Member", href: "/member/" },
+          { label: displayName },
+        ]}
+      />
+      <MemberHeader member={member} compact />
+    </Fragment>
+    <MemberInfobox slot="infobox" member={member} />
     <WikiArticle>
       <Content />
     </WikiArticle>
-  </div>
+    <FloatingTOC slot="toc" headings={headings} />
+  </WikiArticleLayout>
 </BaseLayout>

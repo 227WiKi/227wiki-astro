@@ -1,43 +1,204 @@
 ---
+import { ExternalLink } from "lucide-react";
+import { siTiktok, siX, siYoutube } from "simple-icons";
 import type { CollectionEntry } from "astro:content";
+import logo227Url from "@/assets/brand/227-logo.svg?url";
+import instagramIconUrl from "@/assets/brand/instagram-icon.png?url";
 
 interface Props {
   member: CollectionEntry<"members">;
 }
 
 const { member } = Astro.props;
-const hasLinks = Boolean(member.data.officialProfileUrl) || member.data.socials.length > 0;
+const socials = member.data.socials ?? [];
+const hasOfficialProfile = Boolean(member.data.officialProfileUrl);
+const actionCount = Number(hasOfficialProfile) + socials.length;
+const hasOddActionCount = actionCount % 2 === 1;
+const officialSpansGrid = hasOfficialProfile && hasOddActionCount;
+const lastSocialSpansGrid = !hasOfficialProfile && hasOddActionCount;
+const hasLinks = actionCount > 0;
+const primaryName = member.data.nameJa;
+const memberKey = member.id.replace(/[^a-z0-9-]/gi, "-");
 ---
 
 {hasLinks && (
-  <section aria-labelledby="social-links-heading" class="flex flex-col gap-4">
-    <h2 id="social-links-heading" class="font-heading text-xl font-semibold">官方链接</h2>
-    <ul class="flex flex-wrap gap-3">
+  <section aria-label="官方链接" class="border-t pt-4">
+    <ul class="grid w-full min-w-0 grid-cols-2 gap-1.5">
       {member.data.officialProfileUrl && (
-        <li>
+        <li
+          class:list={[
+            "social-action group relative min-w-0",
+            { "col-span-2": officialSpansGrid },
+          ]}
+        >
           <a
             href={member.data.officialProfileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex rounded-lg border px-3 py-2 text-sm font-medium hover:bg-accent"
+            aria-label="22/7 官方资料"
+            aria-describedby={`${memberKey}-official-tooltip`}
+            class="official-brand-action inline-flex h-10 w-full items-center justify-center rounded-md border shadow-none outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
-            官方成员资料
+            <img
+              src={logo227Url}
+              alt=""
+              aria-hidden="true"
+              class="h-5 w-auto max-w-7 object-contain"
+              decoding="async"
+            />
           </a>
+          <span
+            id={`${memberKey}-official-tooltip`}
+            role="tooltip"
+            data-slot="tooltip-popup"
+            class="social-tooltip"
+          >官方资料</span>
         </li>
       )}
-      {member.data.socials.map((social) => (
-        <li>
-          <a
-            href={social.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex rounded-lg border px-3 py-2 text-sm font-medium hover:bg-accent"
-            data-platform={social.platform}
+      {socials.map((social, index) => {
+        const accessibleLabel = `${primaryName}的 ${social.label}`;
+        const tooltipId = `${memberKey}-${social.platform}-${index}-tooltip`;
+
+        return (
+          <li
+            class:list={[
+              "social-action group relative min-w-0",
+              {
+                "col-span-2":
+                  lastSocialSpansGrid && index === socials.length - 1,
+              },
+            ]}
           >
-            {social.label}
-          </a>
-        </li>
-      ))}
+            <a
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={accessibleLabel}
+              aria-describedby={tooltipId}
+              class="inline-flex h-10 w-full items-center justify-center rounded-md border shadow-none outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              data-platform={social.platform}
+            >
+              {social.platform === "x" && (
+                <svg aria-hidden="true" viewBox="0 0 24 24" class="size-5 shrink-0 fill-current">
+                  <path d={siX.path} />
+                </svg>
+              )}
+              {social.platform === "instagram" && (
+                <img
+                  src={instagramIconUrl}
+                  alt=""
+                  aria-hidden="true"
+                  class="size-5 shrink-0 object-contain"
+                  decoding="async"
+                />
+              )}
+              {social.platform === "youtube" && (
+                <svg aria-hidden="true" viewBox="0 0 24 24" class="size-5 shrink-0 fill-current">
+                  <path d={siYoutube.path} />
+                </svg>
+              )}
+              {social.platform === "tiktok" && (
+                <svg aria-hidden="true" viewBox="0 0 24 24" class="size-5 shrink-0 fill-current">
+                  <path d={siTiktok.path} />
+                </svg>
+              )}
+              {(social.platform === "showroom" || social.platform === "other") && (
+                <ExternalLink aria-hidden="true" className="size-5 shrink-0" />
+              )}
+            </a>
+            <span
+              id={tooltipId}
+              role="tooltip"
+              data-slot="tooltip-popup"
+              class="social-tooltip"
+            >{social.label}</span>
+          </li>
+        );
+      })}
     </ul>
   </section>
 )}
+
+<style>
+  .official-brand-action,
+  [data-platform="instagram"] {
+    border-color: var(--border);
+    background-color: white;
+    color: var(--foreground);
+  }
+
+  .official-brand-action:hover,
+  [data-platform="instagram"]:hover {
+    border-color: color-mix(in oklab, var(--border) 80%, var(--foreground));
+    background-color: color-mix(in oklab, white 96%, var(--foreground));
+  }
+
+  [data-platform="x"],
+  [data-platform="tiktok"] {
+    border-color: var(--color-neutral-950);
+    background-color: var(--color-neutral-950);
+    color: white;
+  }
+
+  [data-platform="x"]:hover,
+  [data-platform="tiktok"]:hover {
+    border-color: color-mix(in oklab, var(--color-neutral-950) 86%, white);
+    background-color: color-mix(in oklab, var(--color-neutral-950) 86%, white);
+  }
+
+  [data-platform="youtube"] {
+    border-color: #ff0000;
+    background-color: #ff0000;
+    color: white;
+  }
+
+  [data-platform="youtube"]:hover {
+    border-color: #b91c1c;
+    background-color: #b91c1c;
+  }
+
+  [data-platform="showroom"],
+  [data-platform="other"] {
+    border-color: var(--input);
+    background-color: var(--popover);
+    color: var(--foreground);
+  }
+
+  [data-platform="showroom"]:hover,
+  [data-platform="other"]:hover {
+    background-color: var(--accent);
+  }
+
+  .social-tooltip {
+    pointer-events: none;
+    position: absolute;
+    bottom: calc(100% + 0.25rem);
+    left: 50%;
+    z-index: 50;
+    width: max-content;
+    max-width: 12rem;
+    transform: translate(-50%, 0.125rem) scale(0.98);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--popover);
+    color: var(--popover-foreground);
+    padding: 0.25rem 0.5rem;
+    box-shadow: 0 4px 10px color-mix(in oklab, var(--foreground) 8%, transparent);
+    font-size: 0.75rem;
+    line-height: 1rem;
+    opacity: 0;
+    transition: opacity 150ms ease, transform 150ms ease;
+  }
+
+  .social-action:hover .social-tooltip,
+  .social-action:focus-within .social-tooltip {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .social-tooltip {
+      transition: none;
+    }
+  }
+</style>

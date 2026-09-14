@@ -1,0 +1,14 @@
+---
+const hasContent = ["japanese", "translation", "notes"].some((name) => Astro.slots.has(name));
+---
+
+<section aria-labelledby="lyrics">
+  <h2 id="lyrics">歌词</h2>
+  {hasContent ? (
+    <>
+      {Astro.slots.has("japanese") && <section aria-label="日本語"><h3>日本語</h3><slot name="japanese" /></section>}
+      {Astro.slots.has("translation") && <section aria-label="中文翻译"><h3>中文翻译</h3><slot name="translation" /></section>}
+      {Astro.slots.has("notes") && <section aria-label="注释"><h3>注释</h3><slot name="notes" /></section>}
+    </>
+  ) : <p class="text-sm text-muted-foreground">完整歌词暂未收录。</p>}
+</section>

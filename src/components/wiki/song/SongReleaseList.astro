@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { releaseLabel } from "@/lib/releases";
+interface Props { releases: readonly CollectionEntry<"releases">[]; }
+const { releases } = Astro.props;
+---
+
+<section aria-labelledby="releases">
+  <h2 id="releases">收录作品</h2>
+  {releases.length > 0 ? (
+    <ul>
+      {releases.map((release) => (
+        <li class="py-1">
+          <a href={`/discography/releases/${release.id}/`} class="rounded-sm">{releaseLabel(release.data)} · {release.data.titleZh ?? release.data.titleJa}</a>
+          <time datetime={release.data.releaseDate} class="mt-1 block text-sm text-muted-foreground">{release.data.releaseDate}</time>
+        </li>
+      ))}
+    </ul>
+  ) : <p class="text-sm text-muted-foreground">收录作品暂未收录。</p>}
+</section>

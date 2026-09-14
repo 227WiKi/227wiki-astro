@@ -6,7 +6,6 @@ export const resourceBaseUrl = "https://res.227wiki.eu.org";
 export const sectionPages = {
   member: { title: "Member", path: "/member/", description: "22/7 成员索引。" },
   character: { title: "Character", path: "/character/", description: "22/7 角色索引。" },
-  songs: { title: "Songs", path: "/songs/", description: "22/7 歌曲索引。" },
   discography: { title: "Discography", path: "/discography/", description: "22/7 单曲与专辑发行索引。" },
   live: { title: "Live", path: "/live/", description: "22/7 演唱会与现场活动索引。" },
   anime: { title: "Anime", path: "/anime/", description: "22/7 动画入口。" },
@@ -47,8 +46,8 @@ export const navigationGroups: readonly NavigationGroup[] = [
   {
     key: "music",
     label: "音乐",
-    description: "歌曲与单曲、专辑发行资料。",
-    links: [navigationLink("songs"), navigationLink("discography")],
+    description: "22/7 的单曲、专辑与歌曲资料。",
+    links: [navigationLink("discography")],
   },
   {
     key: "live",

@@ -1,0 +1,59 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import WikiArticleLayout from "@/components/wiki/article/WikiArticleLayout.astro";
+import ContextNav from "@/components/wiki/article/ContextNav.astro";
+import FloatingTOC from "@/components/wiki/article/FloatingTOC.astro";
+import Breadcrumbs from "@/components/wiki/common/Breadcrumbs.astro";
+import PageHeader from "@/components/wiki/common/PageHeader.astro";
+import WikiArticle from "@/components/wiki/WikiArticle.astro";
+import ReleaseInfobox from "@/components/wiki/release/ReleaseInfobox.astro";
+import EditionSection from "@/components/wiki/release/EditionSection.astro";
+import { editionAnchor, releaseLabel } from "@/lib/releases";
+import { assertSongReferences } from "@/lib/songs";
+
+interface Props { release: CollectionEntry<"releases">; }
+
+export async function getStaticPaths() {
+  const releases = await getCollection("releases");
+  assertSongReferences(releases, await getCollection("songs"));
+  return releases.map((release) => ({ params: { slug: release.id }, props: { release } }));
+}
+
+const { release } = Astro.props;
+const { data } = release;
+const title = data.titleZh ?? data.titleJa;
+const { Content, headings } = await render(release);
+const siblings = await getCollection("releases");
+const contextItems = siblings
+  .sort((a, b) => a.data.releaseDate.localeCompare(b.data.releaseDate))
+  .map((entry) => ({
+    label: `${releaseLabel(entry.data)} · ${entry.data.titleZh ?? entry.data.titleJa}`,
+    href: `/discography/releases/${entry.id}/`,
+    current: entry.id === release.id,
+  }));
+const tocItems = [
+  ...headings,
+  { slug: "editions", text: "版本与收录内容", depth: 2 },
+  ...data.editions.map((edition) => ({ slug: editionAnchor(edition.id), text: edition.name, depth: 3 })),
+];
+---
+
+<BaseLayout title={title} description={`${releaseLabel(data)} · ${data.titleJa}，发行于 ${data.releaseDate}。`} wide>
+  <WikiArticleLayout>
+    <ContextNav slot="context" title="Discography" collapsedLabel="其他发行作品" items={contextItems} />
+    <Fragment slot="header">
+      <Breadcrumbs items={[{ label: "首页", href: "/" }, { label: "Discography", href: "/discography/" }, { label: title }]} />
+      <PageHeader eyebrow={releaseLabel(data)} title={title} description={data.titleZh ? data.titleJa : undefined} />
+    </Fragment>
+    <ReleaseInfobox slot="infobox" release={release} />
+    <WikiArticle>
+      <Content />
+      <section aria-labelledby="editions">
+        <h2 id="editions">版本与收录内容</h2>
+        {data.editions.map((edition, index) => <EditionSection edition={edition} defaultOpen={index === 0} />)}
+      </section>
+    </WikiArticle>
+    <FloatingTOC slot="toc" headings={tocItems} />
+  </WikiArticleLayout>
+</BaseLayout>

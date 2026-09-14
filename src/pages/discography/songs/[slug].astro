@@ -1,0 +1,60 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import WikiArticleLayout from "@/components/wiki/article/WikiArticleLayout.astro";
+import ContextNav from "@/components/wiki/article/ContextNav.astro";
+import FloatingTOC from "@/components/wiki/article/FloatingTOC.astro";
+import Breadcrumbs from "@/components/wiki/common/Breadcrumbs.astro";
+import PageHeader from "@/components/wiki/common/PageHeader.astro";
+import WikiArticle from "@/components/wiki/WikiArticle.astro";
+import SongInfobox from "@/components/wiki/song/SongInfobox.astro";
+import ListeningLinks from "@/components/wiki/song/ListeningLinks.astro";
+import SongVideos from "@/components/wiki/song/SongVideos.astro";
+import LyricsSection from "@/components/wiki/song/LyricsSection.astro";
+import SongReleaseList from "@/components/wiki/song/SongReleaseList.astro";
+import { assertSongReferences, releasesForSong } from "@/lib/songs";
+
+interface Props { song: CollectionEntry<"songs">; }
+
+export async function getStaticPaths() {
+  const songs = await getCollection("songs");
+  assertSongReferences(await getCollection("releases"), songs);
+  return songs.map((song) => ({ params: { slug: song.id }, props: { song } }));
+}
+
+const { song } = Astro.props;
+const { data } = song;
+const title = data.titleZh ?? data.titleJa;
+const { Content, headings } = await render(song);
+const songs = await getCollection("songs");
+const contextItems = songs
+  .sort((a, b) => (a.data.titleZh ?? a.data.titleJa).localeCompare(b.data.titleZh ?? b.data.titleJa, "zh-CN"))
+  .map((entry) => ({ label: entry.data.titleZh ?? entry.data.titleJa, href: `/discography/songs/${entry.id}/`, current: entry.id === song.id }));
+const releases = releasesForSong(await getCollection("releases"), song.id);
+const tocItems = [
+  ...headings,
+  { slug: "listening", text: "试听", depth: 2 },
+  ...(data.videos.length > 0 ? [{ slug: "videos", text: "视频", depth: 2 }] : []),
+  { slug: "lyrics", text: "歌词", depth: 2 },
+  { slug: "releases", text: "收录作品", depth: 2 },
+];
+---
+
+<BaseLayout title={title} description={`${data.titleJa}的歌曲资料与收录作品。`} wide>
+  <WikiArticleLayout>
+    <ContextNav slot="context" title="歌曲" collapsedLabel="其他歌曲" items={contextItems} />
+    <Fragment slot="header">
+      <Breadcrumbs items={[{ label: "首页", href: "/" }, { label: "Discography", href: "/discography/" }, { label: title }]} />
+      <PageHeader eyebrow="Song" title={title} description={data.titleZh ? data.titleJa : undefined} />
+    </Fragment>
+    <SongInfobox slot="infobox" song={song} />
+    <WikiArticle>
+      <Content />
+      <ListeningLinks links={data.listeningLinks} />
+      <SongVideos videos={data.videos} />
+      <LyricsSection />
+      <SongReleaseList releases={releases} />
+    </WikiArticle>
+    <FloatingTOC slot="toc" headings={tocItems} />
+  </WikiArticleLayout>
+</BaseLayout>

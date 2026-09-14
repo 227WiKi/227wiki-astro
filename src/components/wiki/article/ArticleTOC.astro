@@ -1,0 +1,26 @@
+---
+// Structural input accepts both Markdown headings and caller-owned sections.
+// Only depths 2 and 3 are displayed; other heading depths are ignored.
+export interface ArticleTOCItem {
+  slug: string;
+  text: string;
+  depth: number;
+}
+
+interface Props {
+  headings: readonly ArticleTOCItem[];
+}
+const headings = Astro.props.headings.filter(({ depth }) => depth === 2 || depth === 3);
+---
+
+{headings.length > 0 && (
+  <nav aria-label="本页目录">
+    <ol class="flex flex-col gap-1">
+      {headings.map(({ slug, text, depth }) => (
+        <li class:list={[depth === 3 && "pl-4"]}>
+          <a href={`#${slug}`} class="block rounded-lg px-3 py-2.5 text-sm [overflow-wrap:anywhere] outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset">{text}</a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}

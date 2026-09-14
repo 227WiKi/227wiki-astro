@@ -1,0 +1,20 @@
+---
+import type { SongData } from "@/lib/songs";
+interface Props { videos: SongData["videos"]; }
+const { videos } = Astro.props;
+const typeLabels = { "music-video": "Music Video", "lyric-video": "Lyric Video", live: "Live", other: "其他视频" };
+---
+
+{videos.length > 0 && (
+  <section aria-labelledby="videos">
+    <h2 id="videos">视频</h2>
+    <ul>
+      {videos.map((video) => (
+        <li class="py-1">
+          <a href={video.url} target="_blank" rel="noopener noreferrer" data-provider={video.provider} class="rounded-sm">{video.label}</a>
+          <span class="ml-2 text-sm text-muted-foreground">{typeLabels[video.type]}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}

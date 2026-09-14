@@ -1,0 +1,62 @@
+---
+// Composition only: the caller owns routing, headings, and entity data.
+interface Props {
+  infoboxWidth?: "default" | "wide";
+}
+
+const { infoboxWidth = "default" } = Astro.props;
+const hasContext = Astro.slots.has("context");
+const hasInfobox = Astro.slots.has("infobox");
+const articleInfoboxWidth = infoboxWidth === "wide" ? "20rem" : "17.5rem";
+---
+
+<div
+  class:list={["article-layout", { "has-context": hasContext, "has-infobox": hasInfobox }]}
+  style={`--article-infobox-width: ${articleInfoboxWidth}`}
+>
+  <div class="article-header min-w-0 flex flex-col gap-6">
+    <slot name="header" />
+  </div>
+  {hasInfobox && <div class="article-infobox min-w-0"><slot name="infobox" /></div>}
+  {hasContext && <div class="article-context min-w-0"><slot name="context" /></div>}
+  <div class="article-main min-w-0"><slot /></div>
+</div>
+<slot name="toc" />
+
+<style>
+  .article-layout {
+    /* Phase 3 header: 4rem + border, with room for focus rings. */
+    --article-sticky-top: 6rem;
+    display: grid;
+    gap: 1.5rem;
+    overflow-wrap: anywhere;
+  }
+
+  @media (min-width: 48rem) {
+    .article-layout {
+      grid-template-rows: auto auto 1fr;
+      align-items: start;
+    }
+    .article-layout.has-infobox {
+      grid-template-columns: minmax(0, 1fr) var(--article-infobox-width);
+      column-gap: 2rem;
+    }
+    .article-header { grid-area: 1 / 1; }
+    .article-context { grid-area: 2 / 1; }
+    .article-main { grid-area: 3 / 1; }
+    .article-infobox { grid-area: 1 / 2 / 4 / 3; align-self: stretch; }
+  }
+
+  @media (min-width: 80rem) {
+    .article-layout.has-context {
+      grid-template-columns: 13.5rem minmax(0, 1fr);
+    }
+    .article-layout.has-context.has-infobox {
+      grid-template-columns: 13.5rem minmax(0, 1fr) var(--article-infobox-width);
+    }
+    .has-context > .article-header { grid-column: 2; }
+    .has-context > .article-main { grid-area: 2 / 2 / 4 / 3; }
+    .has-context > .article-context { grid-area: 1 / 1 / 4 / 2; align-self: stretch; }
+    .has-context > .article-infobox { grid-column: 3; }
+  }
+</style>

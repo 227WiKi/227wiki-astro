@@ -1,0 +1,44 @@
+---
+import type { AudioDisc } from "@/lib/releases";
+
+interface Props {
+  tracks: AudioDisc["tracks"];
+  label: string;
+}
+const { tracks, label } = Astro.props;
+const hasDuration = tracks.some(({ duration }) => Boolean(duration));
+---
+
+<div class="track-list min-w-0 overflow-x-auto rounded-xl border outline-none focus-visible:ring-2 focus-visible:ring-ring" role="region" aria-label={label} tabindex="0">
+  <table class="w-full min-w-80 border-collapse text-sm">
+    <caption class="sr-only">{label}</caption>
+    <thead class="bg-muted/50 text-left text-muted-foreground">
+      <tr>
+        <th scope="col" class="w-12 px-3 py-2.5 font-medium">No.</th>
+        <th scope="col" class="px-3 py-2.5 font-medium">Title</th>
+        {hasDuration && <th scope="col" class="w-20 px-3 py-2.5 text-right whitespace-nowrap font-medium">Duration</th>}
+      </tr>
+    </thead>
+    <tbody>
+      {tracks.map((track) => (
+        <tr class="border-t align-top">
+          <th scope="row" class="px-3 py-3 text-left font-normal tabular-nums text-muted-foreground">{track.number}</th>
+          <td class="px-3 py-3 [overflow-wrap:anywhere]">
+            {track.song ? (
+              <a href={`/discography/songs/${track.song}/`} class:list={["block rounded-sm", track.variant === "off-vocal" ? "font-normal" : "font-medium"]}>{track.titleZh ?? track.titleJa}</a>
+            ) : (
+              <span class:list={["block", track.variant === "off-vocal" ? "text-muted-foreground" : "font-medium"]}>{track.titleZh ?? track.titleJa}</span>
+            )}
+            {track.titleZh && <span class="mt-1 block text-xs text-muted-foreground">{track.titleJa}</span>}
+          </td>
+          {hasDuration && <td class="px-3 py-3 text-right whitespace-nowrap tabular-nums text-muted-foreground">{track.duration}</td>}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  /* The region owns scrolling; retain table layout inside WikiArticle. */
+  .track-list table { display: table; }
+</style>

@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Card, CardHeader, CardTitle, CardDescription, CardPanel } from "@/components/ui/card";
+import { resourceUrl } from "@/lib/assets";
+import { releaseLabel } from "@/lib/releases";
+
+interface Props { release: CollectionEntry<"releases">; }
+const { release } = Astro.props;
+const data = release.data;
+const title = data.titleZh ?? data.titleJa;
+---
+
+<article class="min-w-0">
+  <a href={`/discography/releases/${release.id}/`} class="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+    <Card className="h-full transition-shadow hover:shadow-sm">
+      <CardHeader className="flex flex-row items-start gap-4">
+        {data.cover && <img src={resourceUrl(data.cover)} alt="" width="160" height="160" loading="lazy" decoding="async" class="size-24 shrink-0 rounded-lg border object-cover sm:size-28" />}
+        <div class="flex min-w-0 flex-col gap-2 [overflow-wrap:anywhere]">
+          <CardDescription>{releaseLabel(data)}</CardDescription>
+          <CardTitle className="leading-snug"><h3>{title}</h3></CardTitle>
+          {data.titleZh && <CardDescription>{data.titleJa}</CardDescription>}
+        </div>
+      </CardHeader>
+      <CardPanel className="text-sm text-muted-foreground">
+        <time datetime={data.releaseDate}>{data.releaseDate}</time>
+      </CardPanel>
+    </Card>
+  </a>
+</article>

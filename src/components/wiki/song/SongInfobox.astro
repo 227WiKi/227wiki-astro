@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Infobox from "@/components/wiki/article/Infobox.astro";
+import MetadataList from "@/components/wiki/common/MetadataList.astro";
+import MetadataRow from "@/components/wiki/common/MetadataRow.astro";
+
+interface Props { song: CollectionEntry<"songs">; }
+const { data } = Astro.props.song;
+const title = data.titleZh ?? data.titleJa;
+const hasFacts = Boolean(data.duration || data.credits?.lyricists.length || data.credits?.composers.length || data.credits?.arrangers.length);
+---
+
+<Infobox label={`${title}歌曲资料`}>
+  <div class="flex min-w-0 flex-col gap-2">
+    <h2 class="font-heading text-xl font-semibold">{title}</h2>
+    {data.titleZh && <p class="text-sm text-muted-foreground">{data.titleJa}</p>}
+  </div>
+  {hasFacts && (
+    <MetadataList>
+      {data.duration && <MetadataRow label="时长">{data.duration}</MetadataRow>}
+      {Boolean(data.credits?.lyricists.length) && <MetadataRow label="作词">{data.credits?.lyricists.join("、")}</MetadataRow>}
+      {Boolean(data.credits?.composers.length) && <MetadataRow label="作曲">{data.credits?.composers.join("、")}</MetadataRow>}
+      {Boolean(data.credits?.arrangers.length) && <MetadataRow label="编曲">{data.credits?.arrangers.join("、")}</MetadataRow>}
+    </MetadataList>
+  )}
+</Infobox>

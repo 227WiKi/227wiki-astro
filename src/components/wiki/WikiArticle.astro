@@ -4,7 +4,35 @@
 
 <style>
   .wiki-article {
+    min-width: 0;
+    overflow-wrap: anywhere;
     line-height: 1.75;
+  }
+
+  .wiki-article :global(:is(h2, h3, h4, h5, h6)) {
+    scroll-margin-top: 6rem;
+  }
+
+  .wiki-article :global(> :first-child) {
+    margin-block-start: 0;
+  }
+
+  .wiki-article :global(pre) {
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 1rem;
+    border-radius: var(--radius);
+  }
+
+  .wiki-article :global(table) {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .wiki-article :global(a:focus-visible) {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
   }
 
   .wiki-article :global(h2) {

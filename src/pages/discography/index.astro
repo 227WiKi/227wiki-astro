@@ -1,4 +1,32 @@
 ---
-import SectionLanding from "@/components/wiki/common/SectionLanding.astro";
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Breadcrumbs from "@/components/wiki/common/Breadcrumbs.astro";
+import PageHeader from "@/components/wiki/common/PageHeader.astro";
+import ReleaseCard from "@/components/wiki/release/ReleaseCard.astro";
+import { sectionPages } from "@/config/site";
+
+const section = sectionPages.discography;
+const releases = await getCollection("releases");
+const groups = [
+  { type: "single", title: "Single" },
+  { type: "album", title: "Album" },
+] as const;
 ---
-<SectionLanding sectionKey="discography" />
+
+<BaseLayout title={section.title} description={section.description}>
+  <div class="flex flex-col gap-8">
+    <Breadcrumbs items={[{ label: "首页", href: "/" }, { label: section.title }]} />
+    <PageHeader title={section.title} description={section.description} />
+    <div class="grid gap-8 md:grid-cols-2">
+      {groups.map((group) => (
+        <section aria-labelledby={group.type} class="flex min-w-0 flex-col gap-4">
+          <h2 id={group.type} class="font-heading text-2xl font-semibold">{group.title}</h2>
+          {releases.filter(({ data }) => data.releaseType === group.type)
+            .sort((a, b) => a.data.releaseNumber - b.data.releaseNumber)
+            .map((release) => <ReleaseCard release={release} />)}
+        </section>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

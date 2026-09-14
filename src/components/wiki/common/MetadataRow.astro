@@ -1,0 +1,11 @@
+---
+interface Props {
+  label: string;
+}
+const { label } = Astro.props;
+---
+
+<div class="grid min-w-0 grid-cols-[4rem_minmax(0,1fr)] gap-3 [overflow-wrap:anywhere]">
+  <dt class="text-muted-foreground">{label}</dt>
+  <dd class="min-w-0 font-medium"><slot /></dd>
+</div>

@@ -1,0 +1,21 @@
+---
+interface Props {
+  label: string;
+}
+const { label } = Astro.props;
+---
+
+<aside aria-label={label} class="infobox flex min-w-0 flex-col gap-5 rounded-2xl border bg-card p-5 text-card-foreground shadow-xs [overflow-wrap:anywhere]">
+  <slot />
+</aside>
+
+<style>
+  @media (min-width: 48rem) {
+    .infobox {
+      position: sticky;
+      top: var(--article-sticky-top, 6rem);
+      max-height: calc(100dvh - var(--article-sticky-top, 6rem) - 1.5rem);
+      overflow-y: auto;
+    }
+  }
+</style>

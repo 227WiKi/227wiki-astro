@@ -1,0 +1,100 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Card, CardPanel } from "@/components/ui/card";
+import { Frame, FrameHeader } from "@/components/ui/frame";
+import SocialLinks from "@/components/wiki/SocialLinks.astro";
+import MetadataList from "@/components/wiki/common/MetadataList.astro";
+import MetadataRow from "@/components/wiki/common/MetadataRow.astro";
+import { MemberIdentityPreview } from "@/components/wiki/member/MemberIdentityPreview";
+import { MemberPhotoViewer } from "@/components/wiki/member/MemberPhotoViewer";
+import { resourceUrl } from "@/lib/assets";
+
+interface Props {
+  member: CollectionEntry<"members">;
+}
+const { member } = Astro.props;
+const data = member.data;
+const primaryName = data.nameJa;
+const secondaryName = data.nameZh && data.nameZh !== primaryName ? data.nameZh : undefined;
+const hasIdentityPreview = Boolean(
+  secondaryName || data.nameKana || data.nameRomanized,
+);
+const rawOfficialPhotos = data.officialPhotos ?? [];
+const officialPhotos = rawOfficialPhotos.map((photo) => ({
+  ...photo,
+  url: resourceUrl(photo.path),
+}));
+const memberThemeStyle = data.themeColor
+  ? [
+      `--member-accent: ${data.themeColor}`,
+      "--member-frame-bg: color-mix(in oklab, var(--member-accent) 4%, var(--card))",
+      "--member-header-bg: color-mix(in oklab, var(--member-accent) 8%, var(--card))",
+      "--member-frame-border: color-mix(in oklab, var(--member-accent) 35%, var(--border))",
+      "--member-inner-border: color-mix(in oklab, var(--member-accent) 20%, var(--border))",
+    ].join(";")
+  : undefined;
+const frameClassName = data.themeColor
+  ? "min-w-0 border border-[var(--member-frame-border)] bg-[var(--member-frame-bg)]"
+  : "min-w-0";
+const headerClassName = data.themeColor
+  ? "rounded-t-[calc(var(--radius-2xl)-1px)] bg-[var(--member-header-bg)] py-3"
+  : "py-3";
+const cardClassName = data.themeColor
+  ? "min-w-0 border-[var(--member-inner-border)]"
+  : "min-w-0";
+---
+
+<aside
+  aria-label={`${primaryName}基本资料`}
+  class="member-infobox min-w-0 [overflow-wrap:anywhere]"
+  style={memberThemeStyle}
+>
+  <Frame className={frameClassName}>
+    <FrameHeader className={headerClassName}>
+      {hasIdentityPreview ? (
+        <MemberIdentityPreview
+          client:load
+          nameJa={data.nameJa}
+          nameKana={data.nameKana}
+          nameRomanized={data.nameRomanized}
+          nameZh={data.nameZh}
+        />
+      ) : (
+        <div class="flex min-h-9 min-w-0 items-center px-0 py-0.5">
+          <span class="font-heading text-lg font-semibold leading-snug">{primaryName}</span>
+        </div>
+      )}
+    </FrameHeader>
+
+    <Card className={cardClassName}>
+      <CardPanel className="flex min-w-0 flex-col gap-5 p-5">
+        {officialPhotos.length > 0 ? (
+          <MemberPhotoViewer client:load name={primaryName} photos={officialPhotos} />
+        ) : data.avatar ? (
+          <img
+            src={resourceUrl(data.avatar)}
+            alt={`${primaryName}头像`}
+            width="320"
+            height="320"
+            class="aspect-square w-full rounded-xl object-cover"
+            decoding="async"
+          />
+        ) : null}
+
+        <MetadataList>
+          <MetadataRow label="状态">
+            <span class="inline-flex rounded-md border bg-muted px-2 py-1 text-xs font-medium">
+              {data.status === "active" ? "在籍" : "已毕业"}
+            </span>
+          </MetadataRow>
+          {data.birthday && <MetadataRow label="生日">{data.birthday.month}月{data.birthday.day}日</MetadataRow>}
+          {data.birthplace && <MetadataRow label="出生地">{data.birthplace}</MetadataRow>}
+          {data.heightCm && <MetadataRow label="身高">{data.heightCm} cm</MetadataRow>}
+          {data.bloodType && <MetadataRow label="血型">{data.bloodType}型</MetadataRow>}
+        </MetadataList>
+
+        <SocialLinks member={member} />
+      </CardPanel>
+    </Card>
+  </Frame>
+</aside>

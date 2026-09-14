@@ -1,0 +1,52 @@
+---
+export interface ContextNavItem {
+  label: string;
+  href: string;
+  current?: boolean;
+}
+
+interface Props {
+  title: string;
+  items: readonly ContextNavItem[];
+  collapsedLabel?: string;
+}
+
+const { title, items, collapsedLabel = title } = Astro.props;
+const linkClass = "block min-w-0 rounded-lg px-3 py-2.5 text-sm [overflow-wrap:anywhere] outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset";
+---
+
+<div class="context-nav">
+  <nav aria-label={title} class="hidden xl:block">
+    <p class="mb-3 px-3 text-sm font-semibold">{title}</p>
+    <ul class="flex flex-col gap-1">
+      {items.map((item) => (
+        <li><a href={item.href} aria-current={item.current ? "page" : undefined}
+          class:list={[linkClass, item.current ? "bg-accent font-medium text-foreground" : "text-muted-foreground"]}>{item.label}</a></li>
+      ))}
+    </ul>
+  </nav>
+  <details class="rounded-xl border bg-background xl:hidden">
+    <summary class="cursor-pointer rounded-xl px-4 py-3 text-sm font-medium outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset">
+      {collapsedLabel}
+    </summary>
+    <nav aria-label={title} class="max-h-[50dvh] overflow-y-auto border-t p-2">
+      <ul class="flex flex-col gap-1">
+        {items.map((item) => (
+          <li><a href={item.href} aria-current={item.current ? "page" : undefined}
+            class:list={[linkClass, item.current ? "bg-accent font-medium text-foreground" : "text-muted-foreground"]}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </details>
+</div>
+
+<style>
+  @media (min-width: 80rem) {
+    .context-nav {
+      position: sticky;
+      top: var(--article-sticky-top, 6rem);
+      max-height: calc(100dvh - var(--article-sticky-top, 6rem) - 1.5rem);
+      overflow-y: auto;
+    }
+  }
+</style>
