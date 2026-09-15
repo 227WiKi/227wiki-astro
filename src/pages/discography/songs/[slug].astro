@@ -44,7 +44,7 @@ const tocItems = [
   <WikiArticleLayout>
     <ContextNav slot="context" title="歌曲" collapsedLabel="其他歌曲" items={contextItems} />
     <Fragment slot="header">
-      <Breadcrumbs items={[{ label: "首页", href: "/" }, { label: "Discography", href: "/discography/" }, { label: title }]} />
+      <Breadcrumbs items={[{ label: "Discography", href: "/discography/" }, { label: title }]} />
       <PageHeader eyebrow="Song" title={title} description={data.titleZh ? data.titleJa : undefined} />
     </Fragment>
     <SongInfobox slot="infobox" song={song} />

@@ -1,0 +1,114 @@
+---
+import { MemberChronologyScroller } from "@/components/wiki/member/MemberChronologyScroller";
+import { getMemberThemeStyle } from "@/lib/member-theme";
+
+interface TimelineItem {
+  date: string;
+  text: string;
+}
+
+interface Props {
+  timeline?: TimelineItem[];
+  themeColor?: string;
+}
+
+const { timeline, themeColor } = Astro.props;
+const hasTimeline = Boolean(timeline && timeline.length > 0);
+
+interface ChronologyEvent {
+  date: string;
+  displayDate: string;
+  text: string;
+}
+
+interface YearGroup {
+  year: string;
+  events: ChronologyEvent[];
+}
+
+function formatDisplayDate(dateStr: string): string {
+  const parts = dateStr.split("-").map(Number);
+  const [, month, day] = parts;
+  if (!month) return "";
+  if (!day) return `${month}月`;
+  return `${month}月${day}日`;
+}
+
+const yearGroups: YearGroup[] = [];
+
+if (hasTimeline && timeline) {
+  const sorted = [...timeline].sort((a, b) => a.date.localeCompare(b.date));
+
+  for (const item of sorted) {
+    const year = item.date.slice(0, 4);
+    let group = yearGroups.find((g) => g.year === year);
+    if (!group) {
+      group = { year, events: [] };
+      yearGroups.push(group);
+    }
+    group.events.push({
+      date: item.date,
+      displayDate: formatDisplayDate(item.date),
+      text: item.text,
+    });
+  }
+}
+
+const memberThemeStyle = getMemberThemeStyle(themeColor);
+---
+
+{hasTimeline && (
+  <section
+    aria-labelledby="timeline"
+    class="member-chronology mb-10 w-full min-w-0"
+    style={memberThemeStyle}
+  >
+    <MemberChronologyScroller client:load>
+      <div class="flex w-max min-w-full gap-0 pb-3 pt-1">
+        {yearGroups.map((group, groupIdx) => {
+          const isLast = groupIdx === yearGroups.length - 1;
+          return (
+            <div class="flex min-w-[15rem] w-[18rem] shrink-0 flex-col snap-start">
+              <span class="font-heading text-lg font-semibold tabular-nums text-foreground">
+                {group.year}
+              </span>
+              <div class="relative my-3 flex items-center w-full" aria-hidden="true">
+                <span
+                  class:list={[
+                    "size-2 shrink-0 rounded-full",
+                    themeColor
+                      ? "bg-[var(--member-chronology-node)]"
+                      : "bg-muted-foreground/70",
+                  ]}
+                />
+                <span
+                  class:list={[
+                    "h-px flex-1 bg-border",
+                    isLast && "invisible",
+                  ]}
+                />
+              </div>
+              <div class="flex flex-col gap-5 pr-8">
+                {group.events.map((event) => (
+                  <div class="flex flex-col gap-1">
+                    {event.displayDate && (
+                      <time
+                        datetime={event.date}
+                        class="text-sm font-medium tabular-nums text-muted-foreground"
+                      >
+                        {event.displayDate}
+                      </time>
+                    )}
+                    <p class="!m-0 text-sm leading-relaxed text-foreground">
+                      {event.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </MemberChronologyScroller>
+  </section>
+)}

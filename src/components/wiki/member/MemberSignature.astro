@@ -1,0 +1,27 @@
+---
+import { getMemberSignatureSvg } from "@/lib/signatures";
+import { cn } from "@/lib/utils";
+
+interface Props {
+  signature?: string;
+  class?: string;
+  variant?: "breadcrumb" | "watermark";
+}
+
+const { signature, class: className, variant } = Astro.props;
+const svgContent = getMemberSignatureSvg(signature);
+---
+
+{
+  svgContent && (
+    <span
+      aria-hidden="true"
+      class={cn(
+        "inline-flex items-center text-foreground shrink-0 [&>svg]:w-auto [&>svg]:fill-current pointer-events-none select-none",
+        variant === "breadcrumb" && "[&>svg]:h-[18px] [&>svg]:max-w-[56px]",
+        className,
+      )}
+      set:html={svgContent}
+    />
+  )
+}

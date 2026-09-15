@@ -1,0 +1,66 @@
+---
+import {
+  Frame,
+  FrameHeader,
+  FramePanel,
+  FrameTitle,
+} from "@/components/ui/frame";
+import MemberSignature from "@/components/wiki/member/MemberSignature.astro";
+import { getMemberThemeStyle } from "@/lib/member-theme";
+import { cn } from "@/lib/utils";
+
+interface Props {
+  hitokoto?: string;
+  themeColor?: string;
+  signature?: string;
+}
+
+const { hitokoto, themeColor, signature } = Astro.props;
+const content = hitokoto?.trim();
+const memberThemeStyle = getMemberThemeStyle(themeColor);
+const frameClassName = cn(
+  "w-full relative overflow-hidden",
+  themeColor && "border border-[var(--member-frame-border)] bg-[var(--member-frame-bg)]",
+);
+const headerClassName = cn(
+  "relative overflow-hidden isolate",
+  themeColor && "rounded-t-[calc(var(--radius-2xl)-1px)] bg-[var(--member-header-bg)]",
+);
+const panelClassName = cn(
+  "relative z-10",
+  themeColor && "border-[var(--member-inner-border)]",
+);
+---
+
+{content && (
+  <section
+    aria-labelledby="member-hitokoto-title"
+    class="mb-8 w-full min-w-0"
+    style={memberThemeStyle}
+  >
+    <Frame className={frameClassName}>
+      <FrameHeader className={headerClassName}>
+        <div class="relative z-10 min-w-0">
+          <FrameTitle id="member-hitokoto-title" role="heading" aria-level={2}>
+            ひとこと
+          </FrameTitle>
+        </div>
+        <MemberSignature
+          signature={signature}
+          class="pointer-events-none absolute top-0.5 right-1.5 z-0 select-none opacity-[0.075] dark:opacity-[0.095] [&>svg]:h-[56px] [&>svg]:w-auto"
+        />
+      </FrameHeader>
+      <FramePanel className={panelClassName}>
+        <p class="hitokoto-content !m-0 whitespace-pre-line break-words text-sm leading-relaxed">
+          {content}
+        </p>
+      </FramePanel>
+    </Frame>
+  </section>
+)}
+
+<style>
+  .hitokoto-content {
+    margin: 0;
+  }
+</style>

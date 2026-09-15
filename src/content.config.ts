@@ -7,6 +7,16 @@ const memberPhotoPath = z.string().min(1).regex(
   "member photo must be an R2-relative resource path",
 );
 
+const memberTimelineItem = z.object({
+  date: z
+    .string()
+    .regex(
+      /^\d{4}(?:-(?:0[1-9]|1[0-2])(?:-(?:0[1-9]|[12]\d|3[01]))?)?$/,
+      "date must be YYYY, YYYY-MM, or YYYY-MM-DD",
+    ),
+  text: z.string().min(1),
+});
+
 const members = defineCollection({
   loader: glob({
     base: "./src/content/members",
@@ -18,6 +28,9 @@ const members = defineCollection({
     nameKana: z.string().min(1).optional(),
     nameRomanized: z.string().min(1).optional(),
     themeColor: z.string().min(1).optional(),
+    hitokoto: z.string().min(1).optional(),
+    signature: z.string().min(1).optional(),
+    timeline: z.array(memberTimelineItem).optional(),
     status: z.enum(["active", "graduated"]),
     birthday: z
       .object({

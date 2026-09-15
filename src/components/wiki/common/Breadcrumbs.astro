@@ -1,4 +1,15 @@
 ---
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { cn } from "@/lib/utils";
+import { Home } from "lucide-react";
+
 export interface BreadcrumbItem {
   label: string;
   href?: string;
@@ -6,27 +17,54 @@ export interface BreadcrumbItem {
 
 interface Props {
   items: readonly BreadcrumbItem[];
+  className?: string;
 }
 
-const { items } = Astro.props;
+const { items, className } = Astro.props;
+
+// Strip out any explicit home item (e.g. { label: "首页", href: "/" }) to avoid duplicate Home
+const normalizedItems = items.filter(
+  (item) => !(item.href === "/" || item.label === "首页"),
+);
 ---
 
-<nav aria-label="Breadcrumb" class="text-sm text-muted-foreground">
-  <ol class="flex flex-wrap items-center gap-x-2 gap-y-1">
-    {items.map((item, index) => (
-      <li class="flex min-w-0 items-center gap-2">
-        {index > 0 && <span aria-hidden="true">/</span>}
-        {item.href ? (
-          <a
-            href={item.href}
-            class="rounded-sm underline-offset-4 hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            {item.label}
-          </a>
-        ) : (
-          <span class="break-words text-foreground" aria-current="page">{item.label}</span>
-        )}
-      </li>
-    ))}
-  </ol>
-</nav>
+<Breadcrumb className={cn("min-w-0 text-sm", className)}>
+  <BreadcrumbList className="flex-nowrap">
+    <BreadcrumbItem className="shrink-0">
+      <BreadcrumbLink
+        aria-label="首页"
+        href="/"
+        className="inline-flex size-7 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        <Home aria-hidden="true" className="size-4 shrink-0 pointer-events-none" />
+      </BreadcrumbLink>
+    </BreadcrumbItem>
+
+    {
+      normalizedItems.map((item, index) => {
+        const isLast = index === normalizedItems.length - 1;
+
+        return (
+          <>
+            <BreadcrumbSeparator className="shrink-0" />
+            <BreadcrumbItem className={isLast ? "min-w-0" : "shrink-0"}>
+              {item.href && !isLast ? (
+                <BreadcrumbLink
+                  href={item.href}
+                  className="rounded-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  {item.label}
+                </BreadcrumbLink>
+              ) : (
+                <BreadcrumbPage className="truncate" title={item.label}>
+                  {item.label}
+                </BreadcrumbPage>
+              )}
+            </BreadcrumbItem>
+          </>
+        );
+      })
+    }
+  </BreadcrumbList>
+</Breadcrumb>
+

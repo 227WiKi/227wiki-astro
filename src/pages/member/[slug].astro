@@ -1,13 +1,15 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import MemberHeader from "@/components/wiki/MemberHeader.astro";
 import WikiArticleLayout from "@/components/wiki/article/WikiArticleLayout.astro";
 import ContextNav from "@/components/wiki/article/ContextNav.astro";
 import FloatingTOC from "@/components/wiki/article/FloatingTOC.astro";
+import MemberHitokoto from "@/components/wiki/member/MemberHitokoto.astro";
+import MemberChronology from "@/components/wiki/member/MemberChronology.astro";
+import { MemberBreadcrumbs } from "@/components/wiki/member/MemberBreadcrumbs";
 import MemberInfobox from "@/components/wiki/member/MemberInfobox.astro";
 import WikiArticle from "@/components/wiki/WikiArticle.astro";
-import Breadcrumbs from "@/components/wiki/common/Breadcrumbs.astro";
+import { getMemberSignatureSvg } from "@/lib/signatures";
 
 interface Props {
   member: CollectionEntry<"members">;
@@ -24,6 +26,7 @@ export async function getStaticPaths() {
 
 const { member } = Astro.props;
 const displayName = member.data.nameZh ?? member.data.nameJa;
+const primaryName = member.data.nameJa;
 const { Content, headings } = await render(member);
 const siblings = await getCollection("members");
 const contextItems = siblings
@@ -33,23 +36,32 @@ const contextItems = siblings
     href: `/member/${entry.id}/`,
     current: entry.id === member.id,
   }));
+const signatureSvg = getMemberSignatureSvg(member.data.signature);
 ---
 
 <BaseLayout title={displayName} description={`${displayName}的 22/7 成员资料。`} wide>
   <WikiArticleLayout infoboxWidth="wide">
     <ContextNav slot="context" title="成员" collapsedLabel="其他成员" items={contextItems} />
-    <Fragment slot="header">
-      <Breadcrumbs
-        items={[
-          { label: "首页", href: "/" },
-          { label: "Member", href: "/member/" },
-          { label: displayName },
-        ]}
+    <div slot="header" class="min-w-0">
+      <h1 class="sr-only">{primaryName}</h1>
+      <MemberBreadcrumbs
+        client:load
+        currentName={displayName}
+        members={contextItems}
+        signatureSvg={signatureSvg}
       />
-      <MemberHeader member={member} compact />
-    </Fragment>
+    </div>
     <MemberInfobox slot="infobox" member={member} />
     <WikiArticle>
+      <MemberHitokoto
+        hitokoto={member.data.hitokoto}
+        themeColor={member.data.themeColor}
+        signature={member.data.signature}
+      />
+      <MemberChronology
+        timeline={member.data.timeline}
+        themeColor={member.data.themeColor}
+      />
       <Content />
     </WikiArticle>
     <FloatingTOC slot="toc" headings={headings} />

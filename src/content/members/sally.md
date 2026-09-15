@@ -7,6 +7,23 @@ themeColor: "#FFFF00"
 
 status: active
 
+hitokoto: 根暗な明るいオタク、天城サリーです！食も笑顔もアメリカンサイズで頑張ります！
+signature: sally-sign.svg
+
+timeline:
+  - date: "2016-12-24"
+    text: "从10,325名中通过了22/7的最终审核。报名号为11号。"
+  - date: "2017-03-03"
+    text: "在「私たちの名付け親になってください」SHOWROOM 中招募艺名。"
+  - date: "2017-03-04"
+    text: "在SHOWROOM中宣布了艺名天城サリー。"
+  - date: "2017-05-11"
+    text: "确认为22/7角色藤间樱的配音，随后公开角色形象。"
+  - date: "2017-09-20"
+    text: "在22/7首张单曲「僕は存在していなかった」中首次亮相。"
+  - date: "2020-05-18"
+    text: "开设自己的YouTube频道。"
+
 birthday:
   month: 4
   day: 26

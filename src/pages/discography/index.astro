@@ -16,7 +16,7 @@ const groups = [
 
 <BaseLayout title={section.title} description={section.description}>
   <div class="flex flex-col gap-8">
-    <Breadcrumbs items={[{ label: "首页", href: "/" }, { label: section.title }]} />
+    <Breadcrumbs items={[{ label: section.title }]} />
     <PageHeader title={section.title} description={section.description} />
     <div class="grid gap-8 md:grid-cols-2">
       {groups.map((group) => (

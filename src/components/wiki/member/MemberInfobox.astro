@@ -7,7 +7,10 @@ import MetadataList from "@/components/wiki/common/MetadataList.astro";
 import MetadataRow from "@/components/wiki/common/MetadataRow.astro";
 import { MemberIdentityPreview } from "@/components/wiki/member/MemberIdentityPreview";
 import { MemberPhotoViewer } from "@/components/wiki/member/MemberPhotoViewer";
+import MemberSignature from "@/components/wiki/member/MemberSignature.astro";
 import { resourceUrl } from "@/lib/assets";
+import { getMemberThemeStyle } from "@/lib/member-theme";
+import { cn } from "@/lib/utils";
 
 interface Props {
   member: CollectionEntry<"members">;
@@ -24,24 +27,19 @@ const officialPhotos = rawOfficialPhotos.map((photo) => ({
   ...photo,
   url: resourceUrl(photo.path),
 }));
-const memberThemeStyle = data.themeColor
-  ? [
-      `--member-accent: ${data.themeColor}`,
-      "--member-frame-bg: color-mix(in oklab, var(--member-accent) 4%, var(--card))",
-      "--member-header-bg: color-mix(in oklab, var(--member-accent) 8%, var(--card))",
-      "--member-frame-border: color-mix(in oklab, var(--member-accent) 35%, var(--border))",
-      "--member-inner-border: color-mix(in oklab, var(--member-accent) 20%, var(--border))",
-    ].join(";")
-  : undefined;
-const frameClassName = data.themeColor
-  ? "min-w-0 border border-[var(--member-frame-border)] bg-[var(--member-frame-bg)]"
-  : "min-w-0";
-const headerClassName = data.themeColor
-  ? "rounded-t-[calc(var(--radius-2xl)-1px)] bg-[var(--member-header-bg)] py-3"
-  : "py-3";
-const cardClassName = data.themeColor
-  ? "min-w-0 border-[var(--member-inner-border)]"
-  : "min-w-0";
+const memberThemeStyle = getMemberThemeStyle(data.themeColor);
+const frameClassName = cn(
+  "min-w-0 relative overflow-hidden",
+  data.themeColor && "border border-[var(--member-frame-border)] bg-[var(--member-frame-bg)]",
+);
+const headerClassName = cn(
+  "relative overflow-hidden isolate py-3",
+  data.themeColor && "rounded-t-[calc(var(--radius-2xl)-1px)] bg-[var(--member-header-bg)]",
+);
+const cardClassName = cn(
+  "relative z-10 min-w-0",
+  data.themeColor && "border-[var(--member-inner-border)]",
+);
 ---
 
 <aside
@@ -51,19 +49,25 @@ const cardClassName = data.themeColor
 >
   <Frame className={frameClassName}>
     <FrameHeader className={headerClassName}>
-      {hasIdentityPreview ? (
-        <MemberIdentityPreview
-          client:load
-          nameJa={data.nameJa}
-          nameKana={data.nameKana}
-          nameRomanized={data.nameRomanized}
-          nameZh={data.nameZh}
-        />
-      ) : (
-        <div class="flex min-h-9 min-w-0 items-center px-0 py-0.5">
-          <span class="font-heading text-lg font-semibold leading-snug">{primaryName}</span>
-        </div>
-      )}
+      <div class="relative z-10 min-w-0">
+        {hasIdentityPreview ? (
+          <MemberIdentityPreview
+            client:load
+            nameJa={data.nameJa}
+            nameKana={data.nameKana}
+            nameRomanized={data.nameRomanized}
+            nameZh={data.nameZh}
+          />
+        ) : (
+          <div class="flex min-h-9 min-w-0 items-center px-0 py-0.5">
+            <span class="font-heading text-lg font-semibold leading-snug">{primaryName}</span>
+          </div>
+        )}
+      </div>
+      <MemberSignature
+        signature={data.signature}
+        class="pointer-events-none absolute top-1 right-2 z-0 select-none opacity-[0.055] dark:opacity-[0.075] [&>svg]:h-[54px] [&>svg]:w-auto"
+      />
     </FrameHeader>
 
     <Card className={cardClassName}>

@@ -43,7 +43,7 @@ const tocItems = [
   <WikiArticleLayout>
     <ContextNav slot="context" title="Discography" collapsedLabel="其他发行作品" items={contextItems} />
     <Fragment slot="header">
-      <Breadcrumbs items={[{ label: "首页", href: "/" }, { label: "Discography", href: "/discography/" }, { label: title }]} />
+      <Breadcrumbs items={[{ label: "Discography", href: "/discography/" }, { label: title }]} />
       <PageHeader eyebrow={releaseLabel(data)} title={title} description={data.titleZh ? data.titleJa : undefined} />
     </Fragment>
     <ReleaseInfobox slot="infobox" release={release} />
