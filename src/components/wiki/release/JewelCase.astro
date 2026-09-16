@@ -1,0 +1,123 @@
+---
+import { resourceUrl } from "@/lib/assets";
+
+interface Props {
+  cover?: string;
+}
+
+const { cover } = Astro.props;
+const coverUrl = cover ? resourceUrl(cover) : undefined;
+---
+
+<div class="jewel-case" aria-hidden="true">
+  <div class="case-spine"><span class="hinge-tab hinge-top"></span><span class="hinge-tab hinge-bottom"></span></div>
+  <div class="case-artwork">
+    {coverUrl ? (
+      <img src={coverUrl} alt="" class="h-full w-full object-cover" loading="lazy" decoding="async" />
+    ) : (
+      <div class="flex h-full w-full items-center justify-center bg-muted text-muted-foreground/30">
+        <span class="text-2xl font-semibold tracking-wider">CD</span>
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  .jewel-case {
+    --contact-shadow: 0 1px 2px rgb(0 0 0 / 12%), 0 3px 5px -3px rgb(0 0 0 / 14%);
+    --lift-shadow: 0 2px 3px rgb(0 0 0 / 10%), 0 14px 22px -10px rgb(0 0 0 / 22%);
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    aspect-ratio: 1.08;
+    border: 1px solid color-mix(in srgb, var(--foreground) 19%, transparent);
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--background) 94%, var(--foreground));
+    box-shadow: var(--contact-shadow), inset 0 0 0 1px rgb(255 255 255 / 65%);
+    transform-origin: 20% 85%;
+    transform: var(--jewel-transform, none);
+    transition:
+      transform 240ms var(--ease-out-subtle) 0ms,
+      box-shadow 240ms var(--ease-out-subtle) 0ms;
+    user-select: none;
+  }
+
+  /* A thin lid highlight and a separate clear right-hand rim. */
+  .jewel-case::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-top: 1px solid rgb(255 255 255 / 85%);
+    border-right: 1px solid rgb(255 255 255 / 65%);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  .case-spine {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 7%;
+    border-right: 1px solid color-mix(in srgb, var(--foreground) 22%, transparent);
+    background: color-mix(in srgb, var(--foreground) 7%, var(--background));
+    box-shadow: inset 2px 0 0 rgb(255 255 255 / 40%), inset -2px 0 0 rgb(0 0 0 / 4%);
+  }
+
+  .hinge-tab {
+    position: absolute;
+    left: 18%;
+    right: 12%;
+    height: 6%;
+    border: 1px solid color-mix(in srgb, var(--foreground) 17%, transparent);
+    border-radius: 1px;
+    background: color-mix(in srgb, var(--background) 82%, var(--foreground));
+    box-shadow: inset 0 1px rgb(255 255 255 / 60%);
+  }
+  .hinge-top { top: 9%; }
+  .hinge-bottom { bottom: 9%; }
+
+  .case-artwork {
+    position: absolute;
+    width: 90%;
+    aspect-ratio: 1;
+    right: 1.5%;
+    top: 50%;
+    transform: translateY(-50%);
+    overflow: hidden;
+    background: var(--muted);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--foreground) 18%, transparent);
+  }
+  .case-artwork img { display: block; }
+
+  @media (hover: hover) and (pointer: fine) {
+    :global(.release-link:hover) .jewel-case {
+      box-shadow: var(--lift-shadow);
+      transition:
+        transform 240ms var(--ease-out-subtle) var(--hover-intent-delay, 100ms),
+        box-shadow 240ms var(--ease-out-subtle) var(--hover-intent-delay, 100ms);
+    }
+  }
+
+  :global(.release-link:focus-visible) .jewel-case {
+    box-shadow: var(--lift-shadow);
+    transition:
+      transform 240ms var(--ease-out-subtle) 0ms,
+      box-shadow 240ms var(--ease-out-subtle) 0ms;
+  }
+
+  :global(.dark) .jewel-case {
+    --contact-shadow: 0 1px 3px rgb(0 0 0 / 45%), 0 3px 6px -3px rgb(0 0 0 / 40%);
+    --lift-shadow: 0 2px 4px rgb(0 0 0 / 40%), 0 16px 26px -9px rgb(0 0 0 / 65%);
+    border-color: color-mix(in srgb, var(--foreground) 24%, transparent);
+    box-shadow: var(--contact-shadow), inset 0 0 0 1px rgb(255 255 255 / 9%);
+  }
+  :global(.dark) .jewel-case::after { border-color: rgb(255 255 255 / 23%); }
+  :global(.dark) .case-spine { box-shadow: inset 2px 0 rgb(255 255 255 / 10%), inset -2px 0 rgb(0 0 0 / 22%); }
+  :global(.dark) .hinge-tab { box-shadow: inset 0 1px rgb(255 255 255 / 14%); }
+  @media (hover: hover) and (pointer: fine) {
+    :global(.dark .release-link:hover) .jewel-case { box-shadow: var(--lift-shadow); }
+  }
+  :global(.dark .release-link:focus-visible) .jewel-case { box-shadow: var(--lift-shadow); }
+  @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+    .jewel-case { transform: none; transition: none; }
+  }
+</style>

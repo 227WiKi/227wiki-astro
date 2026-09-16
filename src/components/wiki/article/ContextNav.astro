@@ -25,18 +25,23 @@ const linkClass = "block min-w-0 rounded-lg px-3 py-2.5 text-sm [overflow-wrap:a
       ))}
     </ul>
   </nav>
-  <details class="rounded-xl border bg-background xl:hidden">
-    <summary class="cursor-pointer rounded-xl px-4 py-3 text-sm font-medium outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset">
-      {collapsedLabel}
+  <details class="group rounded-xl border bg-background xl:hidden">
+    <summary class="flex cursor-pointer list-none items-center justify-between rounded-xl px-4 py-3 text-sm font-medium outline-none transition-colors duration-(--duration-fast,130ms) ease-(--ease-out-subtle) hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset [&::-webkit-details-marker]:hidden">
+      <span>{collapsedLabel}</span>
+      <span aria-hidden="true" class="disclosure-arrow text-xs transition-transform duration-(--duration-normal) group-open:rotate-180">⌄</span>
     </summary>
-    <nav aria-label={title} class="max-h-[50dvh] overflow-y-auto border-t p-2">
-      <ul class="flex flex-col gap-1">
-        {items.map((item) => (
-          <li><a href={item.href} aria-current={item.current ? "page" : undefined}
-            class:list={[linkClass, item.current ? "bg-accent font-medium text-foreground" : "text-muted-foreground"]}>{item.label}</a></li>
-        ))}
-      </ul>
-    </nav>
+    <div class="disclosure-content">
+      <div class="disclosure-inner">
+        <nav aria-label={title} class="max-h-[50dvh] overflow-y-auto border-t p-2">
+          <ul class="flex flex-col gap-1">
+            {items.map((item) => (
+              <li><a href={item.href} aria-current={item.current ? "page" : undefined}
+                class:list={[linkClass, item.current ? "bg-accent font-medium text-foreground" : "text-muted-foreground"]}>{item.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </div>
   </details>
 </div>
 

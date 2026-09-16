@@ -17,6 +17,20 @@ const memberTimelineItem = z.object({
   text: z.string().min(1),
 });
 
+const voiceSampleItem = z.object({
+  title: z.string().min(1),
+  src: z.string().min(1),
+  duration: z.string().regex(/^\d{1,2}:[0-5]\d$/, "duration must be mm:ss").optional(),
+});
+
+const voiceSampleSet = z.object({
+  id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "id must be slug-style"),
+  label: z.string().min(1),
+  description: z.string().optional(),
+  sourceUrl: z.url().optional(),
+  samples: z.array(voiceSampleItem).min(1),
+});
+
 const members = defineCollection({
   loader: glob({
     base: "./src/content/members",
@@ -30,6 +44,14 @@ const members = defineCollection({
     themeColor: z.string().min(1).optional(),
     hitokoto: z.string().min(1).optional(),
     signature: z.string().min(1).optional(),
+    characterRole: z
+      .union([
+        z.string().min(1).transform((name) => ({ name })),
+        z.object({
+          name: z.string().min(1),
+        }),
+      ])
+      .optional(),
     timeline: z.array(memberTimelineItem).optional(),
     status: z.enum(["active", "graduated"]),
     birthday: z
@@ -63,6 +85,13 @@ const members = defineCollection({
         "official photo IDs must be unique within a member",
       ),
     officialProfileUrl: z.url().optional(),
+    voiceSampleSets: z
+      .array(voiceSampleSet)
+      .default([])
+      .refine(
+        (sets) => new Set(sets.map(({ id }) => id)).size === sets.length,
+        "voice sample set IDs must be unique within a member",
+      ),
     socials: z
       .array(
         z.object({

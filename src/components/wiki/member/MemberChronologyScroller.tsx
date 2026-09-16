@@ -85,7 +85,7 @@ export function MemberChronologyScroller({
               onClick={() => handleScroll(-1)}
               disabled={!canScrollLeft}
               aria-label="向左滚动时间线"
-              className="grid size-8 place-items-center rounded-md border-transparent bg-transparent text-muted-foreground outline-none transition-colors hover:text-foreground disabled:pointer-events-none disabled:opacity-25 focus-visible:ring-2 focus-visible:ring-ring"
+              className="grid size-8 place-items-center rounded-md border-transparent bg-transparent text-muted-foreground outline-none transition-colors duration-(--duration-fast,130ms) ease-(--ease-out-subtle) hover:text-foreground disabled:pointer-events-none disabled:opacity-25 focus-visible:ring-2 focus-visible:ring-ring"
             >
               <ChevronLeft className="size-4.5" aria-hidden="true" />
             </button>
@@ -94,7 +94,7 @@ export function MemberChronologyScroller({
               onClick={() => handleScroll(1)}
               disabled={!canScrollRight}
               aria-label="向右滚动时间线"
-              className="grid size-8 place-items-center rounded-md border-transparent bg-transparent text-muted-foreground outline-none transition-colors hover:text-foreground disabled:pointer-events-none disabled:opacity-25 focus-visible:ring-2 focus-visible:ring-ring"
+              className="grid size-8 place-items-center rounded-md border-transparent bg-transparent text-muted-foreground outline-none transition-colors duration-(--duration-fast,130ms) ease-(--ease-out-subtle) hover:text-foreground disabled:pointer-events-none disabled:opacity-25 focus-visible:ring-2 focus-visible:ring-ring"
             >
               <ChevronRight className="size-4.5" aria-hidden="true" />
             </button>

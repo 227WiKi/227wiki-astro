@@ -1,12 +1,79 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import CossDialogProbe from "@/components/prototype/CossDialogProbe";
+import MemberVoiceSamples from "@/components/wiki/member/MemberVoiceSamples.astro";
+import type { VoiceSampleSet } from "@/lib/voice-samples";
+
+const sampleAudioWav = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA";
+
+const singleSetFixture: VoiceSampleSet[] = [
+  {
+    id: "current",
+    label: "单版本测试",
+    sourceUrl: "https://nanabunnonijyuuni-mobile.com/s/n110/artist/a1",
+    samples: [
+      { title: "少女(Jealousy〜女社会〜)", src: sampleAudioWav, duration: "0:14" },
+      { title: "泣き（白百合の嘘）", src: sampleAudioWav, duration: "0:18" },
+      { title: "幼稚園児「Dreamer〜平和の世界を夢見て〜」", src: sampleAudioWav, duration: "0:20" },
+    ],
+  },
+];
+
+const multiSetFixture: VoiceSampleSet[] = [
+  {
+    id: "current",
+    label: "新版",
+    sourceUrl: "https://nanabunnonijyuuni-mobile.com/s/n110/artist/a1",
+    samples: [
+      { title: "少女(Jealousy〜女社会〜)", src: sampleAudioWav, duration: "0:14" },
+      { title: "泣き（百合の嘘）", src: sampleAudioWav, duration: "0:18" },
+      { title: "ナレーション1「Focus〜世界一醜い(？)〜」", src: sampleAudioWav, duration: "0:20" },
+      { title: "无效样本测试（网络错误）", src: "https://invalid-host-404-test.example.com/audio.mp3" },
+    ],
+  },
+  {
+    id: "old",
+    label: "旧版",
+    sourceUrl: "https://nanabunnonijyuuni-mobile.com/s/n110/artist/a1",
+    samples: [
+      { title: "対話1", src: sampleAudioWav, duration: "0:12" },
+      { title: "対話2", src: sampleAudioWav, duration: "0:15" },
+      { title: "対話3", src: sampleAudioWav, duration: "0:19" },
+    ],
+  },
+];
 ---
-<BaseLayout title="UI Lab" description="Coss Dialog 在 Astro 中的 isolated React island 验证。">
-  <div class="flex flex-col items-start gap-4">
-    <h1 class="font-heading text-3xl font-semibold tracking-tight">UI Lab</h1>
-    <p class="text-muted-foreground">Coss Dialog · isolated React island</p>
-    <CossDialogProbe client:idle />
-    <noscript>此测试需要启用 JavaScript 才能打开 Dialog。普通 Wiki 页面无需 JavaScript。</noscript>
+<BaseLayout title="UI Lab" description="Coss Dialog 与 VoiceSamplePlayer 在 Astro 中的 isolated React island 验证。">
+  <div class="flex flex-col items-start gap-10 max-w-2xl">
+    <div>
+      <h1 class="font-heading text-3xl font-semibold tracking-tight">UI Lab</h1>
+      <p class="text-muted-foreground">VoiceSamplePlayer & Coss Dialog · isolated React islands</p>
+    </div>
+
+    <!-- Case A: Single Set (No Tabs) -->
+    <div class="w-full border-t pt-6" id="test-single-set">
+      <h3 class="font-heading text-lg font-semibold mb-3">Case 1: Single Set (Tabs Should Not Render)</h3>
+      <MemberVoiceSamples voiceSampleSets={singleSetFixture} memberName="天城サリー" />
+    </div>
+
+    <!-- Case B: Multi-Set with Tabs & Error State Track -->
+    <div class="w-full border-t pt-6" id="test-multi-set">
+      <h3 class="font-heading text-lg font-semibold mb-3">Case 2: Multi-Set (新版 / 旧版 + Error Track)</h3>
+      <MemberVoiceSamples voiceSampleSets={multiSetFixture} memberName="天城サリー" />
+    </div>
+
+    <!-- Case C: Empty Set (Should Not Render Anything) -->
+    <div class="w-full border-t pt-6" id="test-empty-set">
+      <h3 class="font-heading text-lg font-semibold mb-3">Case 3: Empty Set (Zero DOM Output)</h3>
+      <div id="empty-set-container">
+        <MemberVoiceSamples voiceSampleSets={[]} memberName="西條和" />
+      </div>
+    </div>
+
+    <div class="w-full border-t pt-6">
+      <h3 class="font-heading text-lg font-semibold mb-3">Dialog Probe</h3>
+      <CossDialogProbe client:idle />
+      <noscript>此测试需要启用 JavaScript 才能打开 Dialog。普通 Wiki 页面无需 JavaScript。</noscript>
+    </div>
   </div>
 </BaseLayout>

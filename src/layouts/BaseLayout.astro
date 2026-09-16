@@ -3,6 +3,7 @@ import "@/styles/global.css";
 import SiteHeader from "@/components/site/SiteHeader.astro";
 import SiteFooter from "@/components/site/SiteFooter.astro";
 import { siteName, siteUrl } from "@/config/site";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title: string;
@@ -16,7 +17,7 @@ const pageTitle = title === siteName ? siteName : `${title} | ${siteName}`;
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 ---
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" transition:name="root" transition:animate="none">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -31,6 +32,7 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:locale" content="zh_CN" />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <ClientRouter />
   </head>
   <body>
     <div class="isolate flex min-h-screen flex-col">
@@ -43,6 +45,7 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
       <SiteHeader />
       <main
         id="main"
+        transition:name="page-content"
         class:list={[
           "mx-auto w-full flex-1 px-4 py-8 sm:px-6 sm:py-10 lg:px-8",
           wide ? "max-w-[84rem]" : "max-w-6xl",
@@ -53,5 +56,38 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
       </main>
       <SiteFooter />
     </div>
+    <script>
+      function setupAnimatedDisclosures() {
+        document.querySelectorAll("details:has(.disclosure-content)").forEach((details) => {
+          const summary = details.querySelector("summary");
+          if (!summary || summary.hasAttribute("data-disclosure-bound")) return;
+          summary.setAttribute("data-disclosure-bound", "true");
+
+          summary.addEventListener("click", (e) => {
+            if (!details.hasAttribute("open")) return;
+            const content = details.querySelector<HTMLElement>(".disclosure-content");
+            if (!content || content.classList.contains("closing")) return;
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+              return;
+            }
+            e.preventDefault();
+            content.classList.add("closing");
+            let finished = false;
+            const finish = () => {
+              if (finished) return;
+              finished = true;
+              content.classList.remove("closing");
+              details.removeAttribute("open");
+              content.removeEventListener("transitionend", finish);
+            };
+            content.addEventListener("transitionend", finish);
+            setTimeout(finish, 250);
+          });
+        });
+      }
+
+      setupAnimatedDisclosures();
+      document.addEventListener("astro:page-load", setupAnimatedDisclosures);
+    </script>
   </body>
 </html>

@@ -14,19 +14,51 @@ const groups = [
 ] as const;
 ---
 
-<BaseLayout title={section.title} description={section.description}>
+<BaseLayout title={section.title} description={section.description} wide>
   <div class="flex flex-col gap-8">
     <Breadcrumbs items={[{ label: section.title }]} />
     <PageHeader title={section.title} description={section.description} />
-    <div class="grid gap-8 md:grid-cols-2">
-      {groups.map((group) => (
-        <section aria-labelledby={group.type} class="flex min-w-0 flex-col gap-4">
-          <h2 id={group.type} class="font-heading text-2xl font-semibold">{group.title}</h2>
-          {releases.filter(({ data }) => data.releaseType === group.type)
-            .sort((a, b) => a.data.releaseNumber - b.data.releaseNumber)
-            .map((release) => <ReleaseCard release={release} />)}
-        </section>
-      ))}
+
+    <div class="flex flex-col gap-10 sm:gap-12">
+      {groups.map((group) => {
+        const groupReleases = releases
+          .filter(({ data }) => data.releaseType === group.type)
+          .sort((a, b) => a.data.releaseNumber - b.data.releaseNumber);
+
+        if (groupReleases.length === 0) return null;
+
+        return (
+          <section aria-labelledby={group.type} class="flex min-w-0 flex-col gap-5">
+            <h2 id={group.type} class="font-heading text-xl font-semibold tracking-tight sm:text-2xl">
+              {group.title}
+            </h2>
+            <div class="cd-wall-grid grid grid-cols-2 gap-3.5 sm:gap-4 md:grid-cols-3 md:gap-5 lg:grid-cols-4 xl:grid-cols-5 lg:gap-5 xl:gap-6 items-start">
+              {groupReleases.map((release) => <ReleaseCard release={release} />)}
+            </div>
+          </section>
+        );
+      })}
     </div>
   </div>
 </BaseLayout>
+
+<style>
+  .cd-wall-grid {
+    --grid-gap: 0.875rem;
+  }
+  @media (min-width: 640px) {
+    .cd-wall-grid {
+      --grid-gap: 1rem;
+    }
+  }
+  @media (min-width: 768px) {
+    .cd-wall-grid {
+      --grid-gap: 1.25rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .cd-wall-grid {
+      --grid-gap: 1.5rem;
+    }
+  }
+</style>

@@ -54,7 +54,7 @@ export function MemberBreadcrumbs({
 
         {/* Member Menu Trigger */}
         <BreadcrumbItem className="shrink-0">
-          <Menu>
+          <Menu modal={false}>
             <MenuTrigger
               aria-label="切换成员"
               className="inline-flex size-7 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"

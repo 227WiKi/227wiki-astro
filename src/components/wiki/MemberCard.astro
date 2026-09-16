@@ -1,53 +1,120 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardPanel,
-  CardTitle,
-} from "@/components/ui/card";
 import { resourceUrl } from "@/lib/assets";
+import { getMemberThemeStyle } from "@/lib/member-theme";
+import MemberSignature from "@/components/wiki/member/MemberSignature.astro";
 
 interface Props {
   member: CollectionEntry<"members">;
 }
 
 const { member } = Astro.props;
-const displayName = member.data.nameZh ?? member.data.nameJa;
-const showJapaneseName = displayName !== member.data.nameJa;
-const avatarUrl = member.data.avatar ? resourceUrl(member.data.avatar) : undefined;
-const statusLabel = member.data.status === "active" ? "在籍" : "已毕业";
+const { data } = member;
+
+// Photo resolution: prefer dedicated avatar, then fallback to officialPhotos
+const photoPath = data.avatar ?? data.officialPhotos?.[0]?.path;
+const photoUrl = photoPath ? resourceUrl(photoPath) : undefined;
+
+// Theme style
+const memberThemeStyle = getMemberThemeStyle(data.themeColor);
+const cardStyle = [
+  memberThemeStyle,
+  "--card-surface: var(--member-frame-bg, var(--card))",
+  "--card-surface-hover: var(--member-header-bg, var(--card))",
+]
+  .filter(Boolean)
+  .join(";");
+
+// Identity text
+const primaryName = data.nameJa ?? data.nameZh ?? "";
+const roleName = data.characterRole?.name;
+const hasSignature = Boolean(data.signature);
 ---
 
-<article>
+<article class="h-full">
   <a
     href={`/member/${member.id}/`}
-    class="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+    class="group member-card-link relative flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--member-inner-border,var(--border))] bg-[var(--card-surface)] transition-[border-color,background-color] duration-200 hover:border-[var(--member-frame-border,var(--border))] hover:bg-[var(--card-surface-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+    style={cardStyle}
   >
-    <Card className="h-full transition-shadow hover:shadow-sm">
-      <CardHeader className="grid grid-cols-[4rem_1fr] items-center gap-4">
-        <div class="relative row-span-2 size-16 overflow-hidden rounded-xl bg-muted" aria-hidden="true">
-          <span class="absolute inset-0 grid place-items-center font-semibold text-muted-foreground">
-            {displayName.slice(0, 1)}
+    {/* 1:1 Square Avatar Container */}
+    <div class="relative aspect-square w-full overflow-hidden bg-muted/40">
+      {photoUrl ? (
+        <img
+          src={photoUrl}
+          alt={primaryName}
+          class="h-full w-full object-cover object-top transition-transform duration-300 ease-out group-hover:scale-[1.01]"
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <div class="flex h-full w-full items-center justify-center bg-muted/20 text-muted-foreground/30">
+          <span class="text-4xl font-semibold select-none">
+            {primaryName.slice(0, 1)}
           </span>
-          {avatarUrl && (
-            <img
-              src={avatarUrl}
-              alt=""
-              class="relative size-full object-cover"
-              loading="lazy"
-              decoding="async"
-            />
+        </div>
+      )}
+
+      {/* Surface-driven bottom gradient fade bridging avatar into identity surface */}
+      {photoUrl && (
+        <div
+          class="avatar-transition-fade pointer-events-none absolute inset-x-0 bottom-0 h-7 sm:h-11"
+          aria-hidden="true"
+        />
+      )}
+    </div>
+
+    {/* Low-overlap Identity Area (-mt-2.5 sm:-mt-3) */}
+    <div class="relative -mt-2.5 sm:-mt-3 flex flex-1 flex-col justify-center px-3.5 pb-3.5 pt-1 sm:px-4 sm:pb-4">
+      <div
+        class:list={[
+          "relative z-10 min-h-[2.75rem] sm:min-h-[3rem] items-center",
+          hasSignature
+            ? "grid grid-cols-[minmax(0,1fr)_auto] gap-2 sm:gap-3"
+            : "flex flex-col justify-center",
+        ]}
+      >
+        {/* Left: Member primary name & character role */}
+        <div class="min-w-0 flex flex-col justify-center">
+          <h2 class="truncate text-base font-semibold tracking-tight text-foreground sm:text-lg">
+            {primaryName}
+          </h2>
+          {roleName && (
+            <p class="truncate text-xs text-muted-foreground sm:text-sm">
+              {roleName} 役
+            </p>
           )}
         </div>
-        <CardTitle><h2>{displayName}</h2></CardTitle>
-        {showJapaneseName && <CardDescription>{member.data.nameJa}</CardDescription>}
-      </CardHeader>
-      <CardPanel className="flex items-center justify-between gap-4 text-sm">
-        <span class="text-muted-foreground">{statusLabel}</span>
-        <span class="font-medium">查看成员资料</span>
-      </CardPanel>
-    </Card>
+
+        {/* Right: Signature secondary identity mark */}
+        {hasSignature && data.signature && (
+          <div
+            class="flex shrink-0 items-center justify-end text-foreground opacity-[0.18] dark:opacity-[0.22] pointer-events-none select-none"
+            aria-hidden="true"
+          >
+            <MemberSignature
+              signature={data.signature}
+              class="h-11 max-w-[56px] sm:h-13 sm:max-w-[70px] [&>svg]:h-full [&>svg]:w-auto"
+            />
+          </div>
+        )}
+      </div>
+    </div>
   </a>
 </article>
+
+<style>
+  .member-card-link:hover {
+    --card-surface: var(--member-header-bg, var(--card));
+  }
+
+  .avatar-transition-fade {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      color-mix(in srgb, var(--card-surface) 12%, transparent) 35%,
+      color-mix(in srgb, var(--card-surface) 65%, transparent) 70%,
+      var(--card-surface) 100%
+    );
+  }
+</style>

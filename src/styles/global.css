@@ -58,6 +58,15 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Unified Motion Tokens */
+  --duration-fast: 130ms;
+  --duration-normal: 170ms;
+  --duration-panel: 210ms;
+  --duration-page: 220ms;
+  --duration-emphasis: 300ms;
+  --ease-out-subtle: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-subtle: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 :root {
@@ -104,6 +113,15 @@
   --sidebar-primary-foreground: var(--color-neutral-50);
   --sidebar-ring: var(--color-neutral-400);
   --wiki-brand: #008cd2;
+
+  /* Unified Motion Tokens */
+  --duration-fast: 130ms;
+  --duration-normal: 170ms;
+  --duration-panel: 210ms;
+  --duration-page: 220ms;
+  --duration-emphasis: 300ms;
+  --ease-out-subtle: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-subtle: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dark {
@@ -164,5 +182,108 @@
   }
   code, kbd, samp, pre {
     font-family: var(--font-mono);
+  }
+}
+
+/* Only main content moves; the root snapshot swaps without animation. */
+@keyframes page-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Root snapshot stays steady without fade or translate so SiteHeader does not jitter. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+/* Avoid geometry interpolation when content width or height changes. */
+::view-transition-group(page-content) {
+  animation: none;
+}
+
+::view-transition-old(page-content) {
+  animation: page-out var(--duration-page) var(--ease-out-subtle) both;
+}
+
+::view-transition-new(page-content) {
+  animation: page-in var(--duration-page) var(--ease-out-subtle) both;
+}
+
+/* Disclosure Grid-row Animation */
+.disclosure-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration-panel) var(--ease-out-subtle);
+}
+
+details[open] > .disclosure-content {
+  grid-template-rows: 1fr;
+}
+
+details[open] > .disclosure-content.closing {
+  grid-template-rows: 0fr;
+}
+
+.disclosure-inner {
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity var(--duration-panel) var(--ease-out-subtle),
+              transform var(--duration-panel) var(--ease-out-subtle);
+}
+
+details[open] > .disclosure-content > .disclosure-inner {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+details[open] > .disclosure-content.closing > .disclosure-inner {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+.disclosure-arrow {
+  display: inline-block;
+  transform-origin: center;
+  transition: transform var(--duration-normal) var(--ease-out-subtle);
+}
+
+details[open]:has(.disclosure-content.closing) .disclosure-arrow {
+  transform: rotate(0deg) !important;
+}
+
+/* Global Prefers-Reduced-Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }

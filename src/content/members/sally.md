@@ -9,6 +9,8 @@ status: active
 
 hitokoto: 根暗な明るいオタク、天城サリーです！食も笑顔もアメリカンサイズで頑張ります！
 signature: sally-sign.svg
+characterRole:
+  name: 藤間桜
 
 timeline:
   - date: "2016-12-24"
@@ -101,6 +103,37 @@ officialPhotos:
 
 
 officialProfileUrl: https://nanabunnonijyuuni-mobile.com/s/n110/artist/a1
+
+voiceSampleSets:
+  - id: "current"
+    label: "新版"
+    samples:
+      - title: "少女(Jealousy〜女社会〜)"
+        src: "https://res.227wiki.eu.org/audio/voicesample/sally/new/1.m4a"
+      - title: "女子高校生は見た"
+        src: "https://res.227wiki.eu.org/audio/voicesample/sally/new/2.m4a"
+      - title: "女子高校生2 (Blue Spring〜おこがましい気遣い〜)"
+        src: "https://res.227wiki.eu.org/audio/voicesample/sally/new/3.m4a"
+      - title: "犯人 (Revenge~最後のお願い〜)"
+        src: "https://res.227wiki.eu.org/audio/voicesample/sally/new/4.m4a"
+      - title: "大人女性 (社畜と犬)"
+        src: "https://res.227wiki.eu.org/audio/voicesample/sally/new/5.m4a"
+      - title: "泣き (百合の嘘)"
+        src: "https://res.227wiki.eu.org/audio/voicesample/sally/new/6.m4a"
+      - title: "幼稚園児「Dreamer～平和の世界を夢見て～)"
+        src: "https://res.227wiki.eu.org/audio/voicesample/sally/new/7.m4a"
+      - title: "ナレーション1「Focus～世界一醜い(？)～」"
+        src: "https://res.227wiki.eu.org/audio/voicesample/sally/new/8.m4a"
+      - title: "ナレーション2(Only You〜愛の為なら〜)"
+        src: "https://res.227wiki.eu.org/audio/voicesample/sally/new/9.m4a"
+      - title: "外画 (凹凹バディ)"
+        src: "https://res.227wiki.eu.org/audio/voicesample/sally/new/10.m4a"
+      - title: "ENG1 Adult(英語1 大人)"
+        src: "https://res.227wiki.eu.org/audio/voicesample/sally/new/ENG1.m4a"
+      - title: "ENG2 Teen ager(英語2 10代)"
+        src: "https://res.227wiki.eu.org/audio/voicesample/sally/new/ENG2.m4a"
+      - title: "ENG3 preschooler(英語3 幼児)"
+        src: "https://res.227wiki.eu.org/audio/voicesample/sally/new/ENG3.m4a"
 
 socials:
   - platform: x

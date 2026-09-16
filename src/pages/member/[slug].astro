@@ -5,6 +5,7 @@ import WikiArticleLayout from "@/components/wiki/article/WikiArticleLayout.astro
 import ContextNav from "@/components/wiki/article/ContextNav.astro";
 import FloatingTOC from "@/components/wiki/article/FloatingTOC.astro";
 import MemberHitokoto from "@/components/wiki/member/MemberHitokoto.astro";
+import MemberVoiceSamples from "@/components/wiki/member/MemberVoiceSamples.astro";
 import MemberChronology from "@/components/wiki/member/MemberChronology.astro";
 import { MemberBreadcrumbs } from "@/components/wiki/member/MemberBreadcrumbs";
 import MemberInfobox from "@/components/wiki/member/MemberInfobox.astro";
@@ -57,6 +58,11 @@ const signatureSvg = getMemberSignatureSvg(member.data.signature);
         hitokoto={member.data.hitokoto}
         themeColor={member.data.themeColor}
         signature={member.data.signature}
+      />
+      <MemberVoiceSamples
+        voiceSampleSets={member.data.voiceSampleSets}
+        memberName={primaryName}
+        themeColor={member.data.themeColor}
       />
       <MemberChronology
         timeline={member.data.timeline}

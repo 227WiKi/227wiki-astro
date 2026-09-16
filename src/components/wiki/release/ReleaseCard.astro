@@ -1,29 +1,252 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { Card, CardHeader, CardTitle, CardDescription, CardPanel } from "@/components/ui/card";
-import { resourceUrl } from "@/lib/assets";
+import JewelCase from "@/components/wiki/release/JewelCase.astro";
 import { releaseLabel } from "@/lib/releases";
 
-interface Props { release: CollectionEntry<"releases">; }
+interface Props {
+  release: CollectionEntry<"releases">;
+}
+
 const { release } = Astro.props;
 const data = release.data;
-const title = data.titleZh ?? data.titleJa;
+const label = releaseLabel(data);
+const formattedDate = data.releaseDate.replaceAll("-", ".");
+const coverPath = data.cover ?? data.editions?.[0]?.cover;
+
+// Japanese primary, Chinese secondary
+const primaryTitle = data.titleJa;
+const secondaryTitle =
+  data.titleZh && data.titleZh !== data.titleJa ? data.titleZh : undefined;
 ---
 
-<article class="min-w-0">
-  <a href={`/discography/releases/${release.id}/`} class="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-    <Card className="h-full transition-shadow hover:shadow-sm">
-      <CardHeader className="flex flex-row items-start gap-4">
-        {data.cover && <img src={resourceUrl(data.cover)} alt="" width="160" height="160" loading="lazy" decoding="async" class="size-24 shrink-0 rounded-lg border object-cover sm:size-28" />}
-        <div class="flex min-w-0 flex-col gap-2 [overflow-wrap:anywhere]">
-          <CardDescription>{releaseLabel(data)}</CardDescription>
-          <CardTitle className="leading-snug"><h3>{title}</h3></CardTitle>
-          {data.titleZh && <CardDescription>{data.titleJa}</CardDescription>}
+<article class="release-item min-w-0">
+  <a
+    href={`/discography/releases/${release.id}/`}
+    class="release-link block rounded-[3px] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+  >
+    <div class="liner-note">
+      <div class="liner-copy">
+        <div class="release-details text-muted-foreground">
+          <span>{label}</span>
+          <time datetime={data.releaseDate}>{formattedDate}</time>
         </div>
-      </CardHeader>
-      <CardPanel className="text-sm text-muted-foreground">
-        <time datetime={data.releaseDate}>{data.releaseDate}</time>
-      </CardPanel>
-    </Card>
+        <h3 class="line-clamp-2 text-xs sm:text-sm font-semibold leading-snug text-foreground">{primaryTitle}</h3>
+        {secondaryTitle && (
+          <p class="mt-0.5 line-clamp-1 text-[11px] leading-snug text-muted-foreground">{secondaryTitle}</p>
+        )}
+      </div>
+    </div>
+    <JewelCase cover={coverPath} />
+    <div class="display-shelf" aria-hidden="true"></div>
   </a>
 </article>
+
+<style>
+  .release-item {
+    --grid-gap: 0.875rem;
+    --shelf-bleed: calc(var(--grid-gap) / 2 + 0.5px);
+    --shelf-edge: color-mix(in srgb, var(--foreground) 10%, transparent);
+    --shelf-face: color-mix(in srgb, var(--foreground) 3.5%, var(--background));
+    --shelf-shadow: 0 3px 6px -2px rgb(0 0 0 / 6%), 0 1px 2px rgb(0 0 0 / 4%);
+    --hover-intent-delay: 100ms;
+    --liner-reveal-delay: 115ms;
+    --liner-copy-delay: 135ms;
+    --note-reveal: 60px;
+    --item-reserve-resting: 8px;
+    --item-reserve-hover: 66px;
+    position: relative;
+    padding-bottom: var(--item-reserve-resting);
+    transition: padding-bottom 260ms var(--ease-out-subtle) 0ms;
+  }
+
+  @media (min-width: 640px) {
+    .release-item {
+      --grid-gap: 1rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .release-item {
+      --grid-gap: 1.25rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .release-item {
+      --grid-gap: 1.5rem;
+    }
+  }
+
+  .release-item:focus-within {
+    z-index: 20;
+  }
+
+  .release-link {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .display-shelf {
+    position: absolute;
+    z-index: 1;
+    top: calc(100% - 1px);
+    left: calc(-1 * var(--shelf-bleed));
+    right: calc(-1 * var(--shelf-bleed));
+    height: 8px;
+    background: var(--shelf-face);
+    border-top: 1px solid var(--shelf-edge);
+    box-shadow: var(--shelf-shadow);
+    pointer-events: none;
+    user-select: none;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .liner-note {
+    position: absolute;
+    z-index: 2;
+    left: 7%;
+    right: 4%;
+    bottom: 0;
+    height: 122px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px 10px 8px;
+    border: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent);
+    border-radius: 3px;
+    background: var(--card);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 5%);
+    transform-origin: 50% 0;
+    pointer-events: none;
+    transform: translate(0, 0);
+    transition:
+      transform 260ms var(--ease-out-subtle) 0ms,
+      box-shadow 260ms var(--ease-out-subtle) 0ms;
+  }
+
+  .liner-copy {
+    opacity: 0;
+    transition: opacity 160ms var(--ease-out-subtle) 0ms;
+  }
+
+  .release-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
+    font-size: 10px;
+    line-height: 1.3;
+    font-weight: 500;
+  }
+  .release-details time {
+    white-space: nowrap;
+  }
+
+  /* Desktop hover & focus-visible interactions */
+  @media (hover: hover) and (pointer: fine) {
+    /* Hover intent (dwell threshold ~100ms) */
+    .release-item:hover {
+      z-index: 20;
+      padding-bottom: var(--item-reserve-hover);
+      transition: padding-bottom 260ms var(--ease-out-subtle) var(--hover-intent-delay);
+    }
+
+    .release-link:hover {
+      --jewel-transform: translateY(-7px) rotate(-1.5deg) scale(1.008);
+    }
+
+    .release-link:hover .liner-note {
+      transform: translate(6px, var(--note-reveal)) rotate(0.4deg);
+      box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+      transition:
+        transform 280ms var(--ease-out-subtle) var(--liner-reveal-delay),
+        box-shadow 280ms var(--ease-out-subtle) var(--liner-reveal-delay);
+    }
+
+    .release-link:hover .liner-copy {
+      opacity: 1;
+      transition: opacity 180ms var(--ease-out-subtle) var(--liner-copy-delay);
+    }
+
+    /* Keyboard focus: instant response with 0ms delay */
+    .release-item:focus-within {
+      z-index: 20;
+      padding-bottom: var(--item-reserve-hover);
+      transition: padding-bottom 260ms var(--ease-out-subtle) 0ms;
+    }
+
+    .release-link:focus-visible {
+      --jewel-transform: translateY(-7px) rotate(-1.5deg) scale(1.008);
+    }
+
+    .release-link:focus-visible .liner-note {
+      transform: translate(6px, var(--note-reveal)) rotate(0.4deg);
+      box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+      transition:
+        transform 280ms var(--ease-out-subtle) 0ms,
+        box-shadow 280ms var(--ease-out-subtle) 0ms;
+    }
+
+    .release-link:focus-visible .liner-copy {
+      opacity: 1;
+      transition: opacity 180ms var(--ease-out-subtle) 0ms;
+    }
+  }
+
+  :global(.dark) .release-item {
+    --shelf-edge: color-mix(in srgb, var(--foreground) 13%, transparent);
+    --shelf-face: color-mix(in srgb, var(--foreground) 5%, var(--background));
+    --shelf-shadow: 0 3px 6px -2px rgb(0 0 0 / 28%), 0 1px 2px rgb(0 0 0 / 18%);
+  }
+
+  :global(.dark) .liner-note {
+    border-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+    box-shadow: 0 2px 6px rgb(0 0 0 / 30%);
+  }
+
+  /* Mobile / Touch: liner note is permanently revealed, wrapper reserve is permanently set, no hover reflow */
+  @media (hover: none), (pointer: coarse) {
+    .release-item {
+      padding-bottom: var(--item-reserve-hover);
+      transition: none;
+    }
+    .liner-note {
+      transform: translate(0, var(--note-reveal));
+      transition: none;
+    }
+    .liner-copy {
+      opacity: 1;
+      transition: none;
+    }
+  }
+
+  /* Prefers Reduced Motion: disable translation/rotation movements */
+  @media (prefers-reduced-motion: reduce) {
+    .release-item {
+      transition: none !important;
+    }
+    .release-item:hover,
+    .release-item:focus-within {
+      padding-bottom: var(--item-reserve-hover);
+      transition: none !important;
+    }
+    .release-link:hover,
+    .release-link:focus-visible {
+      --jewel-transform: none !important;
+    }
+    .liner-note,
+    .release-link:hover .liner-note,
+    .release-link:focus-visible .liner-note {
+      transform: translate(0, var(--note-reveal)) !important;
+      transition: none !important;
+    }
+    .liner-copy {
+      opacity: 1 !important;
+      transition: none !important;
+    }
+  }
+</style>
