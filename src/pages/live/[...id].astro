@@ -1,0 +1,59 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Breadcrumbs from "@/components/wiki/common/Breadcrumbs.astro";
+import WikiArticle from "@/components/wiki/WikiArticle.astro";
+
+interface Props {
+  event: CollectionEntry<"liveEvents">;
+}
+
+export async function getStaticPaths() {
+  return (await getCollection("liveEvents")).map((event) => ({
+    params: { id: event.id },
+    props: { event },
+  }));
+}
+
+const { event } = Astro.props;
+const title = event.data.titleJa;
+const { Content } = await render(event);
+---
+
+<BaseLayout title={title} description={event.data.titleZh ?? `${title} 的演出信息与记录。`}>
+  <div class="live-detail mx-auto flex min-w-0 max-w-4xl flex-col gap-6">
+    <Breadcrumbs items={[{ label: "Live", href: "/live/" }, { label: title }]} />
+    <WikiArticle><Content /></WikiArticle>
+  </div>
+</BaseLayout>
+
+<style>
+  .live-detail :global(h1) {
+    margin-block: 0 1.5rem;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .live-detail :global(img) {
+    display: block;
+    width: min(100%, 48rem);
+    height: auto;
+    margin-inline: auto;
+  }
+
+  .live-detail :global(iframe) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border: 0;
+  }
+
+  .live-detail :global(th),
+  .live-detail :global(td) {
+    padding: 0.5rem 0.75rem;
+    border-block-end: 1px solid var(--border);
+    text-align: start;
+    vertical-align: top;
+  }
+</style>

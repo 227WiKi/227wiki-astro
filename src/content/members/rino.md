@@ -1,0 +1,94 @@
+---
+nameJa: "望月りの"
+nameZh: "望月莉乃"
+nameKana: "もちづきりの"
+nameRomanized: "Rino Mochizuki"
+themeColor: "#FFA500"
+
+status: active
+
+hitokoto: "チアスマイル全開で皆様の心に猛突進！不器用だけど全力で頑張ります。"
+signature: rino-sign.svg
+characterRole:
+  name: 瀬良穂乃花
+
+timeline:
+  - date: "2021"
+    text: "报名参加22/7二期生甄选并合格"
+  - date: "2022-02-27"
+    text: "在ナナニジ House中初次亮相"
+  - date: "2022-04-20"
+    text: "在“14”东京追加公演上宣布为濑良穂乃花配音"
+  - date: "2023-03-07"
+    text: "因为身体问题，暂停活动"
+  - date: "2023-05-25"
+    text: "在宫濑玲奈毕业演唱会上恢复活动"
+
+birthday:
+  month: 3
+  day: 29
+
+birthplace: "神奈川県"
+heightCm: 157
+bloodType: O
+
+avatar: photo/avatar/16th/rino.jpg
+
+officialPhotos:
+  - id: "16th"
+    label: "十六单"
+    path: "photo/rino/16th.webp"
+  - id: "3rd-album"
+    label: "三专"
+    path: "photo/rino/3rd_album.webp"
+  - id: "15th"
+    label: "十五单"
+    path: "photo/rino/15th.webp"
+  - id: "14th"
+    label: "十四单"
+    path: "photo/rino/14th.webp"
+  - id: "13th"
+    label: "十三单"
+    path: "photo/rino/13th.jpg"
+  - id: "12th"
+    label: "十二单"
+    path: "photo/rino/12th.jpg"
+  - id: "2nd-album"
+    label: "二专"
+    path: "photo/rino/2nd-album.jpg"
+  - id: "11th"
+    label: "十一单"
+    path: "photo/rino/11th.jpg"
+  - id: "10th"
+    label: "十单"
+    path: "photo/rino/10th.webp"
+  - id: "9th-v2"
+    label: "九单(v2)"
+    path: "photo/rino/9th-2.jpg"
+  - id: "9th-v1"
+    label: "九单(v1)"
+    path: "photo/rino/9th.jpg"
+
+socials:
+  - platform: x
+    label: X
+    url: https://twitter.com/rino_mochizuki
+  - platform: instagram
+    label: Instagram
+    url: https://twitter.com/cure_rinochi
+  - platform: tiktok
+    label: TikTok
+    url: https://www.tiktok.com/@cure_rinochi
+---
+
+## 相关
+
+- 从小梦想成为偶像
+- 和阿和关系很好
+- 曾经参加过其他偶像的甄选  <span class="heimu" title="你知道的太多了">因为这一点被日网黑粉狂喷</span>
+- 在表演二期生加入之前的歌曲时，经常唱千春的part
+
+
+## FREE TALK
+
+<video controls preload="metadata" src="https://manifest.prod.boltdns.net/manifest/v1/hls/v4/clear/4504957038001/3c6bbf28-1eed-4ef9-bb8d-ab4cf43904d8/10s/master.m3u8?fastly_token=NjJkYTUwYWRfNTcwYmYwNmQ3NmUxZTk3ODU1ODZmN2I4MjlkNWY4OGYwNWQ4NDQ5OGYzZDBlMDI4MTFmOTFhMjI1ZWRhMjY1Yw%3D%3D" class="aspect-video w-full rounded-xl bg-black"></video>

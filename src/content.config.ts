@@ -106,7 +106,7 @@ const members = defineCollection({
 
 const resourcePath = z.string().min(1).regex(
   /^(?!\/)(?![a-z][a-z0-9+.-]*:)(?!.*(?:^|\/)\.\.(?:\/|$))[^\\?#]+$/i,
-  "cover must be an R2-relative resource path",
+  "resource must be an R2-relative resource path",
 );
 
 const releaseTrack = z.object({
@@ -181,4 +181,26 @@ const songs = defineCollection({
   }),
 });
 
-export const collections = { members, releases, songs };
+const liveShow = z.object({
+  id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "show id must be slug-style"),
+  date: z.iso.date(),
+  label: z.string().trim().min(1).optional(),
+  venue: z.string().trim().min(1),
+});
+
+const liveEvents = defineCollection({
+  loader: glob({ base: "./src/content/live-events", pattern: "**/*.md" }),
+  schema: z.object({
+    titleJa: z.string().trim().min(1),
+    titleZh: z.string().trim().min(1).optional(),
+    kind: z.enum(["live", "event"]).default("live"),
+    officialUrl: z.url().optional(),
+    poster: resourcePath.optional(),
+    shows: z.array(liveShow).min(1).refine(
+      (shows) => new Set(shows.map(({ id }) => id)).size === shows.length,
+      "show IDs must be unique within a live event",
+    ),
+  }),
+});
+
+export const collections = { members, releases, songs, liveEvents };

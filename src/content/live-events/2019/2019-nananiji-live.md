@@ -1,0 +1,300 @@
+---
+titleJa: "ナナニジライブ 2019"
+kind: "live"
+officialUrl: "https://www.sonymusic.co.jp/artist/nanabunnonijyuuni/info/502837"
+shows:
+  - id: show-2019-01-22-1
+    date: "2019-01-22"
+    venue: "Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE"
+    label: "1"
+  - id: show-2019-02-25-1
+    date: "2019-02-25"
+    venue: "Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE"
+    label: "2"
+  - id: show-2019-03-27-1
+    date: "2019-03-27"
+    venue: "Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE"
+    label: "3"
+  - id: show-2019-04-22-1
+    date: "2019-04-22"
+    venue: "Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE"
+    label: "4"
+  - id: show-2019-05-22-1
+    date: "2019-05-22"
+    venue: "Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE"
+    label: "5"
+  - id: show-2019-06-27-1
+    date: "2019-06-27"
+    venue: "Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE"
+    label: "6"
+  - id: show-2019-07-31-1
+    date: "2019-07-31"
+    venue: "Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE"
+    label: "7"
+  - id: show-2019-08-22-1
+    date: "2019-08-22"
+    venue: "Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE"
+    label: "8"
+  - id: show-2019-09-30-1
+    date: "2019-09-30"
+    venue: "Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE"
+    label: "9"
+  - id: show-2019-10-22-1
+    date: "2019-10-22"
+    venue: "Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE"
+    label: "10"
+  - id: show-2019-11-27-1
+    date: "2019-11-27"
+    venue: "Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE"
+    label: "11"
+  - id: show-2019-12-30-1
+    date: "2019-12-30"
+    venue: "Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE"
+    label: "12"
+---
+
+<!-- Migrated from 227WiKi/docs/live/2019/2019-nananiji-live.md. -->
+
+# ナナニジライブ 2019
+
+## Live信息
+<b>Live名称:</b> ナナニジライブ
+
+--------
+
+<b>举办时间:</b> 2019年1月至12月
+
+--------
+
+<b>会场:</b> Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE
+
+## 信息
+
+“ナナニジライブ”是22/7于2019年每月举办一次的定期公演，共举办12场。
+
+每期公演会安排成员个人环节，并在部分场次中设置需要成员完成的挑战企划。
+
+## 公演列表
+
+| 场次 | 日期 | 个人环节 |
+| --- | --- | --- |
+| 1 | 2019.01.22 | - |
+| 2 | 2019.02.25 | 武田爱奈 |
+| 3 | 2019.03.27 | 白泽加奈惠|
+| 4 | 2019.04.22 | 天城莎莉 |
+| 5 | 2019.05.22 | 高辻丽 |
+| 6 | 2019.06.27 | 仓冈水巴 |
+| 7 | 2019.07.31 | 海乃琉璃 |
+| 8 | 2019.08.22 | 宫濑玲奈 |
+| 9 | 2019.09.30 | 凉花萌 |
+| 10 | 2019.10.22 | 帆风千春 |
+| 11 | 2019.11.27 | 西条和 |
+| 12 | 2019.12.30 | 河濑诗 |
+
+## 曲目表
+
+### 1
+
+| No. | 曲目 |
+| --- | --- |
+| 1. | 不確かな青春 |
+| 2. | 人格崩壊 |
+| 3. | 絶望の花 |
+| 4. | 理解者 |
+| 5. | やさしい記憶 |
+| 6. | 叫ぶしかない青春 |
+| 7. | 韋駄天娘 |
+| 8. | 未来があるから |
+| <b>Encore</b> | |
+| 1. | 循環バス |
+| 2. | 韋駄天娘 |
+
+### 2
+
+| No. | 曲目 |
+| --- | --- |
+| 1. | シャンプーの匂いがした |
+| 2. | 循環バス |
+| 3. | 未来があるから |
+| 4. | 告白 |
+| 5. | マリーゴールド |
+| 6. | 理解者 |
+| 7. | 地下鉄抵抗主義 |
+| 8. | 韋駄天娘 |
+| <b>Encore</b> | |
+| 1. | やさしい記憶 |
+| 2. | 不確かな青春 |
+
+### 3
+
+| No. | 曲目 |
+| --- | --- |
+| 1. | やさしい記憶 |
+| 2. | 叫ぶしかない青春 |
+| 3. | 地下鉄抵抗主義 |
+| 4. | 絶望の花 |
+| 5. | 韋駄天娘 |
+| 6. | 循環バス |
+| 7. | シャンプーの匂いがした |
+| <b>Encore</b> | |
+| 1. | 未来があるから |
+
+### 4
+
+| No. | 曲目 |
+| --- | --- |
+| 1. | 絶望の花 |
+| 2. | 叫ぶしかない青春 |
+| 3. | 不確かな青春 |
+| 4. | 秒針を噛む |
+| 5. | 童話迷宮 |
+| 6. | pray |
+| 7. | ロキ |
+| 8. | 韋駄天娘 |
+| 9. | 未来があるから |
+| 10. | シャンプーの匂いがした |
+| <b>Encore</b> | |
+| 1. | やさしい記憶 |
+| 2. | 循環バス |
+
+### 5
+
+| No. | 曲目 |
+| --- | --- |
+| 1. | 理解者 |
+| 2. | やさしい記憶 |
+| 3. | 未来があるから |
+| 4. | 絶望の花 |
+| 5. | 韋駄天娘 |
+| 6. | 叫ぶしかない青春 |
+| <b>Encore</b> | |
+| 1. | 不確かな青春 |
+| 2. | 循環バス |
+
+### 6
+
+| No. | 曲目 |
+| --- | --- |
+| 1. | 未来があるから |
+| 2. | 人格崩壊 |
+| 3. | 地下鉄抵抗主義 |
+| 4. | やさしい記憶 |
+| 5. | 不確かな青春 |
+| 6. | 雪だるまつくろう |
+| 7. | 生まれてはじめて |
+| 8. | DOWN TOWN |
+| 9. | 韋駄天娘 |
+| <b>Encore</b> | |
+| 1. | シャンプーの匂いがした |
+| 2. | 循環バス |
+
+### 7
+
+| No. | 曲目 |
+| --- | --- |
+| 1. | 何もしてあげられない |
+| 2. | ロマンスの積み木 |
+| 3. | 千本桜 |
+| 4. | 私たちは未来の花 |
+| 5. | 不確かな青春 |
+| 6. | 未来があるから |
+| 7. | 人格崩壊 |
+| 8. | 地下鉄抵抗主義 |
+| <b>Encore</b> | |
+| 1. | 韋駄天娘 |
+| 2. | 循環バス |
+
+### 8
+
+| No. | 曲目 |
+| --- | --- |
+| 1. | 理解者 |
+| 2. | 韋駄天娘 |
+| 3. | シャンプーの匂いがした |
+| 4. | 不確かな青春 |
+| 5. | ロマンスの積み木 |
+| 6. | Rain of lies |
+| 7. | 何もしてあげられない |
+| <b>Encore</b> | |
+| 1. | 未来があるから |
+| 2. | 循環バス |
+
+### 9
+
+| No. | 曲目 |
+| --- | --- |
+| 1. | 君はMoon |
+| 2. | 叫ぶしかない青春 |
+| 3. | 不確かな青春 |
+| 4. | シャンプーの匂いがした |
+| 5. | Honey Come!! |
+| 6. | ロマンスの積み木 |
+| 7. | Rain of lies |
+| 8. | 未来があるから |
+| 9. | とんぼの気持ち |
+| <b>Encore</b> | |
+| 1. | 韋駄天娘 |
+| 2. | 循環バス |
+
+### 10
+
+| No. | 曲目 |
+| --- | --- |
+| 1. | 何もしてあげられない |
+| 2. | やさしい記憶 |
+| 3. | とんぼの気持ち |
+| 4. | only my railgun |
+| 5. | God knows... |
+| 6. | Rising Hope |
+| 7. | ETERNAL BLAZE |
+| 8. | 韋駄天娘 |
+| 9. | 地下鉄抵抗主義 |
+| 10. | ロマンスの積み木 |
+| 11. | Rain of lies |
+| <b>Encore</b> | |
+| 1. | 不確かな青春 |
+| 2. | 循環バス |
+
+### 11
+
+| No. | 曲目 |
+| --- | --- |
+| 1. | 僕は存在していなかった |
+| 2. | 理解者 |
+| 3. | 叫ぶしかない青春 |
+| 4. | とんぼの気持ち |
+| 5. | アイロニ |
+| 6. | 何もしてあげられない |
+| 7. | 韋駄天娘 |
+| 8. | 未来があるから |
+| <b>Encore</b> | |
+| 1. | Rain of lies |
+| 2. | 循環バス |
+
+### 12
+
+| No. | 曲目 |
+| --- | --- |
+| 1. | 何もしてあげられない |
+| 2. | ムズイ |
+| 3. | 空のエメラルド |
+| 4. | 不確かな青春 |
+| 5. | 叫ぶしかない青春 |
+| 6. | 紅蓮華 |
+| 7. | Rain of lies |
+| 8. | 未来があるから |
+| <b>Encore</b> | |
+| 1. | やさしい記憶 |
+| 2. | 循環バス |
+
+## 观看
+
+### 中字
+
+<iframe title="ナナニジライブ 2019 视频 1" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=92016542&bvid=BV1v7411P7H3&cid=157113375&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
+
+[B站观看](https://www.bilibili.com/video/BV1v7411P7H3)
+
+## 参考
+
+- [Sony Music官方年度公演日程](https://www.sonymusic.co.jp/artist/nanabunnonijyuuni/info/502837)

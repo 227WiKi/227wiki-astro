@@ -1,0 +1,99 @@
+---
+titleJa: "22/7 CHARACTER LIVE 2024 ～RED or WHITE？～"
+kind: "live"
+officialUrl: "https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/10701?ima=0000&link=ROBO004"
+shows:
+  - id: show-2024-12-28-1
+    date: "2024-12-28"
+    venue: "在线直播"
+    label: "第一部 13:00"
+  - id: show-2024-12-28-2
+    date: "2024-12-28"
+    venue: "在线直播"
+    label: "第二部 17:00"
+---
+
+<!-- Migrated from 227WiKi/docs/live/2024/2024-character-live-red-or-white.md. -->
+
+# 22/7 CHARACTER LIVE 2024 ～RED or WHITE？～
+
+## Live信息
+<b>Live名称:</b> 22/7 CHARACTER LIVE 2024 ～RED or WHITE？～
+
+--------
+
+<b>举办日期:</b> 2024年12月28日
+
+--------
+
+<b>形式:</b> 在线直播
+
+--------
+
+<b>场次:</b> 第一部 13:00 / 第二部 17:00
+
+--------
+
+<b>影像收录:</b> [ロックは死なない](/discography/releases/14th-single/) Blu-ray
+
+## 信息
+
+22/7 CHARACTER LIVE 2024 ～RED or WHITE？～是为纪念22/7组合成立八周年举办的角色Live。
+
+本次活动以“RED or WHITE？”为主题，9名角色分为红白两组进行歌合战。除了22/7歌曲外，演出中还包含角色个人翻唱和仅限当日组合的分组表演。
+
+## 曲目表
+
+### 第一部
+
+| No. | 曲目 |
+| --- | --- |
+| 1. | YESとNOの間に |
+| 2. | ファンサ（HoneyWorks） |
+| 3. | 絶対零度（なとり） |
+| 4. | 佐藤さん |
+| 5. | 渡良瀬橋（森高千里） |
+| 6. | クリスマスソング（back number） |
+| 7. | 好きと言ったのは嘘だ |
+| 8. | Just here and now |
+| 9. | 最後のピアノ |
+| 10. | ヘッドフォンを外せ！ |
+| 11. | キウイの主張 |
+| 12. | ロックは死なない |
+| 13. | 世界中で歌おうぜ |
+
+### 第二部
+
+| No. | 曲目 |
+| --- | --- |
+| 1. | シャンプーの匂いがした |
+| 2. | ブルーバード（いきものがかり） |
+| 3. | ラムのラブソング（松谷祐子） |
+| 4. | ロックは死なない |
+| 5. | だから僕は音楽を辞めた（ヨルシカ） |
+| 6. | あたしを彼女にしたいなら（コレサワ） |
+| 7. | oath sign（LiSA） |
+| 8. | 後でわかること |
+| 9. | 雷鳴のDelay |
+| 10. | ハレロ |
+| 11. | 今年 初めての雪 |
+| 12. | 無関心ヒーロー |
+| 13. | YESとNOの間に |
+
+## 观看
+
+### 第一部 生肉
+
+<iframe title="22/7 CHARACTER LIVE 2024 ～RED or WHITE？～ 视频 1" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=113734475319919&bvid=BV1NT6bYAEvq&cid=27588495330&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
+
+[B站观看](https://www.bilibili.com/video/BV1NT6bYAEvq)
+
+### 第二部 生肉
+
+<iframe title="22/7 CHARACTER LIVE 2024 ～RED or WHITE？～ 视频 2" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=113734525650853&bvid=BV1Jq6tYXEiG&cid=27588690318&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
+
+[B站观看](https://www.bilibili.com/video/BV1Jq6tYXEiG)
+
+## 参考
+
+- [22/7官方活动公告](https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/10701?ima=0000&link=ROBO004)

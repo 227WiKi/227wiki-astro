@@ -1,0 +1,113 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { MapPin } from "lucide-react";
+import { resourceUrl } from "@/lib/assets";
+import { deriveLiveEvent, formatTicketDate, liveKindLabel } from "@/lib/live";
+
+interface Props {
+  event: CollectionEntry<"liveEvents">;
+  href?: string;
+}
+
+const { event, href } = Astro.props;
+const { data } = event;
+const posterUrl = data.poster ? resourceUrl(data.poster) : undefined;
+const summary = deriveLiveEvent(data.shows);
+const date = formatTicketDate(summary);
+const secondaryTitle = data.titleZh && data.titleZh !== data.titleJa ? data.titleZh : undefined;
+const venueLabel = summary.venues.join(" / ");
+const Card = href ? "a" : "div";
+---
+
+<article class="min-w-0">
+  <Card
+    href={href}
+    data-layout={posterUrl ? "poster" : "date"}
+    class:list={[
+      "live-ticket flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card text-card-foreground",
+      href && "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+    ]}
+  >
+    <div class="ticket-media relative aspect-video shrink-0 overflow-hidden border-b bg-muted/50 [container-type:inline-size]">
+      {posterUrl ? (
+        <img src={posterUrl} alt={`${data.titleJa} 海报`} loading="lazy" decoding="async" class="absolute inset-0 size-full object-cover" />
+      ) : (
+        <div class="absolute inset-0 flex flex-col gap-2 p-4">
+          <p class="flex items-center justify-between gap-2 text-xs text-muted-foreground tabular-nums">
+            <span>{date.year}</span>
+            {date.weekday && <span>{date.weekday}</span>}
+          </p>
+          <time
+            datetime={summary.startDate}
+            title={date.rangeLabel}
+            aria-label={date.rangeLabel}
+            class:list={[
+              "ticket-calendar min-h-0 min-w-0 flex-1 font-heading font-semibold tracking-tight tabular-nums",
+              date.secondary ? "has-range grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-end gap-3" : "flex items-end justify-between gap-3",
+            ]}
+          >
+            {date.secondary ? (
+              <>
+                <span class="flex min-w-0 flex-col items-center gap-1">
+                  <span class="ticket-date-month shrink-0 whitespace-nowrap text-xs leading-4 text-muted-foreground">{date.primary.slice(0, 2)}月</span>
+                  <span class="ticket-date-day shrink-0 whitespace-nowrap text-[clamp(3rem,27cqw,7rem)] leading-[0.9]">{date.primary.slice(-2)}</span>
+                </span>
+                <span aria-hidden="true" class="self-center text-2xl font-normal text-muted-foreground">–</span>
+                <span class="flex min-w-0 flex-col items-center gap-1">
+                  <span class="ticket-date-month shrink-0 whitespace-nowrap text-xs leading-4 text-muted-foreground">{summary.endDate.slice(5, 7)}月</span>
+                  <span class="ticket-date-day shrink-0 whitespace-nowrap text-[clamp(3rem,27cqw,7rem)] leading-[0.9]">{summary.endDate.slice(-2)}</span>
+                </span>
+              </>
+            ) : (
+              <>
+                <span class="ticket-date-month shrink-0 whitespace-nowrap text-[clamp(1.5rem,12cqw,3rem)] leading-none">{date.primary.slice(0, 2)}月</span>
+                <span class="ticket-date-day shrink-0 whitespace-nowrap text-[clamp(4rem,36cqw,10rem)] leading-[0.85]">{date.primary.slice(-2)}</span>
+              </>
+            )}
+          </time>
+        </div>
+      )}
+    </div>
+
+    <div class="ticket-body grid h-36 min-w-0 shrink-0 grid-rows-[1rem_minmax(0,1fr)_1rem] gap-2 p-4">
+      <p class="flex min-w-0 items-center justify-between gap-2 text-xs text-muted-foreground tabular-nums">
+        {posterUrl && (
+          <time datetime={summary.startDate} class="min-w-0 truncate" title={date.rangeLabel}>
+            {date.rangeLabel}{date.weekday && <span class="ml-1.5">{date.weekday}</span>}
+          </time>
+        )}
+        <span class="ml-auto shrink-0 font-medium text-(--wiki-brand)">{liveKindLabel(data.kind)}</span>
+      </p>
+
+      <div class="min-w-0">
+        <h3 lang="ja" class="line-clamp-2 text-[0.9375rem] font-semibold leading-snug tracking-tight [overflow-wrap:anywhere]" title={data.titleJa}>
+          {data.titleJa}
+        </h3>
+        {secondaryTitle && <p lang="zh-CN" class="mt-1 truncate text-xs text-muted-foreground">{secondaryTitle}</p>}
+      </div>
+
+      <p lang="ja" class="flex min-w-0 items-center gap-1.5 text-xs text-muted-foreground">
+        <MapPin aria-hidden="true" className="size-3.5 shrink-0" />
+        <span class="min-w-0 flex-1 truncate" title={venueLabel}>{venueLabel}</span>
+        <span class="shrink-0 tabular-nums">{summary.showCount}公演</span>
+      </p>
+    </div>
+  </Card>
+</article>
+
+<style>
+  .live-ticket {
+    transition: border-color var(--duration-normal) var(--ease-out-subtle);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    a.live-ticket:hover {
+      border-color: color-mix(in oklab, var(--foreground) 20%, var(--border));
+    }
+
+    a.live-ticket:hover h3 {
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+  }
+</style>

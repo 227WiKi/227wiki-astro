@@ -1,4 +1,36 @@
 ---
-import SectionLanding from "@/components/wiki/common/SectionLanding.astro";
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Breadcrumbs from "@/components/wiki/common/Breadcrumbs.astro";
+import PageHeader from "@/components/wiki/common/PageHeader.astro";
+import LiveEventCard from "@/components/wiki/live/LiveEventCard.astro";
+import { sectionPages } from "@/config/site";
+import { groupLiveEventsByYear } from "@/lib/live";
+
+const section = sectionPages.live;
+const groups = groupLiveEventsByYear(await getCollection("liveEvents"));
 ---
-<SectionLanding sectionKey="live" />
+
+<BaseLayout title={section.title} description={section.description} wide>
+  <div class="flex min-w-0 flex-col gap-8">
+    <Breadcrumbs items={[{ label: section.title }]} />
+    <PageHeader title={section.title} description={section.description} />
+
+    {groups.length > 0 ? (
+      <div class="flex min-w-0 flex-col gap-10 sm:gap-12">
+        {groups.map(({ year, events }) => (
+          <section aria-labelledby={`live-year-${year}`} class="flex min-w-0 flex-col gap-5">
+            <h2 id={`live-year-${year}`} class="font-heading text-xl font-semibold tracking-tight sm:text-2xl">{year}</h2>
+            <div class="grid auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-5">
+              {events.map((event) => <LiveEventCard event={event} href={`/live/${event.id}/`} />)}
+            </div>
+          </section>
+        ))}
+      </div>
+    ) : (
+      <section class="rounded-xl border bg-muted/30 p-6 text-sm text-muted-foreground" aria-label={`${section.title} 内容状态`}>
+        <p>相关 Live 内容正在整理中。</p>
+      </section>
+    )}
+  </div>
+</BaseLayout>
