@@ -1,0 +1,44 @@
+/* Keep inset wiki panels concentric without changing the Coss primitives. */
+.wiki-frame {
+  --wiki-frame-padding: calc(var(--spacing) * 1);
+  --wiki-frame-border-width: 0px;
+  --wiki-frame-inner-radius: max(0px, calc(var(--radius-2xl) - var(--wiki-frame-padding) - var(--wiki-frame-border-width)));
+  border-radius: var(--radius-2xl);
+  padding: var(--wiki-frame-padding);
+}
+
+.wiki-frame[data-bordered="true"] {
+  --wiki-frame-border-width: 1px;
+}
+
+.wiki-frame > :is([data-slot="card"], [data-slot="frame-panel"], .wiki-frame-panel) {
+  border-radius: var(--wiki-frame-inner-radius);
+}
+
+.wiki-frame > :is([data-slot="card"], [data-slot="frame-panel"])::before {
+  border-radius: max(0px, calc(var(--wiki-frame-inner-radius) - 1px));
+}
+
+.wiki-frame > [data-slot="frame-panel-header"] {
+  border-start-start-radius: var(--wiki-frame-inner-radius);
+  border-start-end-radius: var(--wiki-frame-inner-radius);
+}
+
+.wiki-frame .wiki-media-panel {
+  /* Spaced media is a separate surface, rather than an inset border ring. */
+  --wiki-media-radius: var(--radius-sm);
+}
+
+/* Media can sit closer to its frame while the p-5 text area keeps its spacing. */
+.wiki-inset-media {
+  --wiki-media-inset: calc(var(--spacing) * 3);
+  --wiki-media-surface-radius: var(--radius-2xl);
+  --wiki-media-radius: max(0px, calc(var(--wiki-media-surface-radius) - var(--wiki-media-inset) - 1px));
+  margin-inline: calc(var(--wiki-media-inset) - var(--spacing) * 5);
+  margin-block-start: calc(var(--wiki-media-inset) - var(--spacing) * 5);
+}
+
+.wiki-frame .wiki-inset-media {
+  /* Portraits retain the same inset as covers, with their own small corners. */
+  --wiki-media-radius: var(--radius-sm);
+}

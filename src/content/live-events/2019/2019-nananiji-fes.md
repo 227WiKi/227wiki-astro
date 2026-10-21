@@ -5,56 +5,42 @@ officialUrl: "https://www.sonymusic.co.jp/artist/nanabunnonijyuuni/info/505256"
 shows:
   - id: show-2019-07-22-1
     date: "2019-07-22"
-    venue: "duo MUSIC EXCHANGE"
+    venue: duo MUSIC EXCHANGE
+    setlist:
+      - type: song
+        number: 1
+        titleJa: 何もしてあげられない
+      - type: song
+        number: 2
+        titleJa: やさしい記憶
+      - type: song
+        number: 3
+        titleJa: 不確かな青春
+      - type: song
+        number: 4
+        titleJa: 韋駄天娘
+      - type: song
+        number: 5
+        titleJa: 未来があるから
+      - type: section
+        label: Encore
+      - type: song
+        number: 1
+        titleJa: 11人が集まった理由
+        song: 11nin-ga-atsumatta-riyuu
+references:
+  - label: Live 中字 — B站观看
+    url: https://www.bilibili.com/video/BV17E411C7mQ
+  - label: Making 中字 — B站观看
+    url: https://www.bilibili.com/video/BV1if4y1975r
+  - label: Sony Music官方公演公告
+    url: https://www.sonymusic.co.jp/artist/nanabunnonijyuuni/info/505256
+  - label: Aniplex官方动画播出公告
+    url: https://prtimes.jp/main/html/rd/p/000001788.000016356.html
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2019/2019-nananiji-fes.md. -->
 
-# ナナニジフェス 2019
-
-## Live信息
-<b>Live名称:</b> ナナニジフェス 2019
-
---------
-
-<b>举办日期:</b> 2019年7月22日
-
---------
-
-<b>会场:</b> duo MUSIC EXCHANGE
-
 ## 信息
 
 ナナニジフェス 2019 是22/7于2019年7月22日在duo MUSIC EXCHANGE举办的活动。活动中首次公开演唱《何もしてあげられない》，并宣布TV动画《22/7》将于2020年1月播出，以及举办Anniversary Live 2019等消息。现有直播影像从活动中途开始，因此没有收录完整曲目。
-
-## 曲目表
-
-### 曲目
-| No. | 曲目 |
-| --- | --- |
-| 1. | 何もしてあげられない |
-| 2. | やさしい記憶 |
-| 3. | 不確かな青春 |
-| 4. | 韋駄天娘 |
-| 5. | 未来があるから |
-| <b>Encore</b> | |
-| 1. | 11人が集まった理由 |
-
-## 观看
-
-### Live 中字
-
-<iframe title="ナナニジフェス 2019 视频 1" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=71398505&bvid=BV17E411C7mQ&cid=123711588&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV17E411C7mQ)
-
-### Making 中字
-
-<iframe title="ナナニジフェス 2019 视频 2" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=286738315&bvid=BV1if4y1975r&cid=222119508&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1if4y1975r)
-
-## 参考
-
-- [Sony Music官方公演公告](https://www.sonymusic.co.jp/artist/nanabunnonijyuuni/info/505256)
-- [Aniplex官方动画播出公告](https://prtimes.jp/main/html/rd/p/000001788.000016356.html)

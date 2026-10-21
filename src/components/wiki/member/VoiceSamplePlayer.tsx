@@ -20,6 +20,7 @@ import {
   VolumeX,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import "@/styles/wiki-surfaces.css";
 import {
   formatTime,
   type VoiceSampleSet,
@@ -328,15 +329,16 @@ export default function VoiceSamplePlayer({
 
         {/* Unified Voice Archive Frame Container */}
         <div
+          data-bordered={Boolean(themeColor)}
           className={cn(
-            "relative flex flex-col rounded-2xl bg-muted/40 p-1 w-full min-w-0 transition-colors",
+            "wiki-frame relative flex flex-col rounded-2xl bg-muted/40 p-1 w-full min-w-0 transition-colors",
             themeColor &&
               "border border-[color-mix(in_oklab,var(--member-accent)_15%,var(--border))] bg-[color-mix(in_oklab,var(--member-accent)_2%,var(--card))]"
           )}
         >
           <div
             className={cn(
-              "relative rounded-xl border border-border/80 bg-background bg-clip-padding shadow-xs/5 overflow-hidden transition-colors",
+              "wiki-frame-panel relative rounded-xl border border-border/80 bg-background bg-clip-padding shadow-xs/5 overflow-hidden transition-colors",
               themeColor &&
                 "border-[color-mix(in_oklab,var(--member-accent)_12%,var(--border))]"
             )}

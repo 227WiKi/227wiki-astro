@@ -4,79 +4,41 @@ kind: "live"
 shows:
   - id: show-2026-08-20-1
     date: "2026-08-20"
-    venue: "よみうりランド プールWAI"
+    venue: よみうりランド プールWAI
+    setlist:
+      - type: song
+        number: 1
+        titleJa: あなたでなくちゃ
+      - type: song
+        number: 2
+        titleJa: スパシーバ！
+      - type: song
+        number: 3
+        titleJa: YESとNOの間に
+      - type: song
+        number: 4
+        titleJa: 世界中で歌おうぜ
+references:
+  - label: 饭拍1 — B站观看
+    url: https://www.bilibili.com/video/BV1TM8z6KE2G
+  - label: 饭拍2 — B站观看
+    url: https://www.bilibili.com/video/BV1pv8B6ZEmM
+  - label: 饭拍3 — B站观看
+    url: https://www.bilibili.com/video/BV1Pe8B6bEbR
+  - label: 饭拍4 — B站观看
+    url: https://www.bilibili.com/video/BV1kB8B6dEKD
+  - label: 饭拍5 — B站观看
+    url: https://www.bilibili.com/video/BV1xh8B6hEsT
+  - label: 饭拍6 — B站观看
+    url: https://www.bilibili.com/video/BV1Z28B6JEEf
+  - label: 22/7 Live Database活动记录
+    url: https://nananiji-live-db.com/events/eventernote-489778/
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2026/2026-yomiuriland-mini-live.md. -->
-
-# 22/7 よみうりランド ミニライブ
-
-## Live信息
-<b>Live名称:</b> 22/7 よみうりランド ミニライブ
-
---------
-
-<b>举办日期:</b> 2026年8月20日
-
---------
-
-<b>会场:</b> よみうりランド プールWAI
 
 ## 信息
 
 22/7于2026年8月20日在读卖乐园Pool WAI举办Mini Live，14:30开演。
 
 出演成员为相川奈央、麻丘真央、天城莎莉、河瀬詩、椎名桜月、月城咲舞、望月りの。
-
-## 曲目表
-
-### 曲目
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | あなたでなくちゃ |
-| 2. | スパシーバ！ |
-| 3. | YESとNOの間に |
-| 4. | 世界中で歌おうぜ |
-
-## 观看
-
-### 饭拍1
-
-<iframe title="22/7 よみうりランド ミニライブ 视频 1" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=117133942001393&bvid=BV1TM8z6KE2G&cid=41135770525&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1TM8z6KE2G)
-
-### 饭拍2
-
-<iframe title="22/7 よみうりランド ミニライブ 视频 2" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=117133958778263&bvid=BV1pv8B6ZEmM&cid=41135836705&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1pv8B6ZEmM)
-
-### 饭拍3
-
-<iframe title="22/7 よみうりランド ミニライブ 视频 3" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=117133975489462&bvid=BV1Pe8B6bEbR&cid=41135966930&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1Pe8B6bEbR)
-
-### 饭拍4
-
-<iframe title="22/7 よみうりランド ミニライブ 视频 4" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=117133992396842&bvid=BV1kB8B6dEKD&cid=41136032881&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1kB8B6dEKD)
-
-### 饭拍5
-
-<iframe title="22/7 よみうりランド ミニライブ 视频 5" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=117134076218288&bvid=BV1xh8B6hEsT&cid=41136686861&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1xh8B6hEsT)
-
-### 饭拍6
-
-<iframe title="22/7 よみうりランド ミニライブ 视频 6" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=117134109707534&bvid=BV1Z28B6JEEf&cid=41136819522&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1Z28B6JEEf)
-
-## 参考
-
-- [22/7 Live Database活动记录](https://nananiji-live-db.com/events/eventernote-489778/)

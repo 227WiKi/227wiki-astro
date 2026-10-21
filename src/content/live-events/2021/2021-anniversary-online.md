@@ -4,46 +4,39 @@ kind: "live"
 shows:
   - id: show-2021-09-20-1
     date: "2021-09-20"
-    venue: "在线直播"
+    venue: 在线直播
+    setlist:
+      - type: song
+        number: 1
+        titleJa: 僕は存在していなかった
+        song: boku-wa-sonzai-shiteinakatta
+      - type: song
+        number: 2
+        titleJa: シャンプーの匂いがした
+      - type: song
+        number: 3
+        titleJa: 理解者
+      - type: song
+        number: 4
+        titleJa: 何もしてあげられない
+      - type: song
+        number: 5
+        titleJa: ムズイ
+      - type: song
+        number: 6
+        titleJa: 風は吹いてるか？
+      - type: song
+        number: 7
+        titleJa: 僕が持ってるものなら
+references:
+  - label: Live 中字 — B站观看
+    url: https://www.bilibili.com/video/BV16Q4y1z7h6
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2021/2021-anniversary-online.md. -->
-
-# 22/7 ANNIVERSARY ONLINE 2021
-
-## Live信息
-<b>Live名称:</b> 22/7 ANNIVERSARY ONLINE 2021
-
---------
-
-<b>举办日期:</b> 2021年9月20日
-
---------
-
-<b>形式:</b> 在线直播
 
 ## 信息
 
 22/7 ANNIVERSARY ONLINE 2021 是22/7于2021年9月20日举办的线上演唱会。活动中公布了二期生甄选，以及将于2021年11月14日在东京国际论坛举办22/7 ANNIVERSARY LIVE 2021的消息。
 
-## 曲目表
-
-### 曲目
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | 僕は存在していなかった |
-| 2. | シャンプーの匂いがした |
-| 3. | 理解者 |
-| 4. | 何もしてあげられない |
-| 5. | ムズイ |
-| 6. | 風は吹いてるか？ |
-| 7. | 僕が持ってるものなら |
-
-## 观看
-
-### Live 中字
-
-<iframe title="22/7 ANNIVERSARY ONLINE 2021 视频 1" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=720672004&bvid=BV16Q4y1z7h6&cid=412483097&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV16Q4y1z7h6)
+<b>形式:</b> 在线直播

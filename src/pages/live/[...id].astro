@@ -1,59 +1,86 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import WikiArticleLayout from "@/components/wiki/article/WikiArticleLayout.astro";
+import FloatingTOC from "@/components/wiki/article/FloatingTOC.astro";
 import Breadcrumbs from "@/components/wiki/common/Breadcrumbs.astro";
+import PageHeader from "@/components/wiki/common/PageHeader.astro";
 import WikiArticle from "@/components/wiki/WikiArticle.astro";
+import LiveInfobox from "@/components/wiki/live/LiveInfobox.astro";
+import LiveCast from "@/components/wiki/live/LiveCast.astro";
+import LiveShowAccordion from "@/components/wiki/live/LiveShowAccordion.astro";
+import { LiveSetlist } from "@/components/wiki/live/LiveSetlist";
+import { LiveShowTabs } from "@/components/wiki/live/LiveShowTabs";
+import { assertLiveReferences, type PerformerView, type ShowView } from "@/lib/live-detail";
+import type { Performer } from "@/lib/live-schema";
+import { sortShows, liveKindLabel } from "@/lib/live";
+import { resourceUrl } from "@/lib/assets";
 
-interface Props {
-  event: CollectionEntry<"liveEvents">;
-}
-
+interface Props { event: CollectionEntry<"liveEvents">; }
 export async function getStaticPaths() {
-  return (await getCollection("liveEvents")).map((event) => ({
-    params: { id: event.id },
-    props: { event },
-  }));
+  const [events, songs, members] = await Promise.all([getCollection("liveEvents"), getCollection("songs"), getCollection("members")]);
+  assertLiveReferences(events, songs, members);
+  return events.map((event) => ({ params: { id: event.id }, props: { event } }));
 }
-
 const { event } = Astro.props;
-const title = event.data.titleJa;
-const { Content } = await render(event);
+const { data } = event;
+const title = data.titleJa;
+const { Content, headings } = await render(event);
+const members = new Map((await getCollection("members")).map((member) => [member.id, member]));
+function performersView(cast: Performer[] | undefined): PerformerView[] | undefined {
+  return cast?.map((person) => {
+    const member = person.type === "member" && person.ref ? members.get(person.ref) : undefined;
+    return { type: person.type, name: person.name, ...(member ? { href: `/member/${member.id}/`, avatar: member.data.avatar ? resourceUrl(member.data.avatar) : undefined } : {}) };
+  });
+}
+const shows: ShowView[] = sortShows(data.shows).map((show) => ({
+  ...show, cast: performersView(show.cast),
+  setlist: show.setlist?.map((entry) => entry.type !== "song" ? entry : ({
+    type: entry.type, number: entry.number, titleJa: entry.titleJa,
+    href: entry.song ? `/discography/songs/${entry.song}/` : undefined,
+    performers: performersView(entry.performers),
+  })),
+}));
+const schedule = data.format === "tour" || new Set(shows.map(({ date }) => date)).size > 1;
+const setlistHeading = schedule ? "公演日程与 Setlist" : "Setlist";
+const references = [...(data.references ?? [])];
+if (data.officialUrl && !references.some(({ url }) => url === data.officialUrl)) references.unshift({ label: "官方网站", url: data.officialUrl });
+const tocItems = [...headings, { slug: "setlist", text: setlistHeading, depth: 2 },
+  ...(data.cast?.length ? [{ slug: "live-cast", text: "出演成员", depth: 2 }] : []),
+  ...(references.length || data.referenceNotes?.length ? [{ slug: "live-references", text: "参考资料与官方链接", depth: 2 }] : [])];
 ---
-
-<BaseLayout title={title} description={event.data.titleZh ?? `${title} 的演出信息与记录。`}>
-  <div class="live-detail mx-auto flex min-w-0 max-w-4xl flex-col gap-6">
-    <Breadcrumbs items={[{ label: "Live", href: "/live/" }, { label: title }]} />
-    <WikiArticle><Content /></WikiArticle>
-  </div>
+<BaseLayout title={title} description={data.titleZh ?? `${title} 的演出信息与记录。`} wide>
+  <WikiArticleLayout infoboxWidth="wide">
+    <Fragment slot="header">
+      <Breadcrumbs items={[{ label: "Live", href: "/live/" }, { label: title }]} />
+      <PageHeader eyebrow={`${liveKindLabel(data.kind)}${data.format ? " / Tour" : ""}`} title={title} description={data.titleZh && data.titleZh !== title ? data.titleZh : undefined} />
+    </Fragment>
+    <LiveInfobox slot="infobox" event={event} />
+    <div class="live-detail min-w-0">
+      <WikiArticle><Content /></WikiArticle>
+      <WikiArticle>
+        <section aria-labelledby="setlist">
+          <h2 id="setlist" class="sr-only">{setlistHeading}</h2>
+          {schedule ? <LiveShowAccordion shows={shows} /> : shows.length > 1 ? <LiveShowTabs client:load shows={shows} /> : shows[0].setlist?.some((entry) => entry.type === "song" && entry.performers?.length) ? <LiveSetlist client:load show={shows[0]} /> : <LiveSetlist show={shows[0]} />}
+        </section>
+        <LiveCast cast={performersView(data.cast)} />
+        {(references.length > 0 || data.referenceNotes?.length) && <section aria-labelledby="live-references">
+          <h2 id="live-references">参考资料与官方链接</h2>
+          {data.referenceNotes?.map((note) => <p>{note}</p>)}
+          <ul>{references.map(({ label, url }) => <li><a href={url} target="_blank" rel="noopener noreferrer">{label} ↗</a></li>)}</ul>
+        </section>}
+      </WikiArticle>
+    </div>
+    <FloatingTOC slot="toc" headings={tocItems} />
+  </WikiArticleLayout>
 </BaseLayout>
-
 <style>
-  .live-detail :global(h1) {
-    margin-block: 0 1.5rem;
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
-    font-weight: 600;
-    line-height: 1.3;
-  }
-
-  .live-detail :global(img) {
-    display: block;
-    width: min(100%, 48rem);
-    height: auto;
-    margin-inline: auto;
-  }
-
-  .live-detail :global(iframe) {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    border: 0;
-  }
-
-  .live-detail :global(th),
-  .live-detail :global(td) {
-    padding: 0.5rem 0.75rem;
-    border-block-end: 1px solid var(--border);
-    text-align: start;
-    vertical-align: top;
-  }
+  .live-detail :global(.live-cast) { list-style: none; padding: 0; margin-block: 0; }
+  .live-detail :global(.live-setlist) { display: table; overflow: visible; }
+  .live-detail :global(.live-setlist [data-slot="table-cell"]) { white-space: normal; line-height: 1.5; vertical-align: top; }
+  .live-detail :global(.live-cast a) { color: var(--foreground); text-decoration: none; }
+  .live-detail :global(.live-show-content p) { margin: 0; }
+  .live-detail :global(.live-show-panel) { transition: none; transform: none; }
+  .live-detail :global(.wiki-article > table th), .live-detail :global(.wiki-article > table td) { padding: .5rem .75rem; border-bottom: 1px solid var(--border); text-align: start; vertical-align: top; }
+  .live-detail :global(img) { max-width: 100%; height: auto; border-radius: var(--radius-sm); }
 </style>

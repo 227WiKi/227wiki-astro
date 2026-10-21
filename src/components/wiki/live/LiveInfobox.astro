@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Infobox from "@/components/wiki/article/Infobox.astro";
+import MetadataList from "@/components/wiki/common/MetadataList.astro";
+import MetadataRow from "@/components/wiki/common/MetadataRow.astro";
+import { resourceUrl } from "@/lib/assets";
+import { deriveLiveEvent, formatLiveDateRange, liveKindLabel, liveVenueMetadata } from "@/lib/live";
+interface Props { event: CollectionEntry<"liveEvents">; }
+const { data } = Astro.props.event;
+const summary = deriveLiveEvent(data.shows);
+---
+<Infobox label={`${data.titleJa} 活动资料`}>
+  {data.poster && <div class="wiki-inset-media"><img src={resourceUrl(data.poster)} alt={`${data.titleJa} 海报`} decoding="async" class="h-auto w-full rounded-[var(--wiki-media-radius)] object-contain" /></div>}
+  <p class="font-heading text-lg font-semibold leading-snug">{data.titleJa}</p>
+  <MetadataList>
+    <MetadataRow label="类型">{liveKindLabel(data.kind)}</MetadataRow>
+    {data.format && <MetadataRow label="形式">Tour</MetadataRow>}
+    <MetadataRow label="举办日期">{formatLiveDateRange(summary.startDate, summary.endDate)}</MetadataRow>
+    <MetadataRow label="会场">{liveVenueMetadata(summary)}</MetadataRow>
+    {summary.showCount > 1 && <MetadataRow label="公演数">{summary.showCount} 公演</MetadataRow>}
+  </MetadataList>
+  {data.officialUrl && <a href={data.officialUrl} target="_blank" rel="noopener noreferrer" class="text-sm text-(--wiki-brand) underline-offset-4 hover:underline">官方网站 ↗</a>}
+</Infobox>
+

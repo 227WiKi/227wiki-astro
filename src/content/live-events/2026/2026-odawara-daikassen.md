@@ -4,35 +4,25 @@ kind: "live"
 shows:
   - id: show-2026-05-23-1
     date: "2026-05-23"
-    venue: "小田原市観光交流センター にぎわい広場"
+    venue: 小田原市観光交流センター にぎわい広場
+    setlist:
+      - type: song
+        number: 1
+        titleJa: 地下鉄抵抗主義
+        song: chikatetsu-teikou-shugi
+      - type: song
+        number: 2
+        titleJa: Rain of lies
+      - type: song
+        number: 3
+        titleJa: 未来があるから（22/7_the 3rd）
+      - type: song
+        number: 4
+        titleJa: 理解者
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2026/2026-odawara-daikassen.md. -->
 
-# 小田原大合戦2026
-
-## Live信息
-<b>Live名称:</b> 小田原大合戦2026
-
---------
-
-<b>举办日期:</b> 2026年5月23日
-
---------
-
-<b>会场:</b> 小田原市観光交流センター にぎわい広場
-
 ## 信息
 
 22/7_the 3rd于2026年5月23日临时追加出演小田原大合戦2026。
-
-## 曲目表
-
-### 曲目
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | 地下鉄抵抗主義 |
-| 2. | Rain of lies |
-| 3. | 未来があるから（22/7_the 3rd） |
-| 4. | 理解者 |

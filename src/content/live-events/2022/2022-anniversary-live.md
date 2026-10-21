@@ -4,35 +4,229 @@ kind: "live"
 shows:
   - id: show-2022-10-22-1
     date: "2022-10-22"
-    venue: "東京国際フォーラム ホールA"
+    venue: 東京国際フォーラム ホールA
+    setlist:
+      - type: song
+        number: 0
+        titleJa: Overture
+      - type: song
+        number: 1
+        titleJa: 11人が集まった理由
+        song: 11nin-ga-atsumatta-riyuu
+      - type: song
+        number: 2
+        titleJa: 僕は存在していなかった
+        song: boku-wa-sonzai-shiteinakatta
+      - type: song
+        number: 3
+        titleJa: 地下鉄抵抗主義
+        song: chikatetsu-teikou-shugi
+      - type: song
+        number: 4
+        titleJa: ヒヤシンス
+      - type: song
+        number: 5
+        titleJa: 空を飛んでみよう
+      - type: song
+        number: 6
+        titleJa: 交換条件
+      - type: song
+        number: 7
+        titleJa: 好きになるのは自由だし…
+      - type: song
+        number: 8
+        titleJa: To goでよろしく！
+      - type: song
+        number: 9
+        titleJa: 僕が持ってるものなら
+      - type: song
+        number: 10
+        titleJa: 好きと言ったのは嘘だ
+      - type: song
+        number: 11
+        titleJa: タチツテトパワー
+      - type: song
+        number: 12
+        titleJa: 雷鳴のDelay
+      - type: song
+        number: 13
+        titleJa: キウイの主張
+      - type: song
+        number: 14
+        titleJa: ムズイ
+      - type: song
+        number: 15
+        titleJa: 僕らの環境
+      - type: song
+        number: 16
+        titleJa: 願いの眼差し
+      - type: song
+        number: 17
+        titleJa: 足を洗え！
+      - type: song
+        number: 18
+        titleJa: 空のエメラルド
+      - type: section
+        label: Encore - 蛍光灯再生計画
+      - type: song
+        number: 1
+        titleJa: タトゥー・ラブ
+      - type: song
+        number: 2
+        titleJa: 交換条件
+      - type: song
+        number: 3
+        titleJa: 読みかけの漫画
   - id: show-2022-10-23-1
     date: "2022-10-23"
-    venue: "東京国際フォーラム ホールA"
-    label: "昼场"
+    venue: 東京国際フォーラム ホールA
+    label: 昼场
+    setlist:
+      - type: song
+        number: 0
+        titleJa: Overture
+      - type: song
+        number: 1
+        titleJa: シャンプーの匂いがした
+      - type: song
+        number: 2
+        titleJa: 人格崩壊
+      - type: song
+        number: 3
+        titleJa: 循環バス
+      - type: song
+        number: 4
+        titleJa: やさしい記憶
+      - type: song
+        number: 5
+        titleJa: 叫ぶしかない青春
+      - type: song
+        number: 6
+        titleJa: 風は吹いてるか？
+      - type: song
+        number: 7
+        titleJa: 半チャーハン
+      - type: song
+        number: 8
+        titleJa: タトゥー・ラブ
+      - type: song
+        number: 9
+        titleJa: ソフトクリーム落としちゃった
+      - type: song
+        number: 10
+        titleJa: ポニーテールは振り向かせない
+      - type: song
+        number: 11
+        titleJa: 何もしてあげられない
+      - type: song
+        number: 12
+        titleJa: とんぼの気持ち
+      - type: song
+        number: 13
+        titleJa: ロマンスの積み木
+      - type: song
+        number: 14
+        titleJa: 君はMoon
+      - type: song
+        number: 15
+        titleJa: Rain of lies
+      - type: section
+        label: Encore - 晴れた日のベンチ
+      - type: song
+        number: 1
+        titleJa: 半チャーハン
+      - type: song
+        number: 2
+        titleJa: To goでよろしく！
+      - type: song
+        number: 3
+        titleJa: 君は誰だ？
   - id: show-2022-10-23-2
     date: "2022-10-23"
-    venue: "東京国際フォーラム ホールA"
-    label: "夜场"
+    venue: 東京国際フォーラム ホールA
+    label: 夜场
+    setlist:
+      - type: song
+        number: 0
+        titleJa: Overture
+      - type: song
+        number: 1
+        titleJa: 理解者
+      - type: song
+        number: 2
+        titleJa: 未来があるから
+      - type: song
+        number: 3
+        titleJa: 絶望の花
+      - type: song
+        number: 4
+        titleJa: 韋駄天娘
+      - type: song
+        number: 5
+        titleJa: 不確かな青春
+      - type: song
+        number: 6
+        titleJa: 覚醒
+      - type: song
+        number: 7
+        titleJa: Just here and now
+      - type: song
+        number: 8
+        titleJa: いつの間にSunrise
+      - type: song
+        number: 9
+        titleJa: ヘッドフォンを外せ！
+      - type: song
+        number: 10
+        titleJa: 今年 初めての雪
+      - type: song
+        number: 11
+        titleJa: 君は誰だ？
+      - type: song
+        number: 12
+        titleJa: カントリーガール
+      - type: song
+        number: 13
+        titleJa: 読みかけの漫画
+      - type: song
+        number: 14
+        titleJa: 打ち上げ花火の拒否権
+      - type: song
+        number: 15
+        titleJa: 曇り空の向こうは晴れている
+      - type: section
+        label: Encore - 気の抜けたサイダー
+      - type: song
+        number: 1
+        titleJa: ソフトクリーム落としちゃった
+      - type: song
+        number: 2
+        titleJa: 好きになるのは自由だし…
+      - type: song
+        number: 3
+        titleJa: カントリーガール
+references:
+  - label: 10月22日直播 中字 — B站观看
+    url: https://www.bilibili.com/video/BV1D84y1i7b2
+  - label: 10月22日 Encore 中字 — B站观看
+    url: https://www.bilibili.com/video/BV1CL411r7CB
+  - label: 10月22日 BD — B站观看
+    url: https://www.bilibili.com/video/BV12m4y1k7F9
+  - label: 10月23日昼场直播 中字 — B站观看
+    url: https://www.bilibili.com/video/BV1Q84y1e7a2
+  - label: 10月23日昼场 Encore 中字 — B站观看
+    url: https://www.bilibili.com/video/BV1Ho4y1s75n
+  - label: 10月23日昼场 BD — B站观看
+    url: https://www.bilibili.com/video/BV1PM411g7tm
+  - label: 10月23日夜场直播 中字 — B站观看
+    url: https://www.bilibili.com/video/BV1P24y1277Q
+  - label: 10月23日夜场 Encore 中字 — B站观看
+    url: https://www.bilibili.com/video/BV1ms4y1S7ZZ
+  - label: 10月23日夜场 BD — B站观看
+    url: https://www.bilibili.com/video/BV1w24y177Ah
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2022/2022-anniversary-live.md. -->
-
-# 22/7 ANNIVERSARY LIVE 2022
-
-## Live信息
-<b>Live名称:</b> 22/7 ANNIVERSARY LIVE 2022
-
---------
-
-<b>举办日期:</b> 2022年10月22日 / 10月23日
-
---------
-
-<b>会场:</b> 東京国際フォーラム ホールA
-
---------
-
-<b>场次:</b> 10月22日 / 10月23日昼场 / 10月23日夜场
 
 ## 信息
 
@@ -40,138 +234,4 @@ shows:
 
 演唱会共举办三场，14名成员在三场公演中披露了当时的全部组合原创歌曲。每场安可分别由三个企划小组编排。
 
-## 曲目表
-
-### 10月22日
-
-| No. | 曲目 |
-| --- | --- |
-| 0. | Overture |
-| 1. | 11人が集まった理由 |
-| 2. | 僕は存在していなかった |
-| 3. | 地下鉄抵抗主義 |
-| 4. | ヒヤシンス |
-| 5. | 空を飛んでみよう |
-| 6. | 交換条件 |
-| 7. | 好きになるのは自由だし… |
-| 8. | To goでよろしく！ |
-| 9. | 僕が持ってるものなら |
-| 10. | 好きと言ったのは嘘だ |
-| 11. | タチツテトパワー |
-| 12. | 雷鳴のDelay |
-| 13. | キウイの主張 |
-| 14. | ムズイ |
-| 15. | 僕らの環境 |
-| 16. | 願いの眼差し |
-| 17. | 足を洗え！ |
-| 18. | 空のエメラルド |
-| <b>Encore - 蛍光灯再生計画</b> | |
-| 1. | タトゥー・ラブ |
-| 2. | 交換条件 |
-| 3. | 読みかけの漫画 |
-
-### 10月23日昼场
-
-| No. | 曲目 |
-| --- | --- |
-| 0. | Overture |
-| 1. | シャンプーの匂いがした |
-| 2. | 人格崩壊 |
-| 3. | 循環バス |
-| 4. | やさしい記憶 |
-| 5. | 叫ぶしかない青春 |
-| 6. | 風は吹いてるか？ |
-| 7. | 半チャーハン |
-| 8. | タトゥー・ラブ |
-| 9. | ソフトクリーム落としちゃった |
-| 10. | ポニーテールは振り向かせない |
-| 11. | 何もしてあげられない |
-| 12. | とんぼの気持ち |
-| 13. | ロマンスの積み木 |
-| 14. | 君はMoon |
-| 15. | Rain of lies |
-| <b>Encore - 晴れた日のベンチ</b> | |
-| 1. | 半チャーハン |
-| 2. | To goでよろしく！ |
-| 3. | 君は誰だ？ |
-
-### 10月23日夜场
-
-| No. | 曲目 |
-| --- | --- |
-| 0. | Overture |
-| 1. | 理解者 |
-| 2. | 未来があるから |
-| 3. | 絶望の花 |
-| 4. | 韋駄天娘 |
-| 5. | 不確かな青春 |
-| 6. | 覚醒 |
-| 7. | Just here and now |
-| 8. | いつの間にSunrise |
-| 9. | ヘッドフォンを外せ！ |
-| 10. | 今年 初めての雪 |
-| 11. | 君は誰だ？ |
-| 12. | カントリーガール |
-| 13. | 読みかけの漫画 |
-| 14. | 打ち上げ花火の拒否権 |
-| 15. | 曇り空の向こうは晴れている |
-| <b>Encore - 気の抜けたサイダー</b> | |
-| 1. | ソフトクリーム落としちゃった |
-| 2. | 好きになるのは自由だし… |
-| 3. | カントリーガール |
-
-## 观看
-
-### 10月22日直播 中字
-
-<iframe title="22/7 ANNIVERSARY LIVE 2022 视频 1" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=604664010&bvid=BV1D84y1i7b2&cid=878691394&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1D84y1i7b2)
-
-### 10月22日 Encore 中字
-
-<iframe title="22/7 ANNIVERSARY LIVE 2022 视频 2" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=441370650&bvid=BV1CL411r7CB&cid=1063950519&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1CL411r7CB)
-
-### 10月22日 BD
-
-<iframe title="22/7 ANNIVERSARY LIVE 2022 视频 3" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=696455403&bvid=BV12m4y1k7F9&cid=1067332791&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV12m4y1k7F9)
-
-### 10月23日昼场直播 中字
-
-<iframe title="22/7 ANNIVERSARY LIVE 2022 视频 4" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=604772680&bvid=BV1Q84y1e7a2&cid=881752752&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1Q84y1e7a2)
-
-### 10月23日昼场 Encore 中字
-
-<iframe title="22/7 ANNIVERSARY LIVE 2022 视频 5" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=396480543&bvid=BV1Ho4y1s75n&cid=1066054958&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1Ho4y1s75n)
-
-### 10月23日昼场 BD
-
-<iframe title="22/7 ANNIVERSARY LIVE 2022 视频 6" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=526568759&bvid=BV1PM411g7tm&cid=1068872327&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1PM411g7tm)
-
-### 10月23日夜场直播 中字
-
-<iframe title="22/7 ANNIVERSARY LIVE 2022 视频 7" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=690015247&bvid=BV1P24y1277Q&cid=892591122&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1P24y1277Q)
-
-### 10月23日夜场 Encore 中字
-
-<iframe title="22/7 ANNIVERSARY LIVE 2022 视频 8" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=994124059&bvid=BV1ms4y1S7ZZ&cid=1069505993&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1ms4y1S7ZZ)
-
-### 10月23日夜场 BD
-
-<iframe title="22/7 ANNIVERSARY LIVE 2022 视频 9" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=781535799&bvid=BV1w24y177Ah&cid=1069748198&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1w24y177Ah)
+<b>场次:</b> 10月22日 / 10月23日昼场 / 10月23日夜场

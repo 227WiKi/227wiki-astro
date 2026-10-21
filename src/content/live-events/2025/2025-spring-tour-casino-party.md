@@ -5,41 +5,301 @@ officialUrl: "https://nanabunnonijyuuni-mobile.com/s/n110/page/spring-tour_2025"
 shows:
   - id: show-2025-03-02-1
     date: "2025-03-02"
-    venue: "Zepp Namba (OSAKA)"
+    venue: Zepp Namba (OSAKA)
+    setlist:
+      - type: note
+        text: 目前公开记录可确认以下曲目；完整曲顺仍待更多资料核实。
+      - type: song
+        number: 1
+        titleJa: タチツテトパワー
+      - type: song
+        number: 2
+        titleJa: 佐藤さん
+      - type: song
+        number: 3
+        titleJa: YESとNOの間に
+      - type: song
+        number: 4
+        titleJa: Just here and now
+      - type: song
+        number: 5
+        titleJa: 僕らの環境
+      - type: song
+        number: 6
+        titleJa: あやふやな世界観
+      - type: song
+        number: 7
+        titleJa: Why are you crying?
+      - type: song
+        number: 8
+        titleJa: 無関心ヒーロー
+      - type: song
+        number: 9
+        titleJa: とんぼの気持ち
+      - type: song
+        number: 10
+        titleJa: 世界の矛盾
+      - type: song
+        number: 11
+        titleJa: ロックは死なない
+      - type: section
+        label: Encore
+      - type: song
+        number: 1
+        titleJa: 未来があるから
+      - type: song
+        number: 2
+        titleJa: 恋は道草
   - id: show-2025-03-23-1
     date: "2025-03-23"
-    venue: "SENDAI GIGS"
+    venue: SENDAI GIGS
+    setlist:
+      - type: song
+        number: 1
+        titleJa: タチツテトパワー
+      - type: song
+        number: 2
+        titleJa: 世界中で歌おうぜ
+      - type: song
+        number: 3
+        titleJa: 佐藤さん
+      - type: song
+        number: 4
+        titleJa: YESとNOの間に
+      - type: song
+        number: 5
+        titleJa: Just here and now
+      - type: song
+        number: 6
+        titleJa: 僕らの環境
+      - type: song
+        number: 7
+        titleJa: あやふやな世界観
+      - type: song
+        number: 8
+        titleJa: 韋駄天娘
+      - type: song
+        number: 9
+        titleJa: Why are you crying?
+      - type: song
+        number: 10
+        titleJa: 地獄一丁目
+      - type: song
+        number: 11
+        titleJa: 足を洗え!
+      - type: song
+        number: 12
+        titleJa: 地下鉄抵抗主義
+        song: chikatetsu-teikou-shugi
+      - type: song
+        number: 13
+        titleJa: 世界の矛盾
+      - type: song
+        number: 14
+        titleJa: ロックは死なない
+      - type: section
+        label: Encore
+      - type: song
+        number: 1
+        titleJa: 未来があるから
+      - type: song
+        number: 2
+        titleJa: 恋は道草
   - id: show-2025-03-27-1
     date: "2025-03-27"
-    venue: "Zepp Nagoya"
+    venue: Zepp Nagoya
+    setlist:
+      - type: song
+        number: 1
+        titleJa: ロミオとシンデレラ（椎名桜月 Solo Cover）
+      - type: song
+        number: 2
+        titleJa: 花に亡霊（椎名桜月 Solo Cover）
+      - type: song
+        number: 3
+        titleJa: riddle mermaid（椎名桜月 Solo Cover）
+      - type: song
+        number: 4
+        titleJa: タチツテトパワー
+      - type: song
+        number: 5
+        titleJa: 世界中で歌おうぜ
+      - type: song
+        number: 6
+        titleJa: 佐藤さん
+      - type: song
+        number: 7
+        titleJa: YESとNOの間に
+      - type: song
+        number: 8
+        titleJa: Just here and now
+      - type: song
+        number: 9
+        titleJa: 僕らの環境
+      - type: song
+        number: 10
+        titleJa: あやふやな世界観
+      - type: song
+        number: 11
+        titleJa: 韋駄天娘
+      - type: song
+        number: 12
+        titleJa: Why are you crying?
+      - type: song
+        number: 13
+        titleJa: 無関心ヒーロー
+      - type: song
+        number: 14
+        titleJa: とんぼの気持ち
+      - type: song
+        number: 15
+        titleJa: 嫌われるということ
+      - type: song
+        number: 16
+        titleJa: 世界の矛盾
+      - type: song
+        number: 17
+        titleJa: ロックは死なない
+      - type: section
+        label: Encore
+      - type: song
+        number: 1
+        titleJa: 未来があるから
+      - type: song
+        number: 2
+        titleJa: 恋は道草
   - id: show-2025-03-29-1
     date: "2025-03-29"
-    venue: "Zepp DiverCity (TOKYO)"
-    label: "东京昼场"
+    venue: Zepp DiverCity (TOKYO)
+    label: 东京昼场
+    setlist:
+      - type: song
+        number: 1
+        titleJa: ファンサ（望月りの Solo Cover）
+      - type: song
+        number: 2
+        titleJa: 足跡（望月りの Solo Cover）
+      - type: song
+        number: 3
+        titleJa: タチツテトパワー
+      - type: song
+        number: 4
+        titleJa: 世界中で歌おうぜ
+      - type: song
+        number: 5
+        titleJa: 佐藤さん
+      - type: song
+        number: 6
+        titleJa: YESとNOの間に
+      - type: song
+        number: 7
+        titleJa: Just here and now
+      - type: song
+        number: 8
+        titleJa: 僕らの環境
+      - type: song
+        number: 9
+        titleJa: あやふやな世界観
+      - type: song
+        number: 10
+        titleJa: 韋駄天娘
+      - type: song
+        number: 11
+        titleJa: Why are you crying?
+      - type: song
+        number: 12
+        titleJa: 地獄一丁目
+      - type: song
+        number: 13
+        titleJa: 足を洗え!
+      - type: song
+        number: 14
+        titleJa: 地下鉄抵抗主義
+        song: chikatetsu-teikou-shugi
+      - type: song
+        number: 15
+        titleJa: 世界の矛盾
+      - type: song
+        number: 16
+        titleJa: ロックは死なない
+      - type: section
+        label: Encore
+      - type: song
+        number: 1
+        titleJa: 未来があるから
+      - type: song
+        number: 2
+        titleJa: 恋は道草
   - id: show-2025-03-29-2
     date: "2025-03-29"
-    venue: "Zepp DiverCity (TOKYO)"
-    label: "东京夜场"
+    venue: Zepp DiverCity (TOKYO)
+    label: 东京夜场
+    setlist:
+      - type: song
+        number: 1
+        titleJa: タチツテトパワー
+      - type: song
+        number: 2
+        titleJa: 世界中で歌おうぜ
+      - type: song
+        number: 3
+        titleJa: 佐藤さん
+      - type: song
+        number: 4
+        titleJa: YESとNOの間に
+      - type: song
+        number: 5
+        titleJa: Just here and now
+      - type: song
+        number: 6
+        titleJa: 僕らの環境
+      - type: song
+        number: 7
+        titleJa: あやふやな世界観
+      - type: song
+        number: 8
+        titleJa: 韋駄天娘
+      - type: song
+        number: 9
+        titleJa: Why are you crying?
+      - type: song
+        number: 10
+        titleJa: 無関心ヒーロー
+      - type: song
+        number: 11
+        titleJa: とんぼの気持ち
+      - type: song
+        number: 12
+        titleJa: 嫌われるということ
+      - type: song
+        number: 13
+        titleJa: 世界の矛盾
+      - type: song
+        number: 14
+        titleJa: ロックは死なない
+      - type: section
+        label: Encore
+      - type: song
+        number: 1
+        titleJa: あなたでなくちゃ
+      - type: song
+        number: 2
+        titleJa: 恋は道草
+format: tour
+references:
+  - label: 昼场 直播 生肉 — B站观看
+    url: https://www.bilibili.com/video/BV1NuZBYeEvM
+  - label: 夜场 直播 生肉 — B站观看
+    url: https://www.bilibili.com/video/BV1HBZzYYEeP
+  - label: Making 上 — B站观看
+    url: https://www.bilibili.com/video/BV1GKgYz9EdU
+  - label: Making 下 — B站观看
+    url: https://www.bilibili.com/video/BV18ugYzQEpU
+  - label: 官方 Special Site与曲目表
+    url: https://nanabunnonijyuuni-mobile.com/s/n110/page/spring-tour_2025
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2025/2025-spring-tour-casino-party.md. -->
-
-# 22/7 Spring Tour 2025 ～Casino Party!!～
-
-## Live信息
-<b>Live名称:</b> 22/7 Spring Tour 2025 ～Casino Party!!～
-
---------
-
-<b>举办日期:</b> 2025年3月2日 / 3月23日 / 3月27日 / 3月29日
-
---------
-
-<b>会场:</b> Zepp Namba (OSAKA) / SENDAI GIGS / Zepp Nagoya / Zepp DiverCity (TOKYO)
-
---------
-
-<b>影像收录:</b> [あなたでなくちゃ](/discography/releases/15th-single/) Blu-ray
 
 ## 信息
 
@@ -47,149 +307,4 @@ shows:
 
 第15张单曲[あなたでなくちゃ](/discography/releases/15th-single/)的Blu-ray中收录了2025年3月29日东京昼场和夜场影像。
 
-## 曲目表
-
-### 大阪场
-
-目前公开记录可确认以下曲目；完整曲顺仍待更多资料核实。
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | タチツテトパワー |
-| 2. | 佐藤さん |
-| 3. | YESとNOの間に |
-| 4. | Just here and now |
-| 5. | 僕らの環境 |
-| 6. | あやふやな世界観 |
-| 7. | Why are you crying? |
-| 8. | 無関心ヒーロー |
-| 9. | とんぼの気持ち |
-| 10. | 世界の矛盾 |
-| 11. | ロックは死なない |
-| <b>Encore</b> | |
-| 1. | 未来があるから |
-| 2. | 恋は道草 |
-
-### 仙台场
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | タチツテトパワー |
-| 2. | 世界中で歌おうぜ |
-| 3. | 佐藤さん |
-| 4. | YESとNOの間に |
-| 5. | Just here and now |
-| 6. | 僕らの環境 |
-| 7. | あやふやな世界観 |
-| 8. | 韋駄天娘 |
-| 9. | Why are you crying? |
-| 10. | 地獄一丁目 |
-| 11. | 足を洗え! |
-| 12. | 地下鉄抵抗主義 |
-| 13. | 世界の矛盾 |
-| 14. | ロックは死なない |
-| <b>Encore</b> | |
-| 1. | 未来があるから |
-| 2. | 恋は道草 |
-
-### 爱知场
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | ロミオとシンデレラ（椎名桜月 Solo Cover） |
-| 2. | 花に亡霊（椎名桜月 Solo Cover） |
-| 3. | riddle mermaid（椎名桜月 Solo Cover） |
-| 4. | タチツテトパワー |
-| 5. | 世界中で歌おうぜ |
-| 6. | 佐藤さん |
-| 7. | YESとNOの間に |
-| 8. | Just here and now |
-| 9. | 僕らの環境 |
-| 10. | あやふやな世界観 |
-| 11. | 韋駄天娘 |
-| 12. | Why are you crying? |
-| 13. | 無関心ヒーロー |
-| 14. | とんぼの気持ち |
-| 15. | 嫌われるということ |
-| 16. | 世界の矛盾 |
-| 17. | ロックは死なない |
-| <b>Encore</b> | |
-| 1. | 未来があるから |
-| 2. | 恋は道草 |
-
-### 东京昼场
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | ファンサ（望月りの Solo Cover） |
-| 2. | 足跡（望月りの Solo Cover） |
-| 3. | タチツテトパワー |
-| 4. | 世界中で歌おうぜ |
-| 5. | 佐藤さん |
-| 6. | YESとNOの間に |
-| 7. | Just here and now |
-| 8. | 僕らの環境 |
-| 9. | あやふやな世界観 |
-| 10. | 韋駄天娘 |
-| 11. | Why are you crying? |
-| 12. | 地獄一丁目 |
-| 13. | 足を洗え! |
-| 14. | 地下鉄抵抗主義 |
-| 15. | 世界の矛盾 |
-| 16. | ロックは死なない |
-| <b>Encore</b> | |
-| 1. | 未来があるから |
-| 2. | 恋は道草 |
-
-### 东京夜场
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | タチツテトパワー |
-| 2. | 世界中で歌おうぜ |
-| 3. | 佐藤さん |
-| 4. | YESとNOの間に |
-| 5. | Just here and now |
-| 6. | 僕らの環境 |
-| 7. | あやふやな世界観 |
-| 8. | 韋駄天娘 |
-| 9. | Why are you crying? |
-| 10. | 無関心ヒーロー |
-| 11. | とんぼの気持ち |
-| 12. | 嫌われるということ |
-| 13. | 世界の矛盾 |
-| 14. | ロックは死なない |
-| <b>Encore</b> | |
-| 1. | あなたでなくちゃ |
-| 2. | 恋は道草 |
-
-## 观看
-
-### 昼场 直播 生肉
-
-<iframe title="22/7 Spring Tour 2025 ～Casino Party!!～ 视频 1" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=114249602962067&bvid=BV1NuZBYeEvM&cid=29143467895&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1NuZBYeEvM)
-
-### 夜场 直播 生肉
-
-<iframe title="22/7 Spring Tour 2025 ～Casino Party!!～ 视频 2" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=114250441823577&bvid=BV1HBZzYYEeP&cid=29146678428&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1HBZzYYEeP)
-
-### Making 上
-
-<iframe title="22/7 Spring Tour 2025 ～Casino Party!!～ 视频 3" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=114886969397440&bvid=BV1GKgYz9EdU&cid=31175082526&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1GKgYz9EdU)
-
-### Making 下
-
-<iframe title="22/7 Spring Tour 2025 ～Casino Party!!～ 视频 4" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=114887003016132&bvid=BV18ugYzQEpU&cid=31175085862&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV18ugYzQEpU)
-
-
-## 参考
-
-- [官方 Special Site与曲目表](https://nanabunnonijyuuni-mobile.com/s/n110/page/spring-tour_2025)
+<b>影像收录:</b> [あなたでなくちゃ](/discography/releases/15th-single/) Blu-ray

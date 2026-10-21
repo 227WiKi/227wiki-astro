@@ -5,29 +5,23 @@ officialUrl: "https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/11181?ima=
 shows:
   - id: show-2026-02-07-1
     date: "2026-02-07"
-    venue: "ギャラクシティ まるちたいけんドーム"
+    venue: ギャラクシティ まるちたいけんドーム
   - id: show-2026-02-08-1
     date: "2026-02-08"
-    venue: "ギャラクシティ まるちたいけんドーム"
+    venue: ギャラクシティ まるちたいけんドーム
   - id: show-2026-02-14-1
     date: "2026-02-14"
-    venue: "バンドー神戸青少年科学館ドームシアター"
+    venue: バンドー神戸青少年科学館ドームシアター
+references:
+  - label: Episode1 直播缓存 — B站观看
+    url: https://www.bilibili.com/video/BV1SeFszKEAK
+  - label: Episode2 直播缓存 — B站观看
+    url: https://www.bilibili.com/video/BV1VsFszVEme
+  - label: 官方公告
+    url: https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/11181?ima=1256
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2026/2026-star-travelers.md. 旧文为上映期间，现有来源仅明确确认 2/7、2/8、2/14 的舞台问候上映日；shows 记录已确认日期，不推测每日场次。 -->
-
-# 22/7 Star Travelers
-
-## Live信息
-<b>Live名称:</b> 22/7 Star Travelers
-
---------
-
-<b>上映日期:</b> 2026年2月7日 - 2026年2月23日
-
---------
-
-<b>会场:</b> ギャラクシティ まるちたいけんドーム / バンドー神戸青少年科学館ドームシアター
 
 ## 信息
 
@@ -35,7 +29,9 @@ shows:
 
 作品由《Episode1／失われたホロスコープ》和《Episode2／エメラルドの奇跡》两部分组成，在角色Live中加入了故事情节与翻唱曲目。
 
-## 曲目表
+## 待核实场次的曲目记录
+
+以下曲目表尚无法对应到确定场次，保留原始记录供核查。
 
 ### Episode1／失われたホロスコープ
 
@@ -64,20 +60,4 @@ shows:
 | 7. | 空のエメラルド |
 | 8. | 君は Moon |
 
-## 观看
-
-### Episode1 直播缓存
-
-<iframe title="22/7 Star Travelers 视频 1" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=116028591835055&bvid=BV1SeFszKEAK&cid=35887056422&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1SeFszKEAK)
-
-### Episode2 直播缓存
-
-<iframe title="22/7 Star Travelers 视频 2" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=116028625454642&bvid=BV1VsFszVEme&cid=35887189006&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1VsFszVEme)
-
-## 参考
-
-- [官方公告](https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/11181?ima=1256)
+<b>上映日期:</b> 2026年2月7日 - 2026年2月23日

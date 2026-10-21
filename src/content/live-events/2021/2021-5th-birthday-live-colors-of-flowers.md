@@ -4,32 +4,86 @@ kind: "live"
 shows:
   - id: show-2021-12-26-1
     date: "2021-12-26"
-    venue: "在线直播"
-    label: "第一部 16:00"
+    venue: 在线直播
+    label: 第一部 16:00
+    setlist:
+      - type: song
+        number: 1
+        titleJa: 今年 初めての雪
+      - type: song
+        number: 2
+        titleJa: 僕は存在していなかった
+        song: boku-wa-sonzai-shiteinakatta
+      - type: song
+        number: 3
+        titleJa: シャンプーの匂いがした
+      - type: song
+        number: 4
+        titleJa: 理解者
+      - type: song
+        number: 5
+        titleJa: 何もしてあげられない
+      - type: song
+        number: 6
+        titleJa: ムズイ
+      - type: song
+        number: 7
+        titleJa: 風は吹いてるか？
+      - type: song
+        number: 8
+        titleJa: 僕が持ってるものなら
+      - type: song
+        number: 9
+        titleJa: 覚醒
+      - type: song
+        number: 10
+        titleJa: ヒヤシンス
   - id: show-2021-12-26-2
     date: "2021-12-26"
-    venue: "在线直播"
-    label: "第二部 18:30"
+    venue: 在线直播
+    label: 第二部 18:30
+    setlist:
+      - type: song
+        number: 1
+        titleJa: ヘッドフォンを外せ!
+      - type: song
+        number: 2
+        titleJa: 僕は存在していなかった
+        song: boku-wa-sonzai-shiteinakatta
+      - type: song
+        number: 3
+        titleJa: シャンプーの匂いがした
+      - type: song
+        number: 4
+        titleJa: 理解者
+      - type: song
+        number: 5
+        titleJa: 何もしてあげられない
+      - type: song
+        number: 6
+        titleJa: ムズイ
+      - type: song
+        number: 7
+        titleJa: 風は吹いてるか？
+      - type: song
+        number: 8
+        titleJa: 僕が持ってるものなら
+      - type: song
+        number: 9
+        titleJa: 覚醒
+      - type: song
+        number: 10
+        titleJa: ヒヤシンス
+references:
+  - label: 第一部 生肉 — B站观看
+    url: https://www.bilibili.com/video/BV1NS4y177x5
+  - label: 第二部 生肉 — B站观看
+    url: https://www.bilibili.com/video/BV1Db4y1J7W2
+  - label: Making 中字 — B站观看
+    url: https://www.bilibili.com/video/BV1yF411G7Sy
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2021/2021-5th-birthday-live-colors-of-flowers.md. -->
-
-# 22/7 5TH BIRTHDAY LIVE 2021 ～Colors of Flowers～
-
-## Live信息
-<b>Live名称:</b> 22/7 5TH BIRTHDAY LIVE 2021 ～Colors of Flowers～
-
---------
-
-<b>举办日期:</b> 2021年12月26日
-
---------
-
-<b>形式:</b> 在线直播
-
---------
-
-<b>场次:</b> 第一部 16:00 / 第二部 18:30
 
 ## 信息
 
@@ -39,54 +93,6 @@ shows:
 
 第二部中，佐藤麗華、東条悠希、河野都、戸田ジュン和柊つぼみ五名角色从22/7毕业。
 
-## 曲目表
+<b>形式:</b> 在线直播
 
-### 第一部
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | 今年 初めての雪 |
-| 2. | 僕は存在していなかった |
-| 3. | シャンプーの匂いがした |
-| 4. | 理解者 |
-| 5. | 何もしてあげられない |
-| 6. | ムズイ |
-| 7. | 風は吹いてるか？ |
-| 8. | 僕が持ってるものなら |
-| 9. | 覚醒 |
-| 10. | ヒヤシンス |
-
-### 第二部
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | ヘッドフォンを外せ! |
-| 2. | 僕は存在していなかった |
-| 3. | シャンプーの匂いがした |
-| 4. | 理解者 |
-| 5. | 何もしてあげられない |
-| 6. | ムズイ |
-| 7. | 風は吹いてるか？ |
-| 8. | 僕が持ってるものなら |
-| 9. | 覚醒 |
-| 10. | ヒヤシンス |
-
-## 观看
-
-### 第一部 生肉
-
-<iframe title="22/7 5TH BIRTHDAY LIVE 2021 ～Colors of Flowers～ 视频 1" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=680752815&bvid=BV1NS4y177x5&cid=489569216&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1NS4y177x5)
-
-### 第二部 生肉
-
-<iframe title="22/7 5TH BIRTHDAY LIVE 2021 ～Colors of Flowers～ 视频 2" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=635807620&bvid=BV1Db4y1J7W2&cid=489581545&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1Db4y1J7W2)
-
-### Making 中字
-
-<iframe title="22/7 5TH BIRTHDAY LIVE 2021 ～Colors of Flowers～ 视频 3" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=299720236&bvid=BV1yF411G7Sy&cid=738352153&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1yF411G7Sy)
+<b>场次:</b> 第一部 16:00 / 第二部 18:30

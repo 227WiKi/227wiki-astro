@@ -1,4 +1,6 @@
 ---
+import "@/styles/wiki-surfaces.css";
+
 interface Props {
   label: string;
 }
@@ -10,6 +12,10 @@ const { label } = Astro.props;
 </aside>
 
 <style>
+  .infobox {
+    --wiki-media-radius: var(--radius-sm);
+  }
+
   @media (min-width: 48rem) {
     .infobox {
       position: sticky;

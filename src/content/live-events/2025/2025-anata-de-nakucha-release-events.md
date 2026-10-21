@@ -5,179 +5,176 @@ officialUrl: "https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/10833"
 shows:
   - id: show-2025-04-27-1
     date: "2025-04-27"
-    venue: "イオンモール土浦 1F 花火ひろば"
-    label: "第一部"
+    venue: イオンモール土浦 1F 花火ひろば
+    label: 第一部
+    setlist:
+      - type: song
+        number: 1
+        titleJa: 世界中で歌おうぜ
+      - type: song
+        number: 2
+        titleJa: あなたでなくちゃ
+      - type: song
+        number: 3
+        titleJa: 好きと言ったのは嘘だ
   - id: show-2025-04-27-2
     date: "2025-04-27"
-    venue: "イオンモール土浦 1F 花火ひろば"
-    label: "第二部"
+    venue: イオンモール土浦 1F 花火ひろば
+    label: 第二部
+    setlist:
+      - type: song
+        number: 1
+        titleJa: Why are you crying?
+      - type: song
+        number: 2
+        titleJa: あなたでなくちゃ
+      - type: song
+        number: 3
+        titleJa: シャンプーの匂いがした
   - id: show-2025-05-04-1
     date: "2025-05-04"
-    venue: "セブンパークアリオ柏"
+    venue: セブンパークアリオ柏
+    setlist:
+      - type: song
+        number: 1
+        titleJa: YESとNOの間に
+      - type: song
+        number: 2
+        titleJa: あなたでなくちゃ
+      - type: song
+        number: 3
+        titleJa: 春雷の頃
+      - type: song
+        number: 4
+        titleJa: タチツテトパワー
   - id: show-2025-06-07-1
     date: "2025-06-07"
-    venue: "イオンモール幕張新都心 グランドスクエア"
-    label: "第一部"
+    venue: イオンモール幕張新都心 グランドスクエア
+    label: 第一部
+    setlist:
+      - type: song
+        number: 1
+        titleJa: 世界中で歌おうぜ
+      - type: song
+        number: 2
+        titleJa: あなたでなくちゃ
+      - type: song
+        number: 3
+        titleJa: 君とどれくらい会わずにいられるか？
   - id: show-2025-06-07-2
     date: "2025-06-07"
-    venue: "イオンモール幕張新都心 グランドスクエア"
-    label: "第二部"
+    venue: イオンモール幕張新都心 グランドスクエア
+    label: 第二部
+    setlist:
+      - type: song
+        number: 1
+        titleJa: ポニーテールは振り向かせない
+      - type: song
+        number: 2
+        titleJa: あなたでなくちゃ
+      - type: song
+        number: 3
+        titleJa: 不確かな青春
   - id: show-2025-06-15-1
     date: "2025-06-15"
-    venue: "セブンパーク天美 1F AMAMI STADIUM"
-    label: "第一部"
+    venue: セブンパーク天美 1F AMAMI STADIUM
+    label: 第一部
+    setlist:
+      - type: song
+        number: 1
+        titleJa: 無関心ヒーロー
+      - type: song
+        number: 2
+        titleJa: あなたでなくちゃ
+      - type: song
+        number: 3
+        titleJa: あざす
   - id: show-2025-06-15-2
     date: "2025-06-15"
-    venue: "セブンパーク天美 1F AMAMI STADIUM"
-    label: "第二部"
+    venue: セブンパーク天美 1F AMAMI STADIUM
+    label: 第二部
+    setlist:
+      - type: song
+        number: 1
+        titleJa: あざす
+      - type: song
+        number: 2
+        titleJa: あなたでなくちゃ
+      - type: song
+        number: 3
+        titleJa: 春雷の頃
   - id: show-2025-06-21-1
     date: "2025-06-21"
-    venue: "イオンモール天童"
-    label: "第一部"
+    venue: イオンモール天童
+    label: 第一部
+    setlist:
+      - type: song
+        number: 1
+        titleJa: あざす
+      - type: song
+        number: 2
+        titleJa: あなたでなくちゃ
+      - type: song
+        number: 3
+        titleJa: 理解者
   - id: show-2025-06-21-2
     date: "2025-06-21"
-    venue: "イオンモール天童"
-    label: "第二部"
+    venue: イオンモール天童
+    label: 第二部
+    setlist:
+      - type: song
+        number: 1
+        titleJa: あざす
+      - type: song
+        number: 2
+        titleJa: あなたでなくちゃ
+      - type: song
+        number: 3
+        titleJa: 恋は道草
   - id: show-2025-07-15-1
     date: "2025-07-15"
-    venue: "イオンレイクタウンkaze 1F 翼の広場"
+    venue: イオンレイクタウンkaze 1F 翼の広場
+    setlist:
+      - type: song
+        number: 1
+        titleJa: 22/7
+      - type: song
+        number: 2
+        titleJa: あなたでなくちゃ
+      - type: song
+        number: 3
+        titleJa: 舌打ち
+      - type: song
+        number: 4
+        titleJa: 謎の力
   - id: show-2025-07-26-1
     date: "2025-07-26"
-    venue: "タワーレコード渋谷店 B1F CUTUP STUDIO"
+    venue: タワーレコード渋谷店 B1F CUTUP STUDIO
+    setlist:
+      - type: song
+        number: 1
+        titleJa: 22/7
+      - type: song
+        number: 2
+        titleJa: 舌打ち
+      - type: song
+        number: 3
+        titleJa: あなたでなくちゃ
+      - type: song
+        number: 4
+        titleJa: あざす
+      - type: song
+        number: 5
+        titleJa: 何もしてあげられない
+references:
+  - label: 2025.05.04 柏 — B站观看
+    url: https://www.bilibili.com/video/BV1WuJNznEdT
+  - label: 22/7官方发售活动汇总
+    url: https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/10833
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2025/2025-anata-de-nakucha-release-events.md. -->
 
-# 15thシングル「あなたでなくちゃ」発売記念リリースイベント
-
 ## 信息
 
 本页整理22/7第15张单曲[あなたでなくちゃ](/discography/releases/15th-single/)发售期间举办的线下纪念活动及其曲目。
-
-## 曲目表
-
-### 2025.04.27 土浦
-
-**会场：** イオンモール土浦 1F 花火ひろば
-
-**第一部**
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | 世界中で歌おうぜ |
-| 2. | あなたでなくちゃ |
-| 3. | 好きと言ったのは嘘だ |
-
-**第二部**
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | Why are you crying? |
-| 2. | あなたでなくちゃ |
-| 3. | シャンプーの匂いがした |
-
-### 2025.05.04 柏
-
-**会场：** セブンパークアリオ柏
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | YESとNOの間に |
-| 2. | あなたでなくちゃ |
-| 3. | 春雷の頃 |
-| 4. | タチツテトパワー |
-
-### 2025.06.07 幕張
-
-**会场：** イオンモール幕張新都心 グランドスクエア
-
-**第一部**
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | 世界中で歌おうぜ |
-| 2. | あなたでなくちゃ |
-| 3. | 君とどれくらい会わずにいられるか？ |
-
-**第二部**
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | ポニーテールは振り向かせない |
-| 2. | あなたでなくちゃ |
-| 3. | 不確かな青春 |
-
-### 2025.06.15 天美
-
-**会场：** セブンパーク天美 1F AMAMI STADIUM
-
-**第一部**
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | 無関心ヒーロー |
-| 2. | あなたでなくちゃ |
-| 3. | あざす |
-
-**第二部**
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | あざす |
-| 2. | あなたでなくちゃ |
-| 3. | 春雷の頃 |
-
-### 2025.06.21 天童
-
-**会场：** イオンモール天童
-
-**第一部**
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | あざす |
-| 2. | あなたでなくちゃ |
-| 3. | 理解者 |
-
-**第二部**
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | あざす |
-| 2. | あなたでなくちゃ |
-| 3. | 恋は道草 |
-
-### 2025.07.15 越谷
-
-**会场：** イオンレイクタウンkaze 1F 翼の広場
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | 22/7 |
-| 2. | あなたでなくちゃ |
-| 3. | 舌打ち |
-| 4. | 謎の力 |
-
-### 2025.07.26 渋谷
-
-**会场：** タワーレコード渋谷店 B1F CUTUP STUDIO
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | 22/7 |
-| 2. | 舌打ち |
-| 3. | あなたでなくちゃ |
-| 4. | あざす |
-| 5. | 何もしてあげられない |
-
-## 观看
-
-### 2025.05.04 柏
-
-<iframe title="15thシングル「あなたでなくちゃ」発売記念リリースイベント 视频 1" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=114523457459156&bvid=BV1WuJNznEdT&cid=30010311080&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1WuJNznEdT)
-
-## 参考
-
-- [22/7官方发售活动汇总](https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/10833)

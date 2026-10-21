@@ -1,6 +1,7 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { liveShows, livePerformer, liveReference } from "./lib/live-schema";
 
 const memberPhotoPath = z.string().min(1).regex(
   /^(?!\/)(?![a-z][a-z0-9+.-]*:)(?!.*(?:^|\/)\.\.(?:\/|$))[^\\?#]+$/i,
@@ -181,25 +182,19 @@ const songs = defineCollection({
   }),
 });
 
-const liveShow = z.object({
-  id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "show id must be slug-style"),
-  date: z.iso.date(),
-  label: z.string().trim().min(1).optional(),
-  venue: z.string().trim().min(1),
-});
-
 const liveEvents = defineCollection({
   loader: glob({ base: "./src/content/live-events", pattern: "**/*.md" }),
   schema: z.object({
     titleJa: z.string().trim().min(1),
     titleZh: z.string().trim().min(1).optional(),
     kind: z.enum(["live", "event"]).default("live"),
-    officialUrl: z.url().optional(),
+    officialUrl: z.url().regex(/^https?:\/\//i, "official links must use HTTP or HTTPS").optional(),
     poster: resourcePath.optional(),
-    shows: z.array(liveShow).min(1).refine(
-      (shows) => new Set(shows.map(({ id }) => id)).size === shows.length,
-      "show IDs must be unique within a live event",
-    ),
+    format: z.literal("tour").optional(),
+    cast: z.array(livePerformer).min(1).optional(),
+    references: z.array(liveReference).min(1).optional(),
+    referenceNotes: z.array(z.string().trim().min(1)).min(1).optional(),
+    shows: liveShows,
   }),
 });
 

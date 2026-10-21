@@ -11,6 +11,7 @@ import MemberSignature from "@/components/wiki/member/MemberSignature.astro";
 import { resourceUrl } from "@/lib/assets";
 import { getMemberThemeStyle } from "@/lib/member-theme";
 import { cn } from "@/lib/utils";
+import "@/styles/wiki-surfaces.css";
 
 interface Props {
   member: CollectionEntry<"members">;
@@ -29,12 +30,12 @@ const officialPhotos = rawOfficialPhotos.map((photo) => ({
 }));
 const memberThemeStyle = getMemberThemeStyle(data.themeColor);
 const frameClassName = cn(
-  "min-w-0 relative overflow-hidden",
+  "wiki-frame min-w-0 relative overflow-hidden",
   data.themeColor && "border border-[var(--member-frame-border)] bg-[var(--member-frame-bg)]",
 );
 const headerClassName = cn(
   "relative overflow-hidden isolate py-3",
-  data.themeColor && "rounded-t-[calc(var(--radius-2xl)-1px)] bg-[var(--member-header-bg)]",
+  data.themeColor && "bg-[var(--member-header-bg)]",
 );
 const cardClassName = cn(
   "relative z-10 min-w-0",
@@ -47,7 +48,7 @@ const cardClassName = cn(
   class="member-infobox min-w-0 [overflow-wrap:anywhere]"
   style={memberThemeStyle}
 >
-  <Frame className={frameClassName}>
+  <Frame className={frameClassName} data-bordered={Boolean(data.themeColor)}>
     <FrameHeader className={headerClassName}>
       <div class="relative z-10 min-w-0">
         {hasIdentityPreview ? (
@@ -71,7 +72,8 @@ const cardClassName = cn(
     </FrameHeader>
 
     <Card className={cardClassName}>
-      <CardPanel className="flex min-w-0 flex-col gap-5 p-5">
+      <CardPanel className="wiki-media-panel flex min-w-0 flex-col gap-5 p-5">
+        {(officialPhotos.length > 0 || data.avatar) && <div class="wiki-inset-media">
         {officialPhotos.length > 0 ? (
           <MemberPhotoViewer client:load name={primaryName} photos={officialPhotos} />
         ) : data.avatar ? (
@@ -80,10 +82,11 @@ const cardClassName = cn(
             alt={`${primaryName}头像`}
             width="320"
             height="320"
-            class="aspect-square w-full rounded-xl object-cover"
+            class="aspect-square w-full rounded-[var(--wiki-media-radius)] object-cover"
             decoding="async"
           />
         ) : null}
+        </div>}
 
         <MetadataList>
           <MetadataRow label="状态">

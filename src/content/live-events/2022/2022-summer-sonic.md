@@ -5,46 +5,38 @@ officialUrl: "https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/info10587"
 shows:
   - id: show-2022-08-21-1
     date: "2022-08-21"
-    venue: "幕张メッセ"
+    venue: 幕张メッセ
+    setlist:
+      - type: song
+        number: 1
+        titleJa: ムズイ
+      - type: song
+        number: 2
+        titleJa: 風は吹いてるか？
+      - type: song
+        number: 3
+        titleJa: 僕らの環境
+      - type: song
+        number: 4
+        titleJa: 地下鉄抵抗主義
+        song: chikatetsu-teikou-shugi
+      - type: song
+        number: 5
+        titleJa: 空のエメラルド
+      - type: song
+        number: 6
+        titleJa: 曇り空の向こうは晴れている
+references:
+  - label: 22/7官方出演公告
+    url: https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/info10587
+  - label: SUMMER SONIC 2022官方历史页面
+    url: https://www.summersonic.com/history/2022.html
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2022/2022-summer-sonic.md. -->
-
-# SUMMER SONIC 2022
-
-## Live信息
-<b>Live名称:</b> SUMMER SONIC 2022
-
---------
-
-<b>举办日期:</b> 2022年8月21日
-
---------
-
-<b>会场:</b> 幕张メッセ
-
---------
-
-<b>舞台:</b> J-CULTURE STAGE
 
 ## 信息
 
 22/7于2022年8月21日出演SUMMER SONIC 2022东京场的J-CULTURE STAGE。
 
-## 曲目表
-
-### 曲目
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | ムズイ |
-| 2. | 風は吹いてるか？ |
-| 3. | 僕らの環境 |
-| 4. | 地下鉄抵抗主義 |
-| 5. | 空のエメラルド |
-| 6. | 曇り空の向こうは晴れている |
-
-## 参考
-
-- [22/7官方出演公告](https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/info10587)
-- [SUMMER SONIC 2022官方历史页面](https://www.summersonic.com/history/2022.html)
+<b>舞台:</b> J-CULTURE STAGE

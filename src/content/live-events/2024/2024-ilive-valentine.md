@@ -5,40 +5,30 @@ officialUrl: "https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/info10952"
 shows:
   - id: show-2024-02-12-1
     date: "2024-02-12"
-    venue: "TACHIKAWA STAGE GARDEN"
+    venue: TACHIKAWA STAGE GARDEN
+    setlist:
+      - type: song
+        number: 1
+        titleJa: シャンプーの匂いがした
+      - type: song
+        number: 2
+        titleJa: 絶望の花
+      - type: song
+        number: 3
+        titleJa: 君はMoon
+      - type: song
+        number: 4
+        titleJa: 世界の矛盾
+      - type: song
+        number: 5
+        titleJa: 好きと言ったのは嘘だ
+references:
+  - label: 22/7官方出演公告
+    url: https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/info10952
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2024/2024-ilive-valentine.md. -->
 
-# iLiVE!バレンタイン
-
-## Live信息
-<b>Live名称:</b> iLiVE!バレンタイン
-
---------
-
-<b>举办日期:</b> 2024年2月12日
-
---------
-
-<b>会场:</b> TACHIKAWA STAGE GARDEN
-
 ## 信息
 
 22/7于2024年2月12日出演iLiVE!バレンタイン。
-
-## 曲目表
-
-### 曲目
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | シャンプーの匂いがした |
-| 2. | 絶望の花 |
-| 3. | 君はMoon |
-| 4. | 世界の矛盾 |
-| 5. | 好きと言ったのは嘘だ |
-
-## 参考
-
-- [22/7官方出演公告](https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/info10952)

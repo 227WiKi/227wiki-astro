@@ -4,32 +4,196 @@ kind: "live"
 shows:
   - id: show-2021-11-14-1
     date: "2021-11-14"
-    venue: "東京国際フォーラム ホールA"
-    label: "昼场"
+    venue: 東京国際フォーラム ホールA
+    label: 昼场
+    setlist:
+      - type: song
+        number: 0
+        titleJa: Overture
+      - type: song
+        number: 1
+        titleJa: 僕は存在していなかった
+        song: boku-wa-sonzai-shiteinakatta
+      - type: song
+        number: 2
+        titleJa: 地下鉄抵抗主義
+        song: chikatetsu-teikou-shugi
+      - type: song
+        number: 3
+        titleJa: 11人が集まった理由
+        song: 11nin-ga-atsumatta-riyuu
+      - type: song
+        number: 4
+        titleJa: 生きることに楽になりたい
+      - type: song
+        number: 5
+        titleJa: One of them
+      - type: song
+        number: 6
+        titleJa: シャンプーの匂いがした
+      - type: song
+        number: 7
+        titleJa: 人格崩壊
+      - type: song
+        number: 8
+        titleJa: やさしい記憶
+      - type: song
+        number: 9
+        titleJa: 叫ぶしかない青春
+      - type: song
+        number: 10
+        titleJa: 循環バス
+      - type: song
+        number: 11
+        titleJa: 夢の船
+      - type: song
+        number: 12
+        titleJa: 孤独は嫌いじゃない
+      - type: song
+        number: 13
+        titleJa: 人生はワルツ
+      - type: song
+        number: 14
+        titleJa: 理解者
+      - type: song
+        number: 15
+        titleJa: 絶望の花
+      - type: song
+        number: 16
+        titleJa: 不確かな青春
+      - type: song
+        number: 17
+        titleJa: 未来があるから
+      - type: song
+        number: 18
+        titleJa: 韋駄天娘
+      - type: song
+        number: 19
+        titleJa: 神様に指を差された僕たち
+      - type: song
+        number: 20
+        titleJa: 感情無用論
+      - type: song
+        number: 21
+        titleJa: Moonlight
+      - type: song
+        number: 22
+        titleJa: 君はMoon
+      - type: song
+        number: 23
+        titleJa: ロマンスの積み木
+      - type: song
+        number: 24
+        titleJa: Rain of lies
+      - type: song
+        number: 25
+        titleJa: とんぼの気持ち
+      - type: song
+        number: 26
+        titleJa: 何もしてあげられない
   - id: show-2021-11-14-2
     date: "2021-11-14"
-    venue: "東京国際フォーラム ホールA"
-    label: "夜场"
+    venue: 東京国際フォーラム ホールA
+    label: 夜场
+    setlist:
+      - type: song
+        number: 0
+        titleJa: Overture
+      - type: song
+        number: 1
+        titleJa: ムズイ
+      - type: song
+        number: 2
+        titleJa: 願いの眼差し
+      - type: song
+        number: 3
+        titleJa: 僕らの環境
+      - type: song
+        number: 4
+        titleJa: 足を洗え!
+      - type: song
+        number: 5
+        titleJa: 空のエメラルド
+      - type: song
+        number: 6
+        titleJa: 風は吹いてるか？
+      - type: song
+        number: 7
+        titleJa: ポニーテールは振り向かせない
+      - type: song
+        number: 8
+        titleJa: 半チャーハン
+      - type: song
+        number: 9
+        titleJa: ソフトクリーム落としちゃった
+      - type: song
+        number: 10
+        titleJa: タトゥー・ラブ
+      - type: song
+        number: 11
+        titleJa: 好きと言ったのは嘘だ
+      - type: song
+        number: 12
+        titleJa: 僕が持ってるものなら
+      - type: song
+        number: 13
+        titleJa: タチツテトパワー
+      - type: song
+        number: 14
+        titleJa: 雷鳴のDelay
+      - type: song
+        number: 15
+        titleJa: キウイの主張
+      - type: song
+        number: 16
+        titleJa: ヒヤシンス
+      - type: song
+        number: 17
+        titleJa: 空を飛んでみよう
+      - type: song
+        number: 18
+        titleJa: 交換条件
+      - type: song
+        number: 19
+        titleJa: 好きになるのは自由だし…
+      - type: song
+        number: 20
+        titleJa: To goでよろしく！
+      - type: song
+        number: 21
+        titleJa: 覚醒
+      - type: song
+        number: 22
+        titleJa: 今年 初めての雪
+      - type: song
+        number: 23
+        titleJa: ヘッドフォンを外せ!
+      - type: song
+        number: 24
+        titleJa: Just here and now
+      - type: song
+        number: 25
+        titleJa: いつの間にSunrise
+references:
+  - label: 昼场直播 生肉 — B站观看
+    url: https://www.bilibili.com/video/BV1Vg411T7Pp?p=1
+  - label: 夜场直播 生肉 — B站观看
+    url: https://www.bilibili.com/video/BV1Vg411T7Pp?p=2
+  - label: 昼场 BD — B站观看
+    url: https://www.bilibili.com/video/BV1aT4y1U74B
+  - label: 夜场 BD — B站观看
+    url: https://www.bilibili.com/video/BV1dY411J7RY
+  - label: Making 生肉 — B站观看
+    url: https://www.bilibili.com/video/BV1cZ4y167Xu
+  - label: Making 中字 — B站观看
+    url: https://www.bilibili.com/video/BV1XS4y1U7EG
+  - label: 昼场评论音轨 — B站观看
+    url: https://www.bilibili.com/video/BV1JY4y1s7fK?p=1
+  - label: 夜场评论音轨 — B站观看
+    url: https://www.bilibili.com/video/BV1JY4y1s7fK?p=2
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2021/2021-anniversary-live.md. -->
-
-# 22/7 ANNIVERSARY LIVE 2021
-
-## Live信息
-<b>Live名称:</b> 22/7 ANNIVERSARY LIVE 2021
-
---------
-
-<b>举办日期:</b> 2021年11月14日
-
---------
-
-<b>会场:</b> 東京国際フォーラム ホールA
-
---------
-
-<b>场次:</b> 昼场 / 夜场
 
 ## 信息
 
@@ -37,117 +201,4 @@ shows:
 
 这场演唱会是海乃るり、倉岡水巴和武田愛奈以22/7成员身份参加的最后一场现场演出，也是当时九人体制的最后一场演唱会。昼夜场合计演唱了22/7当时的全部51首歌曲。
 
-## 曲目表
-
-### 昼场
-
-| No. | 曲目 |
-| --- | --- |
-| 0. | Overture |
-| 1. | 僕は存在していなかった |
-| 2. | 地下鉄抵抗主義 |
-| 3. | 11人が集まった理由 |
-| 4. | 生きることに楽になりたい |
-| 5. | One of them |
-| 6. | シャンプーの匂いがした |
-| 7. | 人格崩壊 |
-| 8. | やさしい記憶 |
-| 9. | 叫ぶしかない青春 |
-| 10. | 循環バス |
-| 11. | 夢の船 |
-| 12. | 孤独は嫌いじゃない |
-| 13. | 人生はワルツ |
-| 14. | 理解者 |
-| 15. | 絶望の花 |
-| 16. | 不確かな青春 |
-| 17. | 未来があるから |
-| 18. | 韋駄天娘 |
-| 19. | 神様に指を差された僕たち |
-| 20. | 感情無用論 |
-| 21. | Moonlight |
-| 22. | 君はMoon |
-| 23. | ロマンスの積み木 |
-| 24. | Rain of lies |
-| 25. | とんぼの気持ち |
-| 26. | 何もしてあげられない |
-
-### 夜场
-
-| No. | 曲目 |
-| --- | --- |
-| 0. | Overture |
-| 1. | ムズイ |
-| 2. | 願いの眼差し |
-| 3. | 僕らの環境 |
-| 4. | 足を洗え! |
-| 5. | 空のエメラルド |
-| 6. | 風は吹いてるか？ |
-| 7. | ポニーテールは振り向かせない |
-| 8. | 半チャーハン |
-| 9. | ソフトクリーム落としちゃった |
-| 10. | タトゥー・ラブ |
-| 11. | 好きと言ったのは嘘だ |
-| 12. | 僕が持ってるものなら |
-| 13. | タチツテトパワー |
-| 14. | 雷鳴のDelay |
-| 15. | キウイの主張 |
-| 16. | ヒヤシンス |
-| 17. | 空を飛んでみよう |
-| 18. | 交換条件 |
-| 19. | 好きになるのは自由だし… |
-| 20. | To goでよろしく！ |
-| 21. | 覚醒 |
-| 22. | 今年 初めての雪 |
-| 23. | ヘッドフォンを外せ! |
-| 24. | Just here and now |
-| 25. | いつの間にSunrise |
-
-## 观看
-
-### 昼场直播 生肉
-
-<iframe title="22/7 ANNIVERSARY LIVE 2021 视频 1" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=506663505&bvid=BV1Vg411T7Pp&cid=443550416&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1Vg411T7Pp?p=1)
-
-### 夜场直播 生肉
-
-<iframe title="22/7 ANNIVERSARY LIVE 2021 视频 2" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=506663505&bvid=BV1Vg411T7Pp&cid=443490554&p=2&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1Vg411T7Pp?p=2)
-
-### 昼场 BD
-
-<iframe title="22/7 ANNIVERSARY LIVE 2021 视频 3" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=937321814&bvid=BV1aT4y1U74B&cid=552012107&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1aT4y1U74B)
-
-### 夜场 BD
-
-<iframe title="22/7 ANNIVERSARY LIVE 2021 视频 4" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=254824809&bvid=BV1dY411J7RY&cid=552120263&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1dY411J7RY)
-
-### Making 生肉
-
-<iframe title="22/7 ANNIVERSARY LIVE 2021 视频 5" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=382320488&bvid=BV1cZ4y167Xu&cid=552613621&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1cZ4y167Xu)
-
-### Making 中字
-
-<iframe title="22/7 ANNIVERSARY LIVE 2021 视频 6" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=725002975&bvid=BV1XS4y1U7EG&cid=558241720&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1XS4y1U7EG)
-
-### 昼场评论音轨
-
-<iframe title="22/7 ANNIVERSARY LIVE 2021 视频 7" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=640004967&bvid=BV1JY4y1s7fK&cid=559221040&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1JY4y1s7fK?p=1)
-
-### 夜场评论音轨
-
-<iframe title="22/7 ANNIVERSARY LIVE 2021 视频 8" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=640004967&bvid=BV1JY4y1s7fK&cid=559233940&p=2&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1JY4y1s7fK?p=2)
+<b>场次:</b> 昼场 / 夜场

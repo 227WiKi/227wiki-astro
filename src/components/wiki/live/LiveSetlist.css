@@ -1,0 +1,5 @@
+.live-show-frame [data-slot="card-frame-header"] [data-slot="card-frame-title"] {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}

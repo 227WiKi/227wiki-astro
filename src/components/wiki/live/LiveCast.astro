@@ -1,0 +1,7 @@
+---
+import type { PerformerView } from "@/lib/live-detail";
+import { LiveCastList } from "./LiveCastList";
+interface Props { cast?: PerformerView[]; }
+const { cast } = Astro.props;
+---
+{cast?.length && <section aria-labelledby="live-cast"><h2 id="live-cast">出演成员</h2><LiveCastList cast={cast} /></section>}

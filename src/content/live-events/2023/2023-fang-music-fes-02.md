@@ -5,41 +5,33 @@ officialUrl: "https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/info10884"
 shows:
   - id: show-2023-09-18-1
     date: "2023-09-18"
-    venue: "EX THEATER ROPPONGI"
+    venue: EX THEATER ROPPONGI
+    setlist:
+      - type: song
+        number: 1
+        titleJa: 神様だって決められない
+      - type: song
+        number: 2
+        titleJa: 韋駄天娘
+      - type: song
+        number: 3
+        titleJa: 理解者
+      - type: song
+        number: 4
+        titleJa: 命の続き
+      - type: song
+        number: 5
+        titleJa: 未来があるから
+      - type: song
+        number: 6
+        titleJa: タチツテトパワー
+references:
+  - label: 22/7官方出演公告
+    url: https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/info10884
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2023/2023-fang-music-fes-02.md. -->
 
-# Fang Music Fes #02
-
-## Live信息
-<b>Live名称:</b> Fang Music Fes #02
-
---------
-
-<b>举办日期:</b> 2023年9月18日
-
---------
-
-<b>会场:</b> EX THEATER ROPPONGI
-
 ## 信息
 
 22/7于2023年9月18日出演Fang Music Fes #02。
-
-## 曲目表
-
-### 曲目
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | 神様だって決められない |
-| 2. | 韋駄天娘 |
-| 3. | 理解者 |
-| 4. | 命の続き |
-| 5. | 未来があるから |
-| 6. | タチツテトパワー |
-
-## 参考
-
-- [22/7官方出演公告](https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/info10884)

@@ -73,11 +73,15 @@ export function liveVenueMetadata({ venues, venueCount }: LiveEventSummary): str
   return venueCount === 1 ? venues[0] : `${venueCount}会場`;
 }
 
-export function groupLiveEventsByYear(events: readonly CollectionEntry<"liveEvents">[]) {
-  const sortedEvents = events.map((event) => ({
+function sortLiveEventsByDate(events: readonly CollectionEntry<"liveEvents">[]) {
+  return events.map((event) => ({
     event,
     startDate: deriveLiveEvent(event.data.shows).startDate,
   })).sort((a, b) => a.startDate > b.startDate ? -1 : a.startDate < b.startDate ? 1 : 0);
+}
+
+export function groupLiveEventsByYear(events: readonly CollectionEntry<"liveEvents">[]) {
+  const sortedEvents = sortLiveEventsByDate(events);
   const groups = new Map<string, CollectionEntry<"liveEvents">[]>();
 
   for (const { event, startDate } of sortedEvents) {
@@ -88,4 +92,20 @@ export function groupLiveEventsByYear(events: readonly CollectionEntry<"liveEven
   }
 
   return [...groups].map(([year, events]) => ({ year, events }));
+}
+
+export function groupLiveEventsByKind(events: readonly CollectionEntry<"liveEvents">[]) {
+  const groups = new Map<LiveEventData["kind"], CollectionEntry<"liveEvents">[]>();
+
+  for (const { event } of sortLiveEventsByDate(events)) {
+    const kind = event.data.kind;
+    const group = groups.get(kind) ?? [];
+    group.push(event);
+    groups.set(kind, group);
+  }
+
+  // Stable taxonomy order; the newest event should not reorder the headings.
+  return (["live", "event"] as const)
+    .filter((kind) => groups.has(kind))
+    .map((kind) => ({ kind, title: liveKindLabel(kind), events: groups.get(kind)! }));
 }

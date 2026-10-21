@@ -5,69 +5,88 @@ officialUrl: "https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/11264?ima=
 shows:
   - id: show-2026-05-24-1
     date: "2026-05-24"
-    venue: "ギャラクシティ 西新井文化ホール"
+    venue: ギャラクシティ 西新井文化ホール
+    setlist:
+      - type: song
+        number: 1
+        titleJa: 曇り空の向こうは晴れている
+      - type: song
+        number: 2
+        titleJa: 世界中で歌おうぜ
+      - type: song
+        number: 3
+        titleJa: 謎の力
+      - type: song
+        number: 4
+        titleJa: 好きと言ったのは嘘だ
+      - type: song
+        number: 5
+        titleJa: 不確かな青春
+      - type: song
+        number: 6
+        titleJa: ポニーテールは振り向かせない
+      - type: song
+        number: 7
+        titleJa: 絶望の花
+      - type: song
+        number: 8
+        titleJa: 赤いバラの理由
+      - type: song
+        number: 9
+        titleJa: 好きになるのは自由だし…
+      - type: song
+        number: 10
+        titleJa: 半チャーハン
+      - type: song
+        number: 11
+        titleJa: あなたでなくちゃ
+      - type: song
+        number: 12
+        titleJa: ロックは死なない
+      - type: song
+        number: 13
+        titleJa: Why are you crying?
+      - type: song
+        number: 14
+        titleJa: YESとNOの間に
+      - type: song
+        number: 15
+        titleJa: 未来があるから
+      - type: section
+        label: Encore
+      - type: song
+        number: 1
+        titleJa: 空のエメラルド
+      - type: song
+        number: 2
+        titleJa: お姉ちゃんだから（初披露）
+      - type: song
+        number: 3
+        titleJa: 循環バス
+      - type: song
+        number: 4
+        titleJa: 曇り空の向こうは晴れている
+      - type: section
+        label: Double Encore
+      - type: song
+        number: 1
+        titleJa: 曇り空の向こうは晴れている
+      - type: song
+        number: 2
+        titleJa: YESとNOの間に
+references:
+  - label: 振り返り生配信 — B站观看
+    url: https://www.bilibili.com/video/BV1PRKR62EH4
+  - label: 官方公告
+    url: https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/11264?ima=0000&link=ROBO004
+  - label: 官方Live报道
+    url: https://nanabunnonijyuuni-mobile.com/s/n110/diary/detail/450782
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2026/2026-live-fivesta.md. -->
-
-# 22/7 LIVE「Fivesta」
-
-## Live信息
-<b>Live名称:</b> 22/7 LIVE「Fivesta」
-
---------
-
-<b>举办日期:</b> 2026年5月24日
-
---------
-
-<b>会场:</b> ギャラクシティ 西新井文化ホール
 
 ## 信息
 
 22/7于2026年5月24日举办的演唱会，由加入组合满5周年的二期生5人参与曲目和演出构成的制作。
 
 本场首次设置了可以从第一首歌开始摄影的“カメコ席”，安可环节首次披露了为二期生制作的新曲《お姉ちゃんだから》。
-
-## 曲目表
-
-### 曲目
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | 曇り空の向こうは晴れている |
-| 2. | 世界中で歌おうぜ |
-| 3. | 謎の力 |
-| 4. | 好きと言ったのは嘘だ |
-| 5. | 不確かな青春 |
-| 6. | ポニーテールは振り向かせない |
-| 7. | 絶望の花 |
-| 8. | 赤いバラの理由 |
-| 9. | 好きになるのは自由だし… |
-| 10. | 半チャーハン |
-| 11. | あなたでなくちゃ |
-| 12. | ロックは死なない |
-| 13. | Why are you crying? |
-| 14. | YESとNOの間に |
-| 15. | 未来があるから |
-| <b>Encore</b> | |
-| 1. | 空のエメラルド |
-| 2. | お姉ちゃんだから（初披露） |
-| 3. | 循環バス |
-| 4. | 曇り空の向こうは晴れている |
-| <b>Double Encore</b> | |
-| 1. | 曇り空の向こうは晴れている |
-| 2. | YESとNOの間に |
-
-## 观看
-
-### 振り返り生配信
-
-<iframe title="22/7 LIVE「Fivesta」 视频 1" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=116834955304255&bvid=BV1PRKR62EH4&cid=39515718691&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1PRKR62EH4)
-
-## 参考
-
-- [官方公告](https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/11264?ima=0000&link=ROBO004)
-- [官方Live报道](https://nanabunnonijyuuni-mobile.com/s/n110/diary/detail/450782)

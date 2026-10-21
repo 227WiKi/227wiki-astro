@@ -5,28 +5,18 @@ officialUrl: "https://www.sonymusic.co.jp/artist/nanabunnonijyuuni/info/489232"
 shows:
   - id: show-2017-12-24-1
     date: "2017-12-24"
-    venue: "SME乃木坂ビル（乃木坂スクエア）"
-    label: "第一场"
+    venue: SME乃木坂ビル（乃木坂スクエア）
+    label: 第一场
   - id: show-2017-12-24-2
     date: "2017-12-24"
-    venue: "SME乃木坂ビル（乃木坂スクエア）"
-    label: "第二场"
+    venue: SME乃木坂ビル（乃木坂スクエア）
+    label: 第二场
+references:
+  - label: Sony Music官方活动公告
+    url: https://www.sonymusic.co.jp/artist/nanabunnonijyuuni/info/489232
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2017/2017-special-christmas-event.md. -->
-
-# 22/7 Special Christmas Event
-
-## Live信息
-<b>Live名称:</b> 22/7 Special Christmas Event
-
---------
-
-<b>举办日期:</b> 2017年12月24日
-
---------
-
-<b>会场:</b> SME乃木坂ビル（乃木坂スクエア）
 
 ## 信息
 
@@ -52,7 +42,9 @@ shows:
 | よだかの星 | 宫泽贤治 | 白泽加奈惠、武田爱奈、花川芽衣、宫濑玲奈 |
 | 二人の男と荷車曳き | 梦野久作 | 天城莎莉 |
 
-## 曲目表
+## 待核实场次的曲目记录
+
+以下曲目表尚无法对应到确定场次，保留原始记录供核查。
 
 ### 曲目
 
@@ -61,7 +53,3 @@ shows:
 | 1. | 地下鉄抵抗主義 |
 | 2. | 僕は存在していなかった |
 | 3. | 11人が集まった理由 |
-
-## 参考
-
-- [Sony Music官方活动公告](https://www.sonymusic.co.jp/artist/nanabunnonijyuuni/info/489232)

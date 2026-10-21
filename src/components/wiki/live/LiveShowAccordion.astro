@@ -1,0 +1,13 @@
+---
+import type { ShowView } from "@/lib/live-detail";
+import { LiveSetlist } from "./LiveSetlist";
+interface Props { shows: ShowView[]; }
+const { shows } = Astro.props;
+---
+<div class="flex min-w-0 flex-col gap-4">
+  {shows.map((show) => (
+    show.setlist?.some((entry) => entry.type === "song" && entry.performers?.length)
+      ? <LiveSetlist client:load show={show} collapsible />
+      : <LiveSetlist show={show} collapsible />
+  ))}
+</div>

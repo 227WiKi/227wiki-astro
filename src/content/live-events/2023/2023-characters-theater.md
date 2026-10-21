@@ -5,32 +5,90 @@ officialUrl: "https://nanabunnonijyuuni-mobile.com/s/n110/page/7th-birthday?ima=
 shows:
   - id: show-2023-12-23-1
     date: "2023-12-23"
-    venue: "在线直播"
-    label: "第一部"
+    venue: 在线直播
+    label: 第一部
+    setlist:
+      - type: song
+        number: 1
+        titleJa: 謎の力
+      - type: song
+        number: 2
+        titleJa: タチツテトパワー
+      - type: song
+        number: 3
+        titleJa: 最後のピアノ
+      - type: song
+        number: 4
+        titleJa: ハレロ
+      - type: song
+        number: 5
+        titleJa: 世界の矛盾
+      - type: song
+        number: 6
+        titleJa: 不確かな青春
+      - type: song
+        number: 7
+        titleJa: とんぼの気持ち
+      - type: song
+        number: 8
+        titleJa: 未来があるから
+      - type: song
+        number: 9
+        titleJa: 曇り空の向こうは晴れている
+      - type: song
+        number: 10
+        titleJa: 君とどれくらい会わずにいられるか？
   - id: show-2023-12-23-2
     date: "2023-12-23"
-    venue: "在线直播"
-    label: "第二部"
+    venue: 在线直播
+    label: 第二部
+    setlist:
+      - type: song
+        number: 1
+        titleJa: 謎の力
+      - type: song
+        number: 2
+        titleJa: タチツテトパワー
+      - type: song
+        number: 3
+        titleJa: ハレロ
+      - type: song
+        number: 4
+        titleJa: 最後のピアノ
+      - type: song
+        number: 5
+        titleJa: 世界の矛盾
+      - type: song
+        number: 6
+        titleJa: 不確かな青春
+      - type: song
+        number: 7
+        titleJa: 命の続き
+      - type: song
+        number: 8
+        titleJa: 未来があるから
+      - type: song
+        number: 9
+        titleJa: 曇り空の向こうは晴れている
+      - type: song
+        number: 10
+        titleJa: 君とどれくらい会わずにいられるか？
+references:
+  - label: 第一部 中字 — B站观看
+    url: https://www.bilibili.com/video/BV1jv421y7aY
+  - label: 第二部 中字 — B站观看
+    url: https://www.bilibili.com/video/BV1Fr421c77f
+  - label: 第一部 生肉 — B站观看
+    url: https://www.bilibili.com/video/BV1vp4y1Z7sg
+  - label: 第二部 生肉 — B站观看
+    url: https://www.bilibili.com/video/BV1yQ4y1u7qP
+  - label: Making 生肉 — B站观看
+    url: https://www.bilibili.com/video/BV12z421U7pa
+  - label: 官方 Special Site
+    url: https://nanabunnonijyuuni-mobile.com/s/n110/page/7th-birthday?ima=0000&link=ROBO004
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2023/2023-characters-theater.md. -->
-
-# 22/7 Character's Theater 2023
-
-## Live信息
-<b>活动名称:</b> 22/7 Character's Theater 2023
-
---------
-
-<b>举办日期:</b> 2023年12月23日
-
---------
-
-<b>形式:</b> 在线直播
-
---------
-
-<b>影像收录:</b> [後でわかること](/discography/releases/12th-single/) Blu-ray
 
 ## 信息
 
@@ -45,70 +103,8 @@ shows:
 | 第1部 | 22/7 Character's Theater 2023 ～Pieces of Memory～ |
 | 第2部 | 22/7 Character's Theater 2023 ～Pieces of Mystery～ |
 
-## 曲目表
+<b>活动名称:</b> 22/7 Character's Theater 2023
 
-### 第一部
+<b>形式:</b> 在线直播
 
-| No. | 曲目 |
-| --- | --- |
-| 1. | 謎の力 |
-| 2. | タチツテトパワー |
-| 3. | 最後のピアノ |
-| 4. | ハレロ |
-| 5. | 世界の矛盾 |
-| 6. | 不確かな青春 |
-| 7. | とんぼの気持ち |
-| 8. | 未来があるから |
-| 9. | 曇り空の向こうは晴れている |
-| 10. | 君とどれくらい会わずにいられるか？ |
-
-### 第二部
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | 謎の力 |
-| 2. | タチツテトパワー |
-| 3. | ハレロ |
-| 4. | 最後のピアノ |
-| 5. | 世界の矛盾 |
-| 6. | 不確かな青春 |
-| 7. | 命の続き |
-| 8. | 未来があるから |
-| 9. | 曇り空の向こうは晴れている |
-| 10. | 君とどれくらい会わずにいられるか？ |
-
-## 观看
-
-### 第一部 中字
-
-<iframe title="22/7 Character&#x27;s Theater 2023 视频 1" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=1450599429&bvid=BV1jv421y7aY&cid=1440905643&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1jv421y7aY)
-
-### 第二部 中字
-
-<iframe title="22/7 Character&#x27;s Theater 2023 视频 2" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=1405361024&bvid=BV1Fr421c77f&cid=1567657765&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1Fr421c77f)
-
-### 第一部 生肉
-
-<iframe title="22/7 Character&#x27;s Theater 2023 视频 3" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=965178137&bvid=BV1vp4y1Z7sg&cid=1377992704&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1vp4y1Z7sg)
-
-### 第二部 生肉
-
-<iframe title="22/7 Character&#x27;s Theater 2023 视频 4" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=707720699&bvid=BV1yQ4y1u7qP&cid=1378069113&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1yQ4y1u7qP)
-
-### Making 生肉
-
-<iframe title="22/7 Character&#x27;s Theater 2023 视频 5" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=1354107932&bvid=BV12z421U7pa&cid=1529034317&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV12z421U7pa)
-
-## 参考
-
-- [官方 Special Site](https://nanabunnonijyuuni-mobile.com/s/n110/page/7th-birthday?ima=0000&link=ROBO004)
+<b>影像收录:</b> [後でわかること](/discography/releases/12th-single/) Blu-ray

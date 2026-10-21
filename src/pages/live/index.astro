@@ -5,10 +5,12 @@ import Breadcrumbs from "@/components/wiki/common/Breadcrumbs.astro";
 import PageHeader from "@/components/wiki/common/PageHeader.astro";
 import LiveEventCard from "@/components/wiki/live/LiveEventCard.astro";
 import { sectionPages } from "@/config/site";
-import { groupLiveEventsByYear } from "@/lib/live";
+import { groupLiveEventsByKind, groupLiveEventsByYear } from "@/lib/live";
 
 const section = sectionPages.live;
-const groups = groupLiveEventsByYear(await getCollection("liveEvents"));
+const liveEvents = await getCollection("liveEvents");
+const yearGroups = groupLiveEventsByYear(liveEvents);
+const kindGroups = groupLiveEventsByKind(liveEvents);
 ---
 
 <BaseLayout title={section.title} description={section.description} wide>
@@ -16,17 +18,45 @@ const groups = groupLiveEventsByYear(await getCollection("liveEvents"));
     <Breadcrumbs items={[{ label: section.title }]} />
     <PageHeader title={section.title} description={section.description} />
 
-    {groups.length > 0 ? (
-      <div class="flex min-w-0 flex-col gap-10 sm:gap-12">
-        {groups.map(({ year, events }) => (
-          <section aria-labelledby={`live-year-${year}`} class="flex min-w-0 flex-col gap-5">
-            <h2 id={`live-year-${year}`} class="font-heading text-xl font-semibold tracking-tight sm:text-2xl">{year}</h2>
-            <div class="grid auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-5">
-              {events.map((event) => <LiveEventCard event={event} href={`/live/${event.id}/`} />)}
-            </div>
-          </section>
-        ))}
-      </div>
+    {liveEvents.length > 0 ? (
+      <live-event-index class="live-index flex min-w-0 flex-col gap-6">
+        <fieldset class="flex min-w-0 justify-end" hidden>
+          <legend class="sr-only">Live 索引分组方式</legend>
+          <div class="inline-flex items-center gap-0.5 rounded-lg bg-muted p-0.5">
+            <label class="cursor-pointer">
+              <input class="peer sr-only" type="radio" name="live-view" value="year" checked />
+              <span class="inline-flex min-h-9 items-center justify-center rounded-md px-3 text-sm font-medium text-muted-foreground transition-[color,background-color,box-shadow] duration-(--duration-normal) peer-checked:bg-card peer-checked:text-foreground peer-checked:shadow-xs/5 peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background">按时间</span>
+            </label>
+            <label class="cursor-pointer">
+              <input class="peer sr-only" type="radio" name="live-view" value="kind" />
+              <span class="inline-flex min-h-9 items-center justify-center rounded-md px-3 text-sm font-medium text-muted-foreground transition-[color,background-color,box-shadow] duration-(--duration-normal) peer-checked:bg-card peer-checked:text-foreground peer-checked:shadow-xs/5 peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background">按类别</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="live-by-year flex min-w-0 flex-col gap-10 sm:gap-12">
+          {yearGroups.map(({ year, events }) => (
+            <section aria-labelledby={`live-year-${year}`} class="flex min-w-0 flex-col gap-5">
+              <h2 id={`live-year-${year}`} class="font-heading text-xl font-semibold tracking-tight sm:text-2xl">{year}</h2>
+              <div class="grid auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-5">
+                {events.map((event) => <LiveEventCard event={event} href={`/live/${event.id}/`} />)}
+              </div>
+            </section>
+          ))}
+        </div>
+
+        <div class="live-by-kind flex min-w-0 flex-col gap-10 sm:gap-12" hidden>
+          {kindGroups.map(({ kind, title, events }) => (
+            <section aria-labelledby={`live-kind-${kind}`} class="flex min-w-0 flex-col gap-5">
+              <h2 id={`live-kind-${kind}`} class="flex items-baseline gap-3 font-heading text-xl font-semibold tracking-tight sm:text-2xl">
+                {title}
+                <span class="font-sans text-sm font-normal tabular-nums text-muted-foreground">{events.length}</span>
+              </h2>
+              <div data-kind={kind} class="grid auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-5" />
+            </section>
+          ))}
+        </div>
+      </live-event-index>
     ) : (
       <section class="rounded-xl border bg-muted/30 p-6 text-sm text-muted-foreground" aria-label={`${section.title} 内容状态`}>
         <p>相关 Live 内容正在整理中。</p>
@@ -34,3 +64,52 @@ const groups = groupLiveEventsByYear(await getCollection("liveEvents"));
     )}
   </div>
 </BaseLayout>
+
+<script>
+  class LiveEventIndex extends HTMLElement {
+    private initialized = false;
+
+    connectedCallback() {
+      if (this.initialized) return;
+      const controls = this.querySelector("fieldset");
+      const byYear = this.querySelector<HTMLElement>(".live-by-year");
+      const byKind = this.querySelector<HTMLElement>(".live-by-kind");
+      if (!controls || !byYear || !byKind) return;
+      this.initialized = true;
+
+      // Keep the server-rendered nodes and their year order; switching never clones cards.
+      const cards = Array.from(byYear.querySelectorAll<HTMLElement>("article[data-live-kind]"));
+      const yearGrids = Array.from(byYear.querySelectorAll<HTMLElement>("section > .grid"))
+        .map((grid) => ({ grid, cards: Array.from(grid.children) }));
+      const kindGrids = Array.from(byKind.querySelectorAll<HTMLElement>("[data-kind]"))
+        .map((grid) => ({ grid, cards: cards.filter((card) => card.dataset.liveKind === grid.dataset.kind) }));
+
+      const update = () => {
+        const showKind = controls.querySelector<HTMLInputElement>("input:checked")?.value === "kind";
+        for (const { grid, cards } of showKind ? kindGrids : yearGrids) {
+          grid.append(...cards);
+        }
+        byYear.hidden = showKind;
+        byKind.hidden = !showKind;
+      };
+
+      controls.addEventListener("change", update);
+      update();
+      controls.hidden = false;
+    }
+  }
+
+  customElements.define("live-event-index", LiveEventIndex);
+</script>
+
+<style>
+  .live-index [hidden] {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .live-index label span {
+      transition: none;
+    }
+  }
+</style>

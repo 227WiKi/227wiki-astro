@@ -5,26 +5,16 @@ officialUrl: "https://www.sonymusic.co.jp/artist/nanabunnonijyuuni/info/493436"
 shows:
   - id: show-2018-04-13-1
     date: "2018-04-13"
-    venue: "池袋サンシャインシティ"
+    venue: 池袋サンシャインシティ
   - id: show-2018-04-14-1
     date: "2018-04-14"
-    venue: "イオンモール土浦"
+    venue: イオンモール土浦
+references:
+  - label: Sony Music官方活动公告
+    url: https://www.sonymusic.co.jp/artist/nanabunnonijyuuni/info/493436
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2018/2018-shampoo-release-events.md. -->
-
-# 2ndシングル「シャンプーの匂いがした」発売記念リリースイベント
-
-## Live信息
-<b>活动名称:</b> 2ndシングル「シャンプーの匂いがした」発売記念リリースイベント
-
---------
-
-<b>举办日期:</b> 2018年4月13日、4月14日
-
---------
-
-<b>会场:</b> 池袋サンシャインシティ、イオンモール土浦
 
 ## 信息
 
@@ -32,7 +22,9 @@ shows:
 
 三场Mini Live均演唱了该单曲收录的5首歌曲，其中《循環バス》和《人格崩壊》于4月13日首次公开演唱。
 
-## 曲目表
+## 待核实场次的曲目记录
+
+以下曲目表尚无法对应到确定场次，保留原始记录供核查。
 
 ### 曲目
 
@@ -44,6 +36,4 @@ shows:
 | 4. | 人格崩壊 |
 | 5. | シャンプーの匂いがした |
 
-## 参考
-
-- [Sony Music官方活动公告](https://www.sonymusic.co.jp/artist/nanabunnonijyuuni/info/493436)
+<b>活动名称:</b> 2ndシングル「シャンプーの匂いがした」発売記念リリースイベント

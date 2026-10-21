@@ -5,23 +5,70 @@ officialUrl: "https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/11315?ima=
 shows:
   - id: show-2026-07-25-1
     date: "2026-07-25"
-    venue: "Clapper Studio"
+    venue: Clapper Studio
+    setlist:
+      - type: section
+        label: 7月25日 Live
+      - type: song
+        number: 1
+        titleJa: 理解者
+      - type: song
+        number: 2
+        titleJa: Just here and now
+      - type: song
+        number: 3
+        titleJa: ロックは死なない
+      - type: song
+        number: 4
+        titleJa: 後でわかること
+      - type: song
+        number: 5
+        titleJa: もう純情は邪魔なだけ
+      - type: song
+        number: 6
+        titleJa: ソフトクリーム落としちゃった
+      - type: song
+        number: 7
+        titleJa: 赤いバラの理由
+      - type: song
+        number: 8
+        titleJa: シャンプーの匂いがした
+      - type: song
+        number: 9
+        titleJa: 乳酸菌たち
+      - type: song
+        number: 10
+        titleJa: 佐藤さん
+      - type: song
+        number: 11
+        titleJa: あなたでなくちゃ
+      - type: song
+        number: 12
+        titleJa: スパシーバ！
+      - type: song
+        number: 13
+        titleJa: YESとNOの間に
+      - type: section
+        label: Encore
+      - type: song
+        number: 1
+        titleJa: 打ち上げ花火の拒否権
+      - type: song
+        number: 2
+        titleJa: 世界中で歌おうぜ
+      - type: song
+        number: 3
+        titleJa: 理論物理学的　僕の推論
+references:
+  - label: 7月24日 Fan Meeting（饭拍） — B站观看
+    url: https://www.bilibili.com/video/BV1Mygi6LE3c
+  - label: 振り返り生配信 — B站观看
+    url: https://www.bilibili.com/video/BV17nGG6hEJX
+  - label: 22/7官方公告
+    url: https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/11315?ima=0037
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2026/2026-live-in-taipei.md. -->
-
-# 22/7 Live in Taipei 2026
-
-## Live信息
-<b>Live名称:</b> 22/7 Live in Taipei 2026
-
---------
-
-<b>举办日期:</b> 2026年7月25日
-
---------
-
-<b>会场:</b> Clapper Studio
 
 ## 信息
 
@@ -29,7 +76,9 @@ shows:
 
 演出前一天，成员还参加了第25届台湾漫画博览会的“ATC Special Stage 22/7 粉絲見面會”。
 
-## 曲目表
+## 待核实场次的曲目记录
+
+以下曲目表尚无法对应到确定场次，保留原始记录供核查。
 
 ### 7月24日 Fan Meeting
 
@@ -38,43 +87,3 @@ shows:
 | 1. | あなたでなくちゃ |
 | 2. | Rain of lies |
 | 3. | 君は Moon |
-
-### 7月25日 Live
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | 理解者 |
-| 2. | Just here and now |
-| 3. | ロックは死なない |
-| 4. | 後でわかること |
-| 5. | もう純情は邪魔なだけ |
-| 6. | ソフトクリーム落としちゃった |
-| 7. | 赤いバラの理由 |
-| 8. | シャンプーの匂いがした |
-| 9. | 乳酸菌たち |
-| 10. | 佐藤さん |
-| 11. | あなたでなくちゃ |
-| 12. | スパシーバ！ |
-| 13. | YESとNOの間に |
-| <b>Encore</b> | |
-| 1. | 打ち上げ花火の拒否権 |
-| 2. | 世界中で歌おうぜ |
-| 3. | 理論物理学的　僕の推論 |
-
-## 观看
-
-### 7月24日 Fan Meeting（饭拍）
-
-<iframe title="22/7 Live in Taipei 2026 视频 1" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=116975867070556&bvid=BV1Mygi6LE3c&cid=40264860639&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV1Mygi6LE3c)
-
-### 振り返り生配信
-
-<iframe title="22/7 Live in Taipei 2026 视频 2" loading="lazy" src="https://player.bilibili.com/player.html?isOutside=true&aid=117020645465870&bvid=BV17nGG6hEJX&cid=40507607039&p=1&autoplay=0" autoplay="0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="720"></iframe>
-
-[B站观看](https://www.bilibili.com/video/BV17nGG6hEJX)
-
-## 参考
-
-- [22/7官方公告](https://nanabunnonijyuuni-mobile.com/s/n110/news/detail/11315?ima=0037)

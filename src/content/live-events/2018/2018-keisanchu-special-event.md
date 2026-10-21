@@ -4,23 +4,44 @@ kind: "event"
 shows:
   - id: show-2018-09-20-1
     date: "2018-09-20"
-    venue: "マイナビBLITZ赤坂"
+    venue: マイナビBLITZ赤坂
+    setlist:
+      - type: song
+        number: 1
+        titleJa: シャンプーの匂いがした
+      - type: song
+        number: 2
+        titleJa: 理解者
+      - type: song
+        number: 3
+        titleJa: 絶望の花
+      - type: song
+        number: 4
+        titleJa: 不確かな青春
+      - type: song
+        number: 5
+        titleJa: 叫ぶしかない青春
+      - type: song
+        number: 6
+        titleJa: 韋駄天娘
+      - type: song
+        number: 7
+        titleJa: 未来があるから
+      - type: song
+        number: 8
+        titleJa: 僕は存在していなかった
+        song: boku-wa-sonzai-shiteinakatta
+      - type: section
+        label: Encore
+      - type: song
+        titleJa: 11人が集まった理由
+        song: 11nin-ga-atsumatta-riyuu
+references:
+  - label: Aniplex官方活动报告
+    url: https://prtimes.jp/main/html/rd/p/000001301.000016356.html
 ---
 
 <!-- Migrated from 227WiKi/docs/live/2018/2018-keisanchu-special-event.md. -->
-
-# 22/7 計算中 Special Event
-
-## Live信息
-<b>Live名称:</b> 22/7 計算中 Special Event
-
---------
-
-<b>举办日期:</b> 2018年9月20日
-
---------
-
-<b>会场:</b> マイナビBLITZ赤坂
 
 ## 信息
 
@@ -35,23 +56,3 @@ shows:
 | 凉花萌 | 神木みかみ | 黑星红白 |
 | 高辻丽 | 东条悠希 | 渡边明夫 |
 | 武田爱奈 | 柊つぼみ | 岸田メル |
-
-## 曲目表
-
-### 曲目
-
-| No. | 曲目 |
-| --- | --- |
-| 1. | シャンプーの匂いがした |
-| 2. | 理解者 |
-| 3. | 絶望の花 |
-| 4. | 不確かな青春 |
-| 5. | 叫ぶしかない青春 |
-| 6. | 韋駄天娘 |
-| 7. | 未来があるから |
-| 8. | 僕は存在していなかった |
-| Encore | 11人が集まった理由 |
-
-## 参考
-
-- [Aniplex官方活动报告](https://prtimes.jp/main/html/rd/p/000001301.000016356.html)

@@ -94,13 +94,13 @@ export function MemberPhotoViewer({ name, photos }: MemberPhotoViewerProps) {
   const photoTrigger = (
     <button
       aria-label={`放大查看 ${imageAlt}`}
-      className="group relative block h-auto w-full overflow-hidden rounded-lg border border-border/60 bg-transparent p-0 text-start outline-none transition-[border-color,opacity] duration-150 hover:border-foreground/30 hover:opacity-95 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none"
+      className="group relative block h-auto w-full overflow-hidden rounded-[var(--wiki-media-radius,var(--radius-sm))] border border-border/60 bg-transparent p-0 text-start outline-none transition-[border-color,opacity] duration-150 hover:border-foreground/30 hover:opacity-95 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none"
       onClick={() => setLightboxOpen(true)}
       type="button"
     >
       <img
         alt={imageAlt}
-        className="block h-auto w-full rounded-lg object-contain transition-opacity duration-150 motion-reduce:transition-none"
+        className="block h-auto w-full object-contain transition-opacity duration-150 motion-reduce:transition-none"
         decoding="async"
         height="960"
         src={selected.url}

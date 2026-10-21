@@ -8,6 +8,7 @@ import {
 import MemberSignature from "@/components/wiki/member/MemberSignature.astro";
 import { getMemberThemeStyle } from "@/lib/member-theme";
 import { cn } from "@/lib/utils";
+import "@/styles/wiki-surfaces.css";
 
 interface Props {
   hitokoto?: string;
@@ -19,12 +20,12 @@ const { hitokoto, themeColor, signature } = Astro.props;
 const content = hitokoto?.trim();
 const memberThemeStyle = getMemberThemeStyle(themeColor);
 const frameClassName = cn(
-  "w-full relative overflow-hidden",
+  "wiki-frame w-full relative overflow-hidden",
   themeColor && "border border-[var(--member-frame-border)] bg-[var(--member-frame-bg)]",
 );
 const headerClassName = cn(
   "relative overflow-hidden isolate",
-  themeColor && "rounded-t-[calc(var(--radius-2xl)-1px)] bg-[var(--member-header-bg)]",
+  themeColor && "bg-[var(--member-header-bg)]",
 );
 const panelClassName = cn(
   "relative z-10",
@@ -38,7 +39,7 @@ const panelClassName = cn(
     class="mb-8 w-full min-w-0"
     style={memberThemeStyle}
   >
-    <Frame className={frameClassName}>
+    <Frame className={frameClassName} data-bordered={Boolean(themeColor)}>
       <FrameHeader className={headerClassName}>
         <div class="relative z-10 min-w-0">
           <FrameTitle id="member-hitokoto-title" role="heading" aria-level={2}>
