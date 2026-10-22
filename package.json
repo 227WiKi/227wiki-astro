@@ -10,7 +10,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "astro check"
+    "check": "astro check",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "check:links": "node scripts/check-live-output.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.5",

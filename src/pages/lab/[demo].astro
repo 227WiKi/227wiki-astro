@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { LiveMemberCardDemo } from "@/components/prototype/LiveMemberCardDemo";
+import { resourceUrl } from "@/lib/assets";
+import { memberAvatarPath } from "@/lib/member-avatars";
+
+export function getStaticPaths() {
+  return import.meta.env.DEV ? [{ params: { demo: "live-member-card" } }] : [];
+}
+
+const profiles = new Map((await getCollection("members")).map((member) => [member.id, member]));
+const members = ["alice", "sally", "mao", "aina", "moe", "emma"].flatMap((id) => {
+  const member = profiles.get(id);
+  if (!member) return [];
+  return [{
+    name: member.data.nameJa,
+    href: `/member/${member.id}/`,
+    avatar: resourceUrl(memberAvatarPath(member)),
+  }];
+});
+---
+<BaseLayout title="Live Detail 成员卡片 Demo" description="Live Detail 出演成员卡片的独立样式预览。" noindex wide>
+  <div class="flex max-w-[54rem] flex-col gap-6">
+    <header class="flex flex-col gap-2">
+      <h1 class="text-2xl font-semibold tracking-tight">Live Detail 成员卡片</h1>
+      <p class="text-sm text-muted-foreground">样式预览，使用现有成员资料；不代表某场公演的出演名单。</p>
+    </header>
+    <LiveMemberCardDemo members={members} />
+  </div>
+</BaseLayout>

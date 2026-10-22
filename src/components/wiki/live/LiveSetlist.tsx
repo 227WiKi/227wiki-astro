@@ -18,7 +18,7 @@ export function LiveSetlist({ show, collapsible = false }: { show: ShowView; col
     render={collapsible ? <details id={`show-${show.id}`} className="live-show group" /> : undefined}
   >
     <CardFrameHeader
-      className={cn("relative min-w-0 content-start items-start px-4 pt-0", collapsible && "cursor-pointer list-none py-2 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring [&::-webkit-details-marker]:hidden")}
+      className={cn("relative min-w-0 content-start items-start px-4 py-2", collapsible && "cursor-pointer list-none outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring [&::-webkit-details-marker]:hidden")}
       render={collapsible ? <summary /> : undefined}
     >
       <CardFrameTitle render={<h3 />} className="col-start-1 row-start-1 min-w-0 self-start">
