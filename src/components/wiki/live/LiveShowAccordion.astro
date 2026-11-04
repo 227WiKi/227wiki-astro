@@ -11,3 +11,19 @@ const { shows } = Astro.props;
       : <LiveSetlist show={show} collapsible />
   ))}
 </div>
+
+<script>
+  // Native fragment navigation scrolls to the Show; only opening its <details> needs help.
+  function openTargetShow() {
+    let id: string;
+    try {
+      id = decodeURIComponent(window.location.hash.slice(1));
+    } catch {
+      return;
+    }
+    const target = id ? document.getElementById(id) : null;
+    if (target instanceof HTMLDetailsElement && target.classList.contains("live-show")) target.open = true;
+  }
+  openTargetShow();
+  window.addEventListener("hashchange", openTargetShow);
+</script>

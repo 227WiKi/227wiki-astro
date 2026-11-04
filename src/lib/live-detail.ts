@@ -59,6 +59,31 @@ export function assertLiveReferences(
   if (errors.length) throw new Error(`Invalid Live references:\n${errors.join("\n")}`);
 }
 
+/**
+ * DOM ID of a Show on Live Detail. Show IDs already carry a `show-` prefix in
+ * content, so anchors look like `#show-show-2026-04-04-1`; the format predates
+ * deep links and is kept so existing URLs stay valid.
+ */
+export function showAnchorId(showId: string): string {
+  return `show-${showId}`;
+}
+
+export function showHref(liveId: string, showId: string): string {
+  return `/live/${liveId}/#${showAnchorId(showId)}`;
+}
+
+/** Resolve a location hash to one of the given Show IDs; unknown or malformed hashes return undefined. */
+export function showIdFromHash(hash: string, showIds: readonly string[]): string | undefined {
+  let anchor: string;
+  try {
+    anchor = decodeURIComponent(hash.replace(/^#/, ""));
+  } catch {
+    return undefined;
+  }
+  if (!anchor) return undefined;
+  return showIds.find((showId) => showAnchorId(showId) === anchor);
+}
+
 export function showDisplayLabels(shows: readonly ShowView[]): string[] {
   // Venue and stable IDs distinguish records without inventing a part or time.
   const labels = shows.map((show) => show.label ?? show.venue);

@@ -104,7 +104,7 @@ export function TabsPanel({
     <TabsPrimitive.Panel
       className={cn(
         "flex-1 outline-none",
-        "transition-[opacity,transform] duration-(--duration-panel,210ms) ease-(--ease-out-subtle)",
+        "transition-[opacity,translate] duration-(--duration-panel,210ms) ease-(--ease-out-subtle)",
         "data-starting-style:opacity-0 data-ending-style:opacity-0",
         "data-[activation-direction=left]:data-starting-style:-translate-x-2 data-[activation-direction=left]:data-ending-style:translate-x-2",
         "data-[activation-direction=right]:data-starting-style:translate-x-2 data-[activation-direction=right]:data-ending-style:-translate-x-2",

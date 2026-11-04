@@ -19,6 +19,29 @@ npm run build
 npm run preview
 ```
 
+## Live Detail 头像与成员卡预览
+
+`src/config/member-avatars.ts` 管理 Live Detail 与成员卡 demo 的专用方形头像：
+
+- 现役成员：`photo/avatar/{activeSet}/{member.id}.jpg`，当前版本为 `16th`。
+- 毕业成员：`photo/avatar/graduated/{member.id}.jpg`，不受现役版本切换影响。
+- 特殊路径：在 `overrides` 中按成员 ID 设置 R2 相对路径。
+
+新单曲的头像全部上传后再修改 `activeSet`；不会根据发行日期自动切换。`memberAvatarPath()` 只返回相对路径，完整地址仍通过 `resourceUrl()` 生成，不回退到宣传照。`MemberAvatar` 统一显示比例和尺寸。成员索引及个人详情页原有的 `avatar` 字段与宣传照逻辑未迁移。
+
+启动开发服务器后，访问 `/lab/live-member-card/` 查看独立 demo。页面使用真实成员资料演示样式，不代表某场公演的出演名单；仅开发环境生成，生产构建不输出该路由。Demo 的卡片样式尚未替换正式出演成员列表。
+
+提交前检查：
+
+```sh
+npm run check
+npm test
+npm run build
+npm run check:links
+```
+
+`check:links` 读取 `dist/`，须在构建后运行。
+
 ## Coss workflow
 
 遵循 [Astro + shadcn 官方流程](https://ui.shadcn.com/docs/installation/astro)。初始化命令：

@@ -1,0 +1,20 @@
+---
+// Follows docs/ui-rules.md; listed in RULED_FILES in tests/ui-rules.test.mjs.
+import type { SongLiveYearGroup } from "@/lib/songs";
+import { SongLiveCard } from "./SongLiveCard";
+interface Props { group: SongLiveYearGroup; }
+const { group } = Astro.props;
+const headingId = `live-history-${group.year}`;
+---
+
+<section aria-labelledby={headingId} class="live-history-year">
+  <h3 id={headingId}>{group.year}</h3>
+  <ul class="grid gap-2 @xl:grid-cols-2">
+    {group.lives.map((live) => (
+      <li class="min-w-0">
+        {/* Only multi-Show cards need JS, for their "+N 场" menu; it hydrates when scrolled into view. */}
+        {live.appearances.length > 1 ? <SongLiveCard client:visible live={live} /> : <SongLiveCard live={live} />}
+      </li>
+    ))}
+  </ul>
+</section>

@@ -11,10 +11,11 @@ import LiveCast from "@/components/wiki/live/LiveCast.astro";
 import LiveShowAccordion from "@/components/wiki/live/LiveShowAccordion.astro";
 import { LiveSetlist } from "@/components/wiki/live/LiveSetlist";
 import { LiveShowTabs } from "@/components/wiki/live/LiveShowTabs";
-import { assertLiveReferences, type PerformerView, type ShowView } from "@/lib/live-detail";
+import { assertLiveReferences, showAnchorId, type PerformerView, type ShowView } from "@/lib/live-detail";
 import type { Performer } from "@/lib/live-schema";
 import { sortShows, liveKindLabel } from "@/lib/live";
 import { resourceUrl } from "@/lib/assets";
+import { memberAvatarPath } from "@/lib/member-avatars";
 
 interface Props { event: CollectionEntry<"liveEvents">; }
 export async function getStaticPaths() {
@@ -30,7 +31,7 @@ const members = new Map((await getCollection("members")).map((member) => [member
 function performersView(cast: Performer[] | undefined): PerformerView[] | undefined {
   return cast?.map((person) => {
     const member = person.type === "member" && person.ref ? members.get(person.ref) : undefined;
-    return { type: person.type, name: person.name, ...(member ? { href: `/member/${member.id}/`, avatar: member.data.avatar ? resourceUrl(member.data.avatar) : undefined } : {}) };
+    return { type: person.type, name: person.name, ...(member ? { href: `/member/${member.id}/`, avatar: resourceUrl(memberAvatarPath(member)) } : {}) };
   });
 }
 const shows: ShowView[] = sortShows(data.shows).map((show) => ({
@@ -61,7 +62,7 @@ const tocItems = [...headings, { slug: "setlist", text: setlistHeading, depth: 2
       <WikiArticle>
         <section aria-labelledby="setlist">
           <h2 id="setlist" class="sr-only">{setlistHeading}</h2>
-          {schedule ? <LiveShowAccordion shows={shows} /> : shows.length > 1 ? <LiveShowTabs client:load shows={shows} /> : shows[0].setlist?.some((entry) => entry.type === "song" && entry.performers?.length) ? <LiveSetlist client:load show={shows[0]} /> : <LiveSetlist show={shows[0]} />}
+          {schedule ? <LiveShowAccordion shows={shows} /> : shows.length > 1 ? <LiveShowTabs client:load shows={shows} /> : <div id={showAnchorId(shows[0].id)} class="live-show-anchor">{shows[0].setlist?.some((entry) => entry.type === "song" && entry.performers?.length) ? <LiveSetlist client:load show={shows[0]} /> : <LiveSetlist show={shows[0]} />}</div>}
         </section>
         <LiveCast cast={performersView(data.cast)} />
         {(references.length > 0 || data.referenceNotes?.length) && <section aria-labelledby="live-references">
@@ -81,6 +82,8 @@ const tocItems = [...headings, { slug: "setlist", text: setlistHeading, depth: 2
   .live-detail :global(.live-cast a) { color: var(--foreground); text-decoration: none; }
   .live-detail :global(.live-show-content p) { margin: 0; }
   .live-detail :global(.live-show-panel) { transition: none; transform: none; }
+  /* Show deep-link targets (#show-{show.id}) clear the sticky site header. */
+  .live-detail :global(:is(.live-show, .live-show-anchor, [data-slot="tabs-tab"])) { scroll-margin-top: 6rem; }
   .live-detail :global(.wiki-article > table th), .live-detail :global(.wiki-article > table td) { padding: .5rem .75rem; border-bottom: 1px solid var(--border); text-align: start; vertical-align: top; }
   .live-detail :global(img) { max-width: 100%; height: auto; border-radius: var(--radius-sm); }
 </style>

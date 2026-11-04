@@ -1,4 +1,4 @@
-import type { ShowView } from "@/lib/live-detail";
+import { showAnchorId, type ShowView } from "@/lib/live-detail";
 import { LiveSetlistRow } from "./LiveSetlistRow";
 import { LiveCastList } from "./LiveCastList";
 import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -15,10 +15,10 @@ export function LiveSetlist({ show, collapsible = false }: { show: ShowView; col
   const date = <time dateTime={show.date}>{show.date.replaceAll("-", ".")}</time>;
   return <CardFrame
     className="live-show-frame live-show-content min-w-0 border-0 bg-muted/72 p-1 shadow-none before:hidden *:data-[slot=card]:m-0 *:data-[slot=card]:rounded-xl *:data-[slot=table-container]:m-0 *:data-[slot=table-container]:w-full"
-    render={collapsible ? <details id={`show-${show.id}`} className="live-show group" /> : undefined}
+    render={collapsible ? <details id={showAnchorId(show.id)} className="live-show group" /> : undefined}
   >
     <CardFrameHeader
-      className={cn("relative min-w-0 content-start items-start px-4 pt-0", collapsible && "cursor-pointer list-none py-2 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring [&::-webkit-details-marker]:hidden")}
+      className={cn("relative min-w-0 content-start items-start px-4 py-2", collapsible && "cursor-pointer list-none outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring [&::-webkit-details-marker]:hidden")}
       render={collapsible ? <summary /> : undefined}
     >
       <CardFrameTitle render={<h3 />} className="col-start-1 row-start-1 min-w-0 self-start">

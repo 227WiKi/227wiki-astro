@@ -60,7 +60,7 @@ export function MenuPopup({
         <MenuPrimitive.Popup
           className={cn(
             "relative flex not-[class*='w-']:min-w-32 origin-(--transform-origin) rounded-lg border bg-popover not-dark:bg-clip-padding shadow-lg/5 outline-none will-change-transform",
-            "transition-[opacity,transform,scale] duration-(--duration-panel,210ms) ease-(--ease-out-subtle,cubic-bezier(0.16,1,0.3,1))",
+            "transition-[opacity,translate,scale] duration-(--duration-panel,210ms) ease-(--ease-out-subtle,cubic-bezier(0.16,1,0.3,1))",
             "data-starting-style:opacity-0 data-ending-style:opacity-0",
             "data-starting-style:scale-98 data-ending-style:scale-98",
             "data-[side=bottom]:data-starting-style:-translate-y-1.5 data-[side=bottom]:data-ending-style:-translate-y-1.5",

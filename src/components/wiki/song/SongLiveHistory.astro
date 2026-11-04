@@ -1,0 +1,83 @@
+---
+// Server-rendered: appearances are derived at build time; "show more" is a native <details>.
+// Follows docs/ui-rules.md; listed in RULED_FILES in tests/ui-rules.test.mjs.
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { groupLiveAppearancesByYear, splitLiveHistory, type SongLiveAppearance } from "@/lib/songs";
+import SongLiveHistoryYear from "./SongLiveHistoryYear.astro";
+
+interface Props { appearances: readonly SongLiveAppearance[]; }
+const { appearances } = Astro.props;
+const { visible, hidden } = splitLiveHistory(groupLiveAppearancesByYear(appearances));
+const hiddenCount = hidden.reduce((count, group) => count + group.appearances.length, 0);
+---
+
+<section aria-labelledby="live-history" class="song-live-history @container">
+  <h2 id="live-history">Live 演出历史</h2>
+  {appearances.length > 0 ? (
+    <>
+      {visible.map((group) => <SongLiveHistoryYear group={group} />)}
+      {hidden.length > 0 && (
+        <details class="more">
+          <summary class={cn(buttonVariants({ variant: "outline", size: "sm" }), "more-toggle list-none [&::-webkit-details-marker]:hidden")}>
+            <span class="when-closed">查看更早的 {hiddenCount} 场公演</span>
+            <span class="when-open">收起更早的公演</span>
+          </summary>
+          {hidden.map((group) => <SongLiveHistoryYear group={group} />)}
+        </details>
+      )}
+    </>
+  ) : (
+    <p class="live-history-empty">已整理的 Setlist 里还没有出现本曲。<a href="/live/">浏览全部 Live</a></p>
+  )}
+</section>
+
+<style>
+  .song-live-history .live-history-empty { margin-block: 0; }
+  .song-live-history .more-toggle { margin-top: 1rem; }
+  .song-live-history .when-open,
+  .song-live-history .more[open] .when-closed { display: none; }
+  .song-live-history .more[open] .when-open { display: inline; }
+
+  /* The React year list sits inside WikiArticle; undo its prose list/heading/link rules. */
+  .song-live-history :global(.live-history-year :is(ul, p)) {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .song-live-history :global(.live-history-year h3) {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+  }
+  /* Same gap between years, including the first older year below the "查看更早" toggle. */
+  .song-live-history :global(.live-history-year + .live-history-year),
+  .song-live-history .more > :global(.live-history-year) { margin-top: 1rem; }
+  /* Wide columns: the year sits beside its cards instead of taking its own row. */
+  @container (min-width: 36rem) {
+    .song-live-history :global(.live-history-year) {
+      display: grid;
+      grid-template-columns: 3.5rem minmax(0, 1fr);
+      column-gap: 0.75rem;
+    }
+    .song-live-history :global(.live-history-year h3) {
+      margin: 0;
+      padding-top: 0.75rem;
+    }
+  }
+  .song-live-history :global(.live-history-year a) { text-decoration: none; }
+  /* Two lines are always reserved so every card has the same height. */
+  .song-live-history :global(.live-card-title) { min-height: 2lh; }
+  /* Every date row is as tall as the coss xs "+N 场" button (h-7, sm:h-6), with or without it. */
+  .song-live-history :global(.live-card-dates) { min-height: 1.75rem; }
+  @media (min-width: 40rem) {
+    .song-live-history :global(.live-card-dates) { min-height: 1.5rem; }
+  }
+  .song-live-history :global(:is(.live-card-title, .live-card-date):hover) {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .song-live-history :global(.live-card-date) { color: inherit; }
+</style>

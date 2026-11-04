@@ -12,7 +12,8 @@ import ListeningLinks from "@/components/wiki/song/ListeningLinks.astro";
 import SongVideos from "@/components/wiki/song/SongVideos.astro";
 import LyricsSection from "@/components/wiki/song/LyricsSection.astro";
 import SongReleaseList from "@/components/wiki/song/SongReleaseList.astro";
-import { assertSongReferences, releasesForSong } from "@/lib/songs";
+import SongLiveHistory from "@/components/wiki/song/SongLiveHistory.astro";
+import { assertSongReferences, getLiveAppearancesForSong, releasesForSong } from "@/lib/songs";
 
 interface Props { song: CollectionEntry<"songs">; }
 
@@ -31,12 +32,14 @@ const contextItems = songs
   .sort((a, b) => (a.data.titleZh ?? a.data.titleJa).localeCompare(b.data.titleZh ?? b.data.titleJa, "zh-CN"))
   .map((entry) => ({ label: entry.data.titleZh ?? entry.data.titleJa, href: `/discography/songs/${entry.id}/`, current: entry.id === song.id }));
 const releases = releasesForSong(await getCollection("releases"), song.id);
+const appearances = getLiveAppearancesForSong(await getCollection("liveEvents"), song.id);
 const tocItems = [
   ...headings,
   { slug: "listening", text: "试听", depth: 2 },
   ...(data.videos.length > 0 ? [{ slug: "videos", text: "视频", depth: 2 }] : []),
   { slug: "lyrics", text: "歌词", depth: 2 },
   { slug: "releases", text: "收录作品", depth: 2 },
+  ...(appearances.length > 0 ? [{ slug: "live-history", text: "Live 演出历史", depth: 2 }] : []),
 ];
 ---
 
@@ -54,6 +57,7 @@ const tocItems = [
       <SongVideos videos={data.videos} />
       <LyricsSection />
       <SongReleaseList releases={releases} />
+      <SongLiveHistory appearances={appearances} />
     </WikiArticle>
     <FloatingTOC slot="toc" headings={tocItems} />
   </WikiArticleLayout>
