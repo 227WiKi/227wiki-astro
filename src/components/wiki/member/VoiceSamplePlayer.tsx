@@ -380,7 +380,7 @@ export default function VoiceSamplePlayer({
                       <div
                         aria-hidden="true"
                         className={cn(
-                          "absolute inset-0 flex items-center justify-center transition-[opacity,transform] duration-(--duration-normal,170ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
+                          "absolute inset-0 flex items-center justify-center transition-[opacity,scale] duration-(--duration-normal,170ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
                           isLoaderActive
                             ? "opacity-100 scale-100 pointer-events-auto"
                             : "opacity-0 scale-75 pointer-events-none"
@@ -393,7 +393,7 @@ export default function VoiceSamplePlayer({
                       <div
                         aria-hidden="true"
                         className={cn(
-                          "absolute inset-0 flex items-center justify-center transition-[opacity,transform] duration-(--duration-normal,170ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
+                          "absolute inset-0 flex items-center justify-center transition-[opacity,scale,rotate] duration-(--duration-normal,170ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
                           isPlayActive
                             ? "opacity-100 scale-100 rotate-0 pointer-events-auto"
                             : "opacity-0 scale-75 -rotate-6 pointer-events-none"
@@ -406,7 +406,7 @@ export default function VoiceSamplePlayer({
                       <div
                         aria-hidden="true"
                         className={cn(
-                          "absolute inset-0 flex items-center justify-center transition-[opacity,transform] duration-(--duration-normal,170ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
+                          "absolute inset-0 flex items-center justify-center transition-[opacity,scale] duration-(--duration-normal,170ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
                           isPauseActive
                             ? "opacity-100 scale-100 pointer-events-auto"
                             : "opacity-0 scale-75 pointer-events-none"
@@ -447,7 +447,7 @@ export default function VoiceSamplePlayer({
                         />
                       </TimeSlider.Track>
                       {/* Thumb: Visible resting opacity 0.5, hover/drag 1.0 */}
-                      <TimeSlider.Thumb className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 size-2.5 sm:size-3 rounded-full bg-foreground shadow-xs ring-2 ring-background opacity-50 transition-[opacity,transform] group-hover:opacity-100 group-focus-visible:opacity-100 group-hover:scale-110 pointer-coarse:opacity-100 will-change-[left] [left:var(--slider-fill,0%)]" />
+                      <TimeSlider.Thumb className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 size-2.5 sm:size-3 rounded-full bg-foreground shadow-xs ring-2 ring-background opacity-50 transition-[opacity,scale] group-hover:opacity-100 group-focus-visible:opacity-100 group-hover:scale-110 pointer-coarse:opacity-100 will-change-[left] [left:var(--slider-fill,0%)]" />
                     </TimeSlider.Root>
                   </div>
 
@@ -467,7 +467,7 @@ export default function VoiceSamplePlayer({
                         <div
                           aria-hidden="true"
                           className={cn(
-                            "absolute inset-0 flex items-center justify-center transition-[opacity,transform] duration-(--duration-fast,130ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
+                            "absolute inset-0 flex items-center justify-center transition-[opacity,scale] duration-(--duration-fast,130ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
                             isMuted
                               ? "opacity-100 scale-100 pointer-events-auto"
                               : "opacity-0 scale-85 pointer-events-none"
@@ -480,7 +480,7 @@ export default function VoiceSamplePlayer({
                         <div
                           aria-hidden="true"
                           className={cn(
-                            "absolute inset-0 flex items-center justify-center transition-[opacity,transform] duration-(--duration-fast,130ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
+                            "absolute inset-0 flex items-center justify-center transition-[opacity,scale] duration-(--duration-fast,130ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
                             isLowVolume
                               ? "opacity-100 scale-100 pointer-events-auto"
                               : "opacity-0 scale-85 pointer-events-none"
@@ -493,7 +493,7 @@ export default function VoiceSamplePlayer({
                         <div
                           aria-hidden="true"
                           className={cn(
-                            "absolute inset-0 flex items-center justify-center transition-[opacity,transform] duration-(--duration-fast,130ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
+                            "absolute inset-0 flex items-center justify-center transition-[opacity,scale] duration-(--duration-fast,130ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
                             isHighVolume
                               ? "opacity-100 scale-100 pointer-events-auto"
                               : "opacity-0 scale-85 pointer-events-none"
@@ -526,7 +526,7 @@ export default function VoiceSamplePlayer({
                             }
                           />
                         </VolumeSlider.Track>
-                        <VolumeSlider.Thumb className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 size-2 sm:size-2.5 rounded-full bg-foreground shadow-xs ring-1.5 ring-background opacity-50 transition-[opacity,transform] group-hover:opacity-100 group-focus-visible:opacity-100 group-hover:scale-110 pointer-coarse:opacity-100 will-change-[left] [left:var(--slider-fill,100%)]" />
+                        <VolumeSlider.Thumb className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 size-2 sm:size-2.5 rounded-full bg-foreground shadow-xs ring-1.5 ring-background opacity-50 transition-[opacity,scale] group-hover:opacity-100 group-focus-visible:opacity-100 group-hover:scale-110 pointer-coarse:opacity-100 will-change-[left] [left:var(--slider-fill,100%)]" />
                       </VolumeSlider.Root>
                     </div>
                   </div>
@@ -605,7 +605,7 @@ export default function VoiceSamplePlayer({
                             <span
                               aria-hidden={isActive ? "true" : undefined}
                               className={cn(
-                                "absolute inset-0 flex items-center justify-center transition-[opacity,transform] duration-(--duration-normal,170ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
+                                "absolute inset-0 flex items-center justify-center transition-[opacity,scale] duration-(--duration-normal,170ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
                                 !isActive
                                   ? "opacity-100 scale-100 pointer-events-auto"
                                   : "opacity-0 scale-75 pointer-events-none"
@@ -618,7 +618,7 @@ export default function VoiceSamplePlayer({
                             <span
                               aria-hidden={!isActive || isThisPlaying ? "true" : undefined}
                               className={cn(
-                                "absolute inset-0 flex items-center justify-center transition-[opacity,transform] duration-(--duration-normal,170ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
+                                "absolute inset-0 flex items-center justify-center transition-[opacity,scale,rotate] duration-(--duration-normal,170ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
                                 isActive && !isThisPlaying
                                   ? "opacity-100 scale-100 rotate-0 pointer-events-auto"
                                   : "opacity-0 scale-75 -rotate-6 pointer-events-none"
@@ -634,7 +634,7 @@ export default function VoiceSamplePlayer({
                             <span
                               aria-hidden={!isActive || !isThisPlaying ? "true" : undefined}
                               className={cn(
-                                "absolute inset-0 flex items-center justify-center transition-[opacity,transform] duration-(--duration-normal,170ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
+                                "absolute inset-0 flex items-center justify-center transition-[opacity,scale] duration-(--duration-normal,170ms) ease-(--ease-out-subtle) motion-reduce:transition-opacity motion-reduce:transform-none",
                                 isActive && isThisPlaying
                                   ? "opacity-100 scale-100 pointer-events-auto"
                                   : "opacity-0 scale-75 pointer-events-none"
