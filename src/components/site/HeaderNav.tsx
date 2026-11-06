@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronDown } from "lucide-react";
 import {
   Menu,
   MenuLinkItem,
@@ -39,18 +40,13 @@ export function DesktopNav({ groups, currentPath }: DesktopNavProps) {
                     closeDelay={140}
                     className={cn(
                       navLinkClass,
-                      "flex cursor-pointer list-none items-center gap-1.5 [&[data-popup-open]>span]:rotate-180",
+                      "flex cursor-pointer list-none items-center gap-2 [&[data-popup-open]>svg]:rotate-180",
                       active && "bg-accent text-foreground",
                     )}
                     aria-current={active ? "true" : undefined}
                   >
                     {group.label}
-                    <span
-                      aria-hidden="true"
-                      className="text-xs transition-transform duration-(--duration-normal,170ms) ease-(--ease-out-subtle)"
-                    >
-                      ⌄
-                    </span>
+                    <ChevronDown aria-hidden="true" className="size-4 text-muted-foreground transition-transform duration-(--duration-normal,170ms) [&[data-popup-open]]:rotate-180" />
                   </MenuTrigger>
                   <MenuPopup
                     align="start"

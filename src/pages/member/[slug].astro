@@ -5,6 +5,7 @@ import WikiArticleLayout from "@/components/wiki/article/WikiArticleLayout.astro
 import ContextNav from "@/components/wiki/article/ContextNav.astro";
 import FloatingTOC from "@/components/wiki/article/FloatingTOC.astro";
 import MemberHitokoto from "@/components/wiki/member/MemberHitokoto.astro";
+import VoiceSampleReferences from "@/components/wiki/member/VoiceSampleReferences.astro";
 import MemberVoiceSamples from "@/components/wiki/member/MemberVoiceSamples.astro";
 import MemberChronology from "@/components/wiki/member/MemberChronology.astro";
 import { MemberBreadcrumbs } from "@/components/wiki/member/MemberBreadcrumbs";
@@ -69,6 +70,7 @@ const signatureSvg = getMemberSignatureSvg(member.data.signature);
         themeColor={member.data.themeColor}
       />
       <Content />
+      <VoiceSampleReferences sets={member.data.voiceSampleSets} existingContent={member.body} />
     </WikiArticle>
     <FloatingTOC slot="toc" headings={headings} />
   </WikiArticleLayout>

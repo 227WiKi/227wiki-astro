@@ -1,0 +1,44 @@
+---
+// Native fallback for the enhanced coss navigation; every destination is an HTML link.
+// Follows docs/ui-rules.md; listed in RULED_FILES in tests/ui-rules.test.mjs.
+import { ChevronDown } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { githubUrl, navigationGroups } from "@/config/site";
+import { cn } from "@/lib/utils";
+const currentPath = Astro.url.pathname;
+const isActive = (path: string) => currentPath === path || currentPath.startsWith(path);
+const linkClass = "block rounded-md px-3 py-3 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring";
+---
+<div class="hidden flex-1 justify-end md:flex">
+  <nav aria-label="主导航" data-site-nav-fallback="">
+    <ul class="flex items-center gap-1">
+      {navigationGroups.map((group) => <li>
+        {group.links.length > 1 ? (
+          <details name="static-header-navigation" class="group relative">
+            <summary class="flex cursor-pointer list-none items-center gap-2 rounded-md px-3 py-3 text-sm font-medium hover:bg-accent focus-visible:outline-2 focus-visible:outline-ring [&::-webkit-details-marker]:hidden">
+              {group.label}<ChevronDown aria-hidden="true" className="size-4 text-muted-foreground group-open:rotate-180" />
+            </summary>
+            <ul class="absolute start-0 top-full z-50 mt-2 w-56 rounded-lg border bg-popover p-2 text-popover-foreground">
+              {group.links.map((link) => <li><a href={link.path} aria-current={isActive(link.path) ? "page" : undefined} class={linkClass}>{link.title}</a></li>)}
+            </ul>
+          </details>
+        ) : <a href={group.links[0].path} aria-current={isActive(group.links[0].path) ? "page" : undefined} class={linkClass}>{group.label}</a>}
+      </li>)}
+      <li><a href={githubUrl} target="_blank" rel="noopener noreferrer" class={linkClass}>GitHub</a></li>
+    </ul>
+  </nav>
+</div>
+<details class="group md:hidden" data-mobile-nav-fallback="">
+  <summary aria-label="打开导航菜单" class={cn(buttonVariants({ variant: "outline", size: "default" }), "list-none [&::-webkit-details-marker]:hidden")}>Menu</summary>
+  <nav aria-label="移动端主导航" data-site-nav-fallback="" class="absolute end-4 top-full z-50 mt-2 [max-block-size:calc(100dvh-6rem)] w-[min(calc(100vw-2rem),20rem)] overflow-y-auto rounded-lg border bg-popover p-3 text-popover-foreground">
+    <ul class="flex flex-col gap-2">
+      {navigationGroups.map((group) => <li>
+        {group.links.length > 1 ? <>
+          <h2 class="px-3 py-2 text-sm font-medium">{group.label}</h2>
+          <ul>{group.links.map((link) => <li><a href={link.path} aria-current={isActive(link.path) ? "page" : undefined} class={linkClass}>{link.title}</a></li>)}</ul>
+        </> : <a href={group.links[0].path} aria-current={isActive(group.links[0].path) ? "page" : undefined} class={linkClass}>{group.label}</a>}
+      </li>)}
+      <li><a href={githubUrl} target="_blank" rel="noopener noreferrer" class={linkClass}>GitHub</a></li>
+    </ul>
+  </nav>
+</details>

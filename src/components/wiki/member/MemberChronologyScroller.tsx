@@ -2,6 +2,7 @@
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface MemberChronologyScrollerProps {
@@ -79,25 +80,25 @@ export function MemberChronologyScroller({
           {title}
         </h2>
         {hasOverflow && (
-          <div className="flex items-center gap-0.5" aria-label="时间线导航">
-            <button
+          <div className="flex items-center gap-1" aria-label="时间线导航">
+            <Button variant="ghost" size="icon-sm"
               type="button"
               onClick={() => handleScroll(-1)}
               disabled={!canScrollLeft}
               aria-label="向左滚动时间线"
-              className="grid size-8 place-items-center rounded-md border-transparent bg-transparent text-muted-foreground outline-none transition-colors duration-(--duration-fast,130ms) ease-(--ease-out-subtle) hover:text-foreground disabled:pointer-events-none disabled:opacity-25 focus-visible:ring-2 focus-visible:ring-ring"
+              className="text-muted-foreground transition-colors hover:text-foreground disabled:opacity-25"
             >
-              <ChevronLeft className="size-4.5" aria-hidden="true" />
-            </button>
-            <button
+              <ChevronLeft className="size-4" aria-hidden="true" />
+            </Button>
+            <Button variant="ghost" size="icon-sm"
               type="button"
               onClick={() => handleScroll(1)}
               disabled={!canScrollRight}
               aria-label="向右滚动时间线"
-              className="grid size-8 place-items-center rounded-md border-transparent bg-transparent text-muted-foreground outline-none transition-colors duration-(--duration-fast,130ms) ease-(--ease-out-subtle) hover:text-foreground disabled:pointer-events-none disabled:opacity-25 focus-visible:ring-2 focus-visible:ring-ring"
+              className="text-muted-foreground transition-colors hover:text-foreground disabled:opacity-25"
             >
-              <ChevronRight className="size-4.5" aria-hidden="true" />
-            </button>
+              <ChevronRight className="size-4" aria-hidden="true" />
+            </Button>
           </div>
         )}
       </div>

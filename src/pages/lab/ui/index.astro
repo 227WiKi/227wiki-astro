@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import CossDialogProbe from "@/components/prototype/CossDialogProbe";
+import VoiceSampleReferences from "@/components/wiki/member/VoiceSampleReferences.astro";
 import MemberVoiceSamples from "@/components/wiki/member/MemberVoiceSamples.astro";
 import type { VoiceSampleSet } from "@/lib/voice-samples";
 
@@ -75,5 +76,6 @@ const multiSetFixture: VoiceSampleSet[] = [
       <CossDialogProbe client:idle />
       <noscript>此测试需要启用 JavaScript 才能打开 Dialog。普通 Wiki 页面无需 JavaScript。</noscript>
     </div>
+    <VoiceSampleReferences sets={[...singleSetFixture, ...multiSetFixture]} />
   </div>
 </BaseLayout>

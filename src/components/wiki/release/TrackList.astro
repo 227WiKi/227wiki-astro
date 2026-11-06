@@ -14,9 +14,9 @@ const hasDuration = tracks.some(({ duration }) => Boolean(duration));
     <caption class="sr-only">{label}</caption>
     <thead class="bg-muted/50 text-left text-muted-foreground">
       <tr>
-        <th scope="col" class="w-12 px-3 py-2.5 font-medium">No.</th>
-        <th scope="col" class="px-3 py-2.5 font-medium">Title</th>
-        {hasDuration && <th scope="col" class="w-20 px-3 py-2.5 text-right whitespace-nowrap font-medium">Duration</th>}
+        <th scope="col" class="w-12 px-3 py-3 font-medium">No.</th>
+        <th scope="col" class="px-3 py-3 font-medium">Title</th>
+        {hasDuration && <th scope="col" class="w-20 px-3 py-3 text-right whitespace-nowrap font-medium">Duration</th>}
       </tr>
     </thead>
     <tbody>

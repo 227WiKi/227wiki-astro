@@ -1,20 +1,47 @@
 ---
+// Song → Release navigation: each Single or Album that contains the Song, once.
+// Releases come from releasesForSong(); Edition details stay on the Release page.
+// Follows docs/ui-rules.md; listed in RULED_FILES in tests/ui-rules.test.mjs.
 import type { CollectionEntry } from "astro:content";
-import { releaseLabel } from "@/lib/releases";
-interface Props { releases: readonly CollectionEntry<"releases">[]; }
+import { SongReleaseCard } from "./SongReleaseCard";
+interface Props { releases: readonly Pick<CollectionEntry<"releases">, "id" | "data">[]; }
 const { releases } = Astro.props;
 ---
 
-<section aria-labelledby="releases">
+<section aria-labelledby="releases" class="song-releases @container">
   <h2 id="releases">收录作品</h2>
   {releases.length > 0 ? (
-    <ul>
+    <ul class="song-release-grid grid gap-2">
       {releases.map((release) => (
-        <li class="py-1">
-          <a href={`/discography/releases/${release.id}/`} class="rounded-sm">{releaseLabel(release.data)} · {release.data.titleZh ?? release.data.titleJa}</a>
-          <time datetime={release.data.releaseDate} class="mt-1 block text-sm text-muted-foreground">{release.data.releaseDate}</time>
+        <li class="min-w-0">
+          <SongReleaseCard release={release} />
         </li>
       ))}
     </ul>
-  ) : <p class="text-sm text-muted-foreground">收录作品暂未收录。</p>}
+  ) : (
+    <p class="song-releases-empty">已整理的单曲和专辑里还没有这首歌。<a href="/discography/">浏览 Discography</a></p>
+  )}
 </section>
+
+<style>
+  .song-releases .song-releases-empty { margin-block: 0; }
+  /* The list sits inside WikiArticle; undo its prose list and link rules. */
+  .song-releases .song-release-grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* Keep at most two columns: four Releases form a 2×2 group. */
+  @container (min-width: 36rem) {
+    .song-releases .song-release-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .song-releases :global(.song-release-card) {
+    color: inherit;
+    text-decoration: none;
+  }
+  /* Two lines are always reserved so every card has the same height. */
+  .song-releases :global(.song-release-title) { min-height: 2lh; }
+</style>

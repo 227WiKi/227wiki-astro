@@ -22,11 +22,33 @@ export function assertSongReferences(
   }
 }
 
-/** Filtering at Release level includes each work once, regardless of editions. */
-export function releasesForSong(releases: readonly CollectionEntry<"releases">[], songId: string) {
-  return releases.filter(({ data }) => data.editions.some((edition) =>
-    edition.audioDiscs.some((disc) => disc.tracks.some((track) => track.song === songId)),
-  )).sort((a, b) => a.data.releaseDate.localeCompare(b.data.releaseDate));
+type ReleaseEntry = Pick<CollectionEntry<"releases">, "id" | "data">;
+
+const compareText = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
+const releaseTypeOrder = { single: 0, album: 1 } as const;
+
+/**
+ * The Releases (Singles and Albums) that contain a Song, each exactly once.
+ * Only tracks whose `song` equals the Song ID count, on any Edition or disc;
+ * titles are never matched. Order: release date ascending; same date by
+ * Single before Album, then release number, then Release ID, so the result
+ * never depends on collection order.
+ */
+export function releasesForSong<T extends ReleaseEntry>(releases: readonly T[], songId: string): T[] {
+  const matches = new Map<string, T>();
+  for (const release of releases) {
+    if (matches.has(release.id)) continue;
+    const containsSong = release.data.editions.some((edition) =>
+      edition.audioDiscs.some((disc) => disc.tracks.some((track) => track.song === songId)),
+    );
+    if (containsSong) matches.set(release.id, release);
+  }
+  return [...matches.values()].sort((a, b) =>
+    compareText(a.data.releaseDate, b.data.releaseDate)
+    || releaseTypeOrder[a.data.releaseType] - releaseTypeOrder[b.data.releaseType]
+    || a.data.releaseNumber - b.data.releaseNumber
+    || compareText(a.id, b.id),
+  );
 }
 
 type LiveEventEntry = Pick<CollectionEntry<"liveEvents">, "id" | "data">;
@@ -60,8 +82,6 @@ export interface SongLiveYearGroup {
   appearances: SongLiveAppearance[];
   lives: SongLiveEventGroup[];
 }
-
-const compareText = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
 
 /**
  * Derive a Song's Live history from Setlists. Only entries whose `song` equals

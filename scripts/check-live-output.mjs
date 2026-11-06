@@ -1,4 +1,4 @@
-/** Check generated internal links and Live-specific output invariants after build. */
+/** Check generated internal links, Live-specific and Song → Release output invariants after build. */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -21,10 +21,35 @@ for (const file of walkMarkdown(contentRoot)) {
     }
   }
 }
-const failures = []; let links = 0; let liveDetails = 0; let songPages = 0; const songHistory = {};
+// Every configured section must remain reachable through native header navigation.
+const siteConfig = fs.readFileSync(new URL('../src/config/site.ts', import.meta.url), 'utf8');
+const navigationPaths = [...siteConfig.matchAll(/\bpath:\s*"([^"\n]+)"/g)].map((match) => match[1]);
+if (!navigationPaths.length) throw new Error('No section paths found in site config');
+const failures = []; let links = 0; let liveDetails = 0; let songPages = 0; const songHistory = {}; const songReleases = {};
+// Expected Releases per Song, from Track → Song references only: one per Release, date ascending.
+const releaseRoot = fileURLToPath(new URL('../src/content/releases/', import.meta.url));
+const expectedReleases = new Map();
+for (const file of walkMarkdown(releaseRoot)) {
+  const releaseId = path.relative(releaseRoot, file).split(path.sep).join('/').replace(/\.md$/, '');
+  const data = YAML.parse(fs.readFileSync(file, 'utf8').match(/^---\n([\s\S]*?)\n---/)[1]);
+  const songs = new Set(data.editions.flatMap((edition) => edition.audioDiscs.flatMap((disc) => disc.tracks.map((track) => track.song).filter(Boolean))));
+  for (const song of songs) {
+    const list = expectedReleases.get(song) ?? [];
+    list.push({ href: `/discography/releases/${releaseId}/`, date: data.releaseDate });
+    expectedReleases.set(song, list);
+  }
+}
+const releaseDates = new Map([...expectedReleases.values()].flat().map(({ href, date }) => [href, date]));
 for (const file of files) {
   const html = fs.readFileSync(file, 'utf8');
   const relative = path.relative(root, file);
+  const fallbackNavs = [...html.matchAll(/<nav\b[^>]*data-site-nav-fallback(?:="")?[^>]*>([\s\S]*?)<\/nav>/g)];
+  if (fallbackNavs.length !== 2) failures.push(`${relative}: expected desktop and mobile native navigation`);
+  for (const [, nav] of fallbackNavs) {
+    const hrefs = new Set([...nav.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)].map((match) => match[1]));
+    for (const href of navigationPaths) if (!hrefs.has(href)) failures.push(`${relative}: missing native navigation link ${href}`);
+  }
+
   for (const match of html.matchAll(/\bhref=["']([^"']+)["']/g)) {
     const href = match[1].replaceAll('&amp;', '&');
     if (!(href.startsWith('/') || href.startsWith('#')) || href.startsWith('//')) continue;
@@ -53,11 +78,26 @@ for (const file of files) {
     // Ignore inert markup so a URL in a script, template or comment cannot pass.
     const navigationHtml = html.replace(/<!--[\s\S]*?-->|<(script|style|template)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, '');
     const showLinks = new Set();
+    const releaseLinks = [];
     for (const [tag] of navigationHtml.matchAll(/<a\b(?:"[^"]*"|'[^']*'|[^'">])*>/gi)) {
       const attributes = new Map([...tag.matchAll(/([^\s=<>]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'))?/g)].map(([, name, double, single]) => [name.toLowerCase(), double ?? single ?? '']));
       if (attributes.has('data-live-show-link') && attributes.has('href')) showLinks.add(attributes.get('href').replaceAll('&amp;', '&'));
+      if (attributes.has('data-song-release-link') && attributes.has('href')) releaseLinks.push(attributes.get('href').replaceAll('&amp;', '&'));
     }
     const songId = relative.split('/')[2];
+    const expectedReleaseHrefs = new Set((expectedReleases.get(songId) ?? []).map(({ href }) => href));
+    if (new Set(releaseLinks).size !== releaseLinks.length) failures.push(`${relative}: duplicate Release card`);
+    for (const href of expectedReleaseHrefs) {
+      if (!releaseLinks.includes(href)) failures.push(`${relative}: missing Release card ${href}`);
+    }
+    for (const href of releaseLinks) {
+      if (!expectedReleaseHrefs.has(href)) failures.push(`${relative}: unexpected Release card ${href}`);
+    }
+    for (let i = 1; i < releaseLinks.length; i++) {
+      if (releaseDates.get(releaseLinks[i - 1]) > releaseDates.get(releaseLinks[i])) failures.push(`${relative}: Release cards out of date order`);
+    }
+    if (!releaseLinks.length && !html.includes('已整理的单曲和专辑里还没有这首歌。')) failures.push(`${relative}: missing Release empty state`);
+    songReleases[relative] = releaseLinks;
     const expected = expectedShows.get(songId) ?? new Set();
     for (const href of expected) {
       if (!showLinks.has(href)) failures.push(`${relative}: missing HTML Show link ${href}`);
@@ -77,5 +117,5 @@ for (const file of files) {
   }
 }
 if (fs.existsSync(path.join(root, 'qa-live-detail'))) failures.push('Temporary QA route remains in dist');
-console.log(JSON.stringify({ pages: files.length, liveDetails, songPages, songHistory, internalLinks: links, failures }, null, 2));
+console.log(JSON.stringify({ pages: files.length, liveDetails, songPages, songHistory, songReleases, internalLinks: links, failures }, null, 2));
 if (failures.length) process.exitCode = 1;

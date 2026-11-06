@@ -16,13 +16,13 @@ const kindGroups = groupLiveEventsByKind(liveEvents);
 <BaseLayout title={section.title} description={section.description} wide>
   <div class="flex min-w-0 flex-col gap-8">
     <Breadcrumbs items={[{ label: section.title }]} />
-    <PageHeader title={section.title} description={section.description} />
+    <PageHeader title={section.title} />
 
     {liveEvents.length > 0 ? (
       <live-event-index class="live-index flex min-w-0 flex-col gap-6">
         <fieldset class="flex min-w-0 justify-end" hidden>
           <legend class="sr-only">Live 索引分组方式</legend>
-          <div class="inline-flex items-center gap-0.5 rounded-lg bg-muted p-0.5">
+          <div class="inline-flex items-center gap-1 rounded-lg bg-muted p-1">
             <label class="cursor-pointer">
               <input class="peer sr-only" type="radio" name="live-view" value="year" checked />
               <span class="inline-flex min-h-9 items-center justify-center rounded-md px-3 text-sm font-medium text-muted-foreground transition-[color,background-color,box-shadow] duration-(--duration-normal) peer-checked:bg-card peer-checked:text-foreground peer-checked:shadow-xs/5 peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background">按时间</span>

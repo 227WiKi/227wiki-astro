@@ -10,8 +10,7 @@ const { data } = Astro.props.event;
 const summary = deriveLiveEvent(data.shows);
 ---
 <Infobox label={`${data.titleJa} 活动资料`}>
-  {data.poster && <div class="wiki-inset-media"><img src={resourceUrl(data.poster)} alt={`${data.titleJa} 海报`} decoding="async" class="h-auto w-full rounded-[var(--wiki-media-radius)] object-contain" /></div>}
-  <p class="font-heading text-lg font-semibold leading-snug">{data.titleJa}</p>
+  {data.poster && <div class="wiki-inset-media"><img src={resourceUrl(data.poster)} alt={`${data.titleJa} 海报`} decoding="async" class="w-full rounded-[var(--wiki-media-radius)] object-contain" /></div>}
   <MetadataList>
     <MetadataRow label="类型">{liveKindLabel(data.kind)}</MetadataRow>
     {data.format && <MetadataRow label="形式">Tour</MetadataRow>}
@@ -19,6 +18,5 @@ const summary = deriveLiveEvent(data.shows);
     <MetadataRow label="会场">{liveVenueMetadata(summary)}</MetadataRow>
     {summary.showCount > 1 && <MetadataRow label="公演数">{summary.showCount} 公演</MetadataRow>}
   </MetadataList>
-  {data.officialUrl && <a href={data.officialUrl} target="_blank" rel="noopener noreferrer" class="text-sm text-(--wiki-brand) underline-offset-4 hover:underline">官方网站 ↗</a>}
 </Infobox>
 

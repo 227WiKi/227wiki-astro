@@ -18,7 +18,7 @@ const headings = Astro.props.headings.filter(({ depth }) => depth === 2 || depth
     <ol class="flex flex-col gap-1">
       {headings.map(({ slug, text, depth }) => (
         <li class:list={[depth === 3 && "pl-4"]}>
-          <a href={`#${slug}`} class="block rounded-lg px-3 py-2.5 text-sm [overflow-wrap:anywhere] outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset">{text}</a>
+          <a href={`#${slug}`} class="block rounded-lg px-3 py-3 text-sm [overflow-wrap:anywhere] outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset">{text}</a>
         </li>
       ))}
     </ol>

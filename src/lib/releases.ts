@@ -13,3 +13,13 @@ export function releaseLabel(data: Pick<ReleaseData, "releaseNumber" | "releaseT
 }
 
 export const editionAnchor = (id: string): string => `edition-${id}`;
+
+export const releaseHref = (id: string): string => `/discography/releases/${id}/`;
+
+/** "2017-09-20" → "2017.09.20", the date style used on Release cards. */
+export const formatReleaseDate = (date: string): string => date.replaceAll("-", ".");
+
+/** The Release cover, falling back to the first Edition that has one. */
+export function releaseCoverPath(data: Pick<ReleaseData, "cover" | "editions">): string | undefined {
+  return data.cover ?? data.editions.find((edition) => edition.cover)?.cover;
+}

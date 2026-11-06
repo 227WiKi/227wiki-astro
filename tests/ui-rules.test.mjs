@@ -3,11 +3,20 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 
-/** Files that follow docs/ui-rules.md. Add a file here when you bring it into line. */
+/** Files covered by source checks; inherited styles and rendered layout still need review. */
 export const RULED_FILES = [
+  "src/components/wiki/common/SectionCard.astro",
+  "src/components/wiki/release/ReleaseInfobox.astro",
+  "src/components/wiki/song/SongInfobox.astro",
+  "src/components/wiki/live/LiveInfobox.astro",
+  "src/components/wiki/common/PageHeader.astro",
+  "src/components/site/StaticHeaderNav.astro",
+  "src/components/wiki/member/VoiceSampleReferences.astro",
   "src/components/wiki/song/SongLiveHistory.astro",
   "src/components/wiki/song/SongLiveHistoryYear.astro",
   "src/components/wiki/song/SongLiveCard.tsx",
+  "src/components/wiki/song/SongReleaseList.astro",
+  "src/components/wiki/song/SongReleaseCard.tsx",
 ];
 
 const sources = RULED_FILES.map((file) => ({ file, text: fs.readFileSync(new URL(`../${file}`, import.meta.url), "utf8") }));
@@ -33,7 +42,9 @@ test("sizes come from the design system", () => {
     assert(!half, `${file}: half-step spacing ${half?.[0]}`);
     assert(!/\btext-\[/.test(text), `${file}: arbitrary font size`);
     assert(!/\btext-(?:[5-9]xl)\b/.test(text), `${file}: font size above the scale`);
-    const height = text.match(/\b(?:min-|max-)?h-(?:auto|\d|\[|px)/);
+    // Image dimensions are media layout, not overrides of coss control heights.
+    const controls = text.replace(/<img\b[^>]*>/g, "");
+    const height = controls.match(/\b(?:min-|max-)?h-(?:auto|\d|\[|px)/);
     assert(!height, `${file}: control height override ${height?.[0]} (use coss size variants)`);
     for (const [, value] of css.matchAll(/font-size:\s*([\d.]+)rem/g)) assert(typeRem.has(Number(value)), `${file}: font-size ${value}rem`);
     for (const [, prop, values] of css.matchAll(/\b(margin[\w-]*|padding[\w-]*|gap|column-gap|row-gap|grid-template-columns):\s*([^;}]+)/g)) {

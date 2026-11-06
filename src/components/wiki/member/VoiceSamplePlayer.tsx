@@ -11,13 +11,16 @@ import {
   type MediaPlayerInstance,
 } from "@vidstack/react";
 import { Tabs, TabsList, TabsTab } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Loader2,
   AlertCircle,
   Volume2,
   Volume1,
   VolumeX,
+  Play,
+  Pause,
+  ChevronDown,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import "@/styles/wiki-surfaces.css";
@@ -27,45 +30,12 @@ import {
   type VoiceSampleItem,
 } from "@/lib/voice-samples";
 
-function PlayGlyph({
-  className,
-  style,
-}: {
-  className?: string;
-  style?: React.CSSProperties;
-}) {
-  return (
-    <svg
-      viewBox="0 0 16 16"
-      fill="currentColor"
-      aria-hidden="true"
-      className={cn("shrink-0", className)}
-      style={style}
-    >
-      <path d="M4 3.2L12 8L4 12.8Z" />
-    </svg>
-  );
+function PlayGlyph({ className, style }: { className?: string; style?: React.CSSProperties }) {
+  return <Play aria-hidden="true" className={cn("size-4 shrink-0", className)} style={style} />;
 }
 
-function PauseGlyph({
-  className,
-  style,
-}: {
-  className?: string;
-  style?: React.CSSProperties;
-}) {
-  return (
-    <svg
-      viewBox="0 0 16 16"
-      fill="currentColor"
-      aria-hidden="true"
-      className={cn("shrink-0", className)}
-      style={style}
-    >
-      <rect x="3.5" y="3" width="2.75" height="10" rx="0.5" />
-      <rect x="9.75" y="3" width="2.75" height="10" rx="0.5" />
-    </svg>
-  );
+function PauseGlyph({ className, style }: { className?: string; style?: React.CSSProperties }) {
+  return <Pause aria-hidden="true" className={cn("size-4 shrink-0", className)} style={style} />;
 }
 
 interface VoiceSamplePlayerProps {
@@ -290,7 +260,7 @@ export default function VoiceSamplePlayer({
       `}</style>
 
       {/* Section Header with Tabs on same line (Desktop: Left/Right, Mobile: Stacked) */}
-      <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between mb-3.5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-4">
         <h2
           id="voice-samples-heading"
           className="font-heading text-xl font-semibold tracking-tight sm:text-2xl text-foreground !my-0"
@@ -344,7 +314,7 @@ export default function VoiceSamplePlayer({
             )}
           >
             {/* Upper: Player Area (Editorial Title on top, Controls row below) */}
-            <div className="px-5 py-5 sm:px-6 sm:py-5.5">
+            <div className="px-5 py-5 sm:px-6 sm:py-6">
               {/* Title & Member with light fade up on track/set change */}
               <div
                 key={`${activeSetId}:${activeTrackIndex}`}
@@ -353,7 +323,7 @@ export default function VoiceSamplePlayer({
                 <div className="line-clamp-2 text-base sm:text-lg font-medium tracking-tight text-foreground leading-snug">
                   {activeTrack?.title || "未选择音频"}
                 </div>
-                <div className="mt-0.5 text-xs sm:text-sm text-muted-foreground">
+                <div className="mt-1 text-xs sm:text-sm text-muted-foreground">
                   {memberName}
                 </div>
               </div>
@@ -361,11 +331,11 @@ export default function VoiceSamplePlayer({
               {/* Controls Row: Play button + Current Time + Slider + Duration + Volume Control */}
               {error ? (
                 <div className="mt-4 flex items-center gap-2 rounded-lg bg-destructive/8 border border-destructive/15 px-3 py-2 text-xs text-destructive">
-                  <AlertCircle className="size-3.5 shrink-0" />
+                  <AlertCircle aria-hidden="true" className="size-4 shrink-0" />
                   <span>音频加载失败，请选择其他样本</span>
                 </div>
               ) : (
-                <div className="mt-4 flex items-center gap-2.5 sm:gap-3">
+                <div className="mt-4 flex items-center gap-3">
                   {/* Transport Stage Button (Play / Pause / Loading crossfade, fixed size) */}
                   <Button
                     variant="ghost"
@@ -373,7 +343,7 @@ export default function VoiceSamplePlayer({
                     onClick={handlePlayToggle}
                     disabled={Boolean(error) || !activeTrack}
                     aria-label={paused ? "播放" : "暂停"}
-                    className="relative size-9 sm:size-8.5 shrink-0 rounded-full text-foreground hover:bg-accent/60 transition-colors"
+                    className="rounded-full text-foreground hover:bg-accent/60 transition-colors"
                   >
                     <div className="relative size-4">
                       {/* Loader */}
@@ -399,7 +369,7 @@ export default function VoiceSamplePlayer({
                             : "opacity-0 scale-75 -rotate-6 pointer-events-none"
                         )}
                       >
-                        <PlayGlyph className="size-3.5 translate-x-[1px]" />
+                        <PlayGlyph className="size-4 translate-x-[1px]" />
                       </div>
 
                       {/* Pause Glyph */}
@@ -412,7 +382,7 @@ export default function VoiceSamplePlayer({
                             : "opacity-0 scale-75 pointer-events-none"
                         )}
                       >
-                        <PauseGlyph className="size-3" />
+                        <PauseGlyph className="size-4" />
                       </div>
                     </div>
                   </Button>
@@ -433,7 +403,7 @@ export default function VoiceSamplePlayer({
                       aria-labelledby={sliderLabelId}
                     >
                       {/* Track: High contrast resting bar */}
-                      <TimeSlider.Track className="relative h-[3.5px] w-full rounded-full bg-foreground/12 dark:bg-foreground/18 overflow-hidden">
+                      <TimeSlider.Track className="relative h-1 w-full rounded-full bg-foreground/12 dark:bg-foreground/18 overflow-hidden">
                         <TimeSlider.TrackFill
                           className="absolute left-0 top-0 h-full rounded-full bg-foreground/75 dark:bg-foreground/70 will-change-[width] [width:var(--slider-fill,0%)]"
                           style={
@@ -459,10 +429,10 @@ export default function VoiceSamplePlayer({
                   {/* Volume Control Group (Mute Button + compact VolumeSlider on desktop) */}
                   <div className="flex items-center gap-1 shrink-0">
                     <MuteButton
-                      className="group/mute relative flex size-8 sm:size-7.5 shrink-0 items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-accent/60 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset cursor-pointer"
+                      className={cn(buttonVariants({ variant: "ghost", size: "icon-sm" }), "group/mute rounded-full text-muted-foreground hover:text-foreground hover:bg-accent/60 transition-colors")}
                       aria-label={isMuted ? "取消静音" : "静音"}
                     >
-                      <div className="relative size-3.5 sm:size-4">
+                      <div className="relative size-4">
                         {/* Muted Icon (VolumeX) */}
                         <div
                           aria-hidden="true"
@@ -473,7 +443,7 @@ export default function VoiceSamplePlayer({
                               : "opacity-0 scale-85 pointer-events-none"
                           )}
                         >
-                          <VolumeX className="size-3.5 sm:size-4" />
+                          <VolumeX className="size-4" />
                         </div>
 
                         {/* Low Volume Icon (Volume1) */}
@@ -486,7 +456,7 @@ export default function VoiceSamplePlayer({
                               : "opacity-0 scale-85 pointer-events-none"
                           )}
                         >
-                          <Volume1 className="size-3.5 sm:size-4" />
+                          <Volume1 className="size-4" />
                         </div>
 
                         {/* High Volume Icon (Volume2) */}
@@ -499,7 +469,7 @@ export default function VoiceSamplePlayer({
                               : "opacity-0 scale-85 pointer-events-none"
                           )}
                         >
-                          <Volume2 className="size-3.5 sm:size-4" />
+                          <Volume2 className="size-4" />
                         </div>
                       </div>
                     </MuteButton>
@@ -513,7 +483,7 @@ export default function VoiceSamplePlayer({
                         className="group relative flex h-5 sm:h-6 w-16 sm:w-20 cursor-pointer touch-none select-none items-center outline-none"
                         aria-labelledby={volumeLabelId}
                       >
-                        <VolumeSlider.Track className="relative h-[2.5px] w-full rounded-full bg-foreground/12 dark:bg-foreground/18 overflow-hidden">
+                        <VolumeSlider.Track className="relative h-1 w-full rounded-full bg-foreground/12 dark:bg-foreground/18 overflow-hidden">
                           <VolumeSlider.TrackFill
                             className="absolute left-0 top-0 h-full rounded-full bg-foreground/55 dark:bg-foreground/50 will-change-[width] [width:var(--slider-fill,100%)]"
                             style={
@@ -541,16 +511,11 @@ export default function VoiceSamplePlayer({
               onToggle={(e) => setIsPlaylistOpen(e.currentTarget.open)}
               className="group"
             >
-              <summary className="flex cursor-pointer list-none items-center justify-between border-t border-border/40 px-5 py-2.5 sm:px-6 text-xs font-medium text-muted-foreground outline-none transition-colors hover:bg-accent/25 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset [&::-webkit-details-marker]:hidden select-none">
+              <summary className="flex cursor-pointer list-none items-center justify-between border-t border-border/40 px-5 py-3 sm:px-6 text-xs font-medium text-muted-foreground outline-none transition-colors hover:bg-accent/25 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset [&::-webkit-details-marker]:hidden select-none">
                 <span>样本列表</span>
-                <span className="flex items-center gap-1.5 tabular-nums">
+                <span className="flex items-center gap-2 tabular-nums">
                   <span>{samples.length}</span>
-                  <span
-                    aria-hidden="true"
-                    className="disclosure-arrow text-xs transition-transform duration-(--duration-normal,170ms) ease-(--ease-out-subtle) group-open:rotate-180"
-                  >
-                    ⌄
-                  </span>
+                  <ChevronDown aria-hidden="true" className="disclosure-arrow size-4 text-muted-foreground transition-transform duration-(--duration-normal,170ms) ease-(--ease-out-subtle) group-open:rotate-180" />
                 </span>
               </summary>
 
@@ -561,7 +526,7 @@ export default function VoiceSamplePlayer({
                     role="region"
                     aria-label={`${activeSet.label}播放列表`}
                     className={cn(
-                      "animate-voice-fade-up flex flex-col px-3 py-2 sm:px-4 sm:py-2.5",
+                      "animate-voice-fade-up flex flex-col px-3 py-2 sm:px-4 sm:py-3",
                       samples.length > 6 && "max-h-[290px] overflow-y-auto"
                     )}
                   >
@@ -578,13 +543,13 @@ export default function VoiceSamplePlayer({
                           onClick={() => handleTrackClick(idx)}
                           aria-current={isActive ? "true" : undefined}
                           className={cn(
-                            "group relative flex w-full items-center gap-2.5 sm:gap-3 rounded-lg px-2.5 sm:px-3 py-2.5 text-left text-sm transition-colors duration-(--duration-normal,170ms) ease-(--ease-out-subtle) outline-none",
+                            "group relative flex w-full items-center gap-3 rounded-lg px-3 py-3 text-left text-sm transition-colors duration-(--duration-normal,170ms) ease-(--ease-out-subtle) outline-none",
                             "hover:bg-accent/40 focus-visible:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
                             isActive
                               ? "bg-accent/35 font-medium text-foreground"
                               : "text-muted-foreground hover:text-foreground",
                             !isLast && [
-                              "after:pointer-events-none after:absolute after:bottom-0 after:left-10 sm:after:left-11 after:right-2.5 sm:after:right-3 after:h-px",
+                              "after:pointer-events-none after:absolute after:bottom-0 after:left-10 sm:after:left-11 after:right-3 after:h-px",
                               isActive
                                 ? "after:bg-foreground/[0.06] dark:after:bg-foreground/[0.08]"
                                 : "after:bg-foreground/[0.08] dark:after:bg-foreground/[0.10]",
@@ -625,7 +590,7 @@ export default function VoiceSamplePlayer({
                               )}
                             >
                               <PlayGlyph
-                                className="size-3 translate-x-[0.5px]"
+                                className="size-4"
                                 style={accentColorStyle}
                               />
                             </span>
@@ -666,23 +631,6 @@ export default function VoiceSamplePlayer({
             </details>
           </div>
         </div>
-
-        {/* Source Attribution (Weakened, right-aligned) */}
-        {activeSet?.sourceUrl && (
-          <div className="mt-2.5 flex justify-end px-1">
-            <p className="text-[11px] text-muted-foreground/70">
-              来源：
-              <a
-                href={activeSet.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-2 hover:text-foreground transition-colors"
-              >
-                22/7 官方网站
-              </a>
-            </p>
-          </div>
-        )}
       </MediaPlayer>
     </div>
   );

@@ -15,8 +15,8 @@ const coverUrl = cover ? resourceUrl(cover) : undefined;
     {coverUrl ? (
       <img src={coverUrl} alt="" class="h-full w-full object-cover" loading="lazy" decoding="async" />
     ) : (
-      <div class="flex h-full w-full items-center justify-center bg-muted text-muted-foreground/30">
-        <span class="text-2xl font-semibold tracking-wider">CD</span>
+      <div class="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
+        <span class="text-2xl font-semibold tracking-tight">CD</span>
       </div>
     )}
   </div>
@@ -24,8 +24,8 @@ const coverUrl = cover ? resourceUrl(cover) : undefined;
 
 <style>
   .jewel-case {
-    --contact-shadow: 0 1px 2px rgb(0 0 0 / 12%), 0 3px 5px -3px rgb(0 0 0 / 14%);
-    --lift-shadow: 0 2px 3px rgb(0 0 0 / 10%), 0 14px 22px -10px rgb(0 0 0 / 22%);
+    --contact-shadow: 0 1px 2px color-mix(in srgb, var(--foreground) 12%, transparent), 0 3px 5px -3px color-mix(in srgb, var(--foreground) 14%, transparent);
+    --lift-shadow: 0 2px 3px color-mix(in srgb, var(--foreground) 10%, transparent), 0 14px 22px -10px color-mix(in srgb, var(--foreground) 22%, transparent);
     position: relative;
     z-index: 3;
     width: 100%;
@@ -33,7 +33,7 @@ const coverUrl = cover ? resourceUrl(cover) : undefined;
     border: 1px solid color-mix(in srgb, var(--foreground) 19%, transparent);
     border-radius: 3px;
     background: color-mix(in srgb, var(--background) 94%, var(--foreground));
-    box-shadow: var(--contact-shadow), inset 0 0 0 1px rgb(255 255 255 / 65%);
+    box-shadow: var(--contact-shadow), inset 0 0 0 1px color-mix(in srgb, var(--background) 65%, transparent);
     transform-origin: 20% 85%;
     transform: var(--jewel-transform, none);
     transition:
@@ -47,8 +47,8 @@ const coverUrl = cover ? resourceUrl(cover) : undefined;
     content: "";
     position: absolute;
     inset: 1px;
-    border-top: 1px solid rgb(255 255 255 / 85%);
-    border-right: 1px solid rgb(255 255 255 / 65%);
+    border-top: 1px solid color-mix(in srgb, var(--background) 85%, transparent);
+    border-right: 1px solid color-mix(in srgb, var(--background) 65%, transparent);
     border-radius: 2px;
     pointer-events: none;
   }
@@ -59,7 +59,7 @@ const coverUrl = cover ? resourceUrl(cover) : undefined;
     width: 7%;
     border-right: 1px solid color-mix(in srgb, var(--foreground) 22%, transparent);
     background: color-mix(in srgb, var(--foreground) 7%, var(--background));
-    box-shadow: inset 2px 0 0 rgb(255 255 255 / 40%), inset -2px 0 0 rgb(0 0 0 / 4%);
+    box-shadow: inset 2px 0 0 color-mix(in srgb, var(--background) 40%, transparent), inset -2px 0 0 color-mix(in srgb, var(--foreground) 4%, transparent);
   }
 
   .hinge-tab {
@@ -70,7 +70,7 @@ const coverUrl = cover ? resourceUrl(cover) : undefined;
     border: 1px solid color-mix(in srgb, var(--foreground) 17%, transparent);
     border-radius: 1px;
     background: color-mix(in srgb, var(--background) 82%, var(--foreground));
-    box-shadow: inset 0 1px rgb(255 255 255 / 60%);
+    box-shadow: inset 0 1px color-mix(in srgb, var(--background) 60%, transparent);
   }
   .hinge-top { top: 9%; }
   .hinge-bottom { bottom: 9%; }
@@ -105,14 +105,14 @@ const coverUrl = cover ? resourceUrl(cover) : undefined;
   }
 
   :global(.dark) .jewel-case {
-    --contact-shadow: 0 1px 3px rgb(0 0 0 / 45%), 0 3px 6px -3px rgb(0 0 0 / 40%);
-    --lift-shadow: 0 2px 4px rgb(0 0 0 / 40%), 0 16px 26px -9px rgb(0 0 0 / 65%);
+    --contact-shadow: 0 1px 3px color-mix(in srgb, var(--foreground) 45%, transparent), 0 3px 6px -3px color-mix(in srgb, var(--foreground) 40%, transparent);
+    --lift-shadow: 0 2px 4px color-mix(in srgb, var(--foreground) 40%, transparent), 0 16px 26px -9px color-mix(in srgb, var(--foreground) 65%, transparent);
     border-color: color-mix(in srgb, var(--foreground) 24%, transparent);
-    box-shadow: var(--contact-shadow), inset 0 0 0 1px rgb(255 255 255 / 9%);
+    box-shadow: var(--contact-shadow), inset 0 0 0 1px color-mix(in srgb, var(--background) 9%, transparent);
   }
-  :global(.dark) .jewel-case::after { border-color: rgb(255 255 255 / 23%); }
-  :global(.dark) .case-spine { box-shadow: inset 2px 0 rgb(255 255 255 / 10%), inset -2px 0 rgb(0 0 0 / 22%); }
-  :global(.dark) .hinge-tab { box-shadow: inset 0 1px rgb(255 255 255 / 14%); }
+  :global(.dark) .jewel-case::after { border-color: color-mix(in srgb, var(--background) 23%, transparent); }
+  :global(.dark) .case-spine { box-shadow: inset 2px 0 color-mix(in srgb, var(--background) 10%, transparent), inset -2px 0 color-mix(in srgb, var(--foreground) 22%, transparent); }
+  :global(.dark) .hinge-tab { box-shadow: inset 0 1px color-mix(in srgb, var(--background) 14%, transparent); }
   @media (hover: hover) and (pointer: fine) {
     :global(.dark .release-link:hover) .jewel-case { box-shadow: var(--lift-shadow); }
   }

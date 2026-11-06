@@ -50,18 +50,18 @@ const Card = href ? "a" : "div";
               <>
                 <span class="flex min-w-0 flex-col items-center gap-1">
                   <span class="ticket-date-month shrink-0 whitespace-nowrap text-xs leading-4 text-muted-foreground">{date.primary.slice(0, 2)}月</span>
-                  <span class="ticket-date-day shrink-0 whitespace-nowrap text-[clamp(3rem,27cqw,7rem)] leading-[0.9]">{date.primary.slice(-2)}</span>
+                  <span class="ticket-date-day shrink-0 whitespace-nowrap text-4xl leading-[0.9]">{date.primary.slice(-2)}</span>
                 </span>
                 <span aria-hidden="true" class="self-center text-2xl font-normal text-muted-foreground">–</span>
                 <span class="flex min-w-0 flex-col items-center gap-1">
                   <span class="ticket-date-month shrink-0 whitespace-nowrap text-xs leading-4 text-muted-foreground">{summary.endDate.slice(5, 7)}月</span>
-                  <span class="ticket-date-day shrink-0 whitespace-nowrap text-[clamp(3rem,27cqw,7rem)] leading-[0.9]">{summary.endDate.slice(-2)}</span>
+                  <span class="ticket-date-day shrink-0 whitespace-nowrap text-4xl leading-[0.9]">{summary.endDate.slice(-2)}</span>
                 </span>
               </>
             ) : (
               <>
-                <span class="ticket-date-month shrink-0 whitespace-nowrap text-[clamp(1.5rem,12cqw,3rem)] leading-none">{date.primary.slice(0, 2)}月</span>
-                <span class="ticket-date-day shrink-0 whitespace-nowrap text-[clamp(4rem,36cqw,10rem)] leading-[0.85]">{date.primary.slice(-2)}</span>
+                <span class="ticket-date-month shrink-0 whitespace-nowrap text-2xl leading-none">{date.primary.slice(0, 2)}月</span>
+                <span class="ticket-date-day shrink-0 whitespace-nowrap text-4xl leading-[0.85]">{date.primary.slice(-2)}</span>
               </>
             )}
           </time>
@@ -73,21 +73,21 @@ const Card = href ? "a" : "div";
       <p class="flex min-w-0 items-center justify-between gap-2 text-xs text-muted-foreground tabular-nums">
         {posterUrl && (
           <time datetime={summary.startDate} class="min-w-0 truncate" title={date.rangeLabel}>
-            {date.rangeLabel}{date.weekday && <span class="ml-1.5">{date.weekday}</span>}
+            {date.rangeLabel}{date.weekday && <span class="ml-2">{date.weekday}</span>}
           </time>
         )}
         <span class="ml-auto shrink-0 font-medium text-(--wiki-brand)">{liveKindLabel(data.kind)}</span>
       </p>
 
       <div class="min-w-0">
-        <h3 lang="ja" class="line-clamp-2 text-[0.9375rem] font-semibold leading-snug tracking-tight [overflow-wrap:anywhere]" title={data.titleJa}>
+        <h3 lang="ja" class="line-clamp-2 text-base font-semibold leading-snug tracking-tight [overflow-wrap:anywhere]" title={data.titleJa}>
           {data.titleJa}
         </h3>
-        {secondaryTitle && <p lang="zh-CN" class="mt-1 truncate text-xs text-muted-foreground">{secondaryTitle}</p>}
+        {secondaryTitle && <span class="sr-only">{secondaryTitle}</span>}
       </div>
 
-      <p lang="ja" class="flex min-w-0 items-center gap-1.5 text-xs text-muted-foreground">
-        <MapPin aria-hidden="true" className="size-3.5 shrink-0" />
+      <p lang="ja" class="flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
+        <MapPin aria-hidden="true" className="size-4 shrink-0" />
         <span class="min-w-0 flex-1 truncate" title={venueLabel}>{venueLabel}</span>
         {summary.showCount > 1 && <span class="shrink-0 tabular-nums">{summary.showCount}公演</span>}
       </p>

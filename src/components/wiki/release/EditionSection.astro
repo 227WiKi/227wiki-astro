@@ -24,12 +24,12 @@ const anchor = editionAnchor(edition.id);
       {edition.audioDiscs.map((disc, index) => (
         <section aria-labelledby={`${anchor}-disc-${index + 1}`} class="min-w-0">
           <h4 id={`${anchor}-disc-${index + 1}`} class="mb-3 font-heading text-base font-semibold">{disc.label ?? `Disc ${index + 1}`}</h4>
-          <TrackList tracks={disc.tracks} label={`${edition.name} · ${disc.label ?? `Disc ${index + 1}`}`} />
+          <TrackList tracks={disc.tracks} label={`${edition.name} ${disc.label ?? `Disc ${index + 1}`}`} />
         </section>
       ))}
       {edition.bonusMedia?.map((media, index) => (
         <section aria-labelledby={`${anchor}-bonus-${index + 1}`} class="min-w-0 rounded-xl border bg-muted/30 px-4 py-3 text-sm">
-          <h4 id={`${anchor}-bonus-${index + 1}`} class="font-heading text-base font-semibold">{media.medium === "dvd" ? "DVD" : "Blu-ray"}{media.label && ` · ${media.label}`}</h4>
+          <h4 id={`${anchor}-bonus-${index + 1}`} class="font-heading text-base font-semibold">{media.medium === "dvd" ? "DVD" : "Blu-ray"}{media.label && ` ${media.label}`}</h4>
           <ul>{media.items.map((item) => <li>{item}</li>)}</ul>
         </section>
       ))}

@@ -37,7 +37,7 @@ export function FloatingTOCMenu({ headings }: FloatingTOCMenuProps) {
           delay={80}
           closeDelay={160}
           aria-label="展开本页目录"
-          className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-full border bg-popover px-4 py-2.5 text-sm font-medium text-popover-foreground shadow-md outline-none transition-colors duration-(--duration-fast,130ms) ease-(--ease-out-subtle) hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 [&[data-popup-open]]:bg-accent"
+          className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-full border bg-popover px-4 py-3 text-sm font-medium text-popover-foreground shadow-md outline-none transition-colors duration-(--duration-fast,130ms) ease-(--ease-out-subtle) hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 [&[data-popup-open]]:bg-accent"
         >
           <span aria-hidden="true">≡</span> 本页目录
         </MenuTrigger>
@@ -58,7 +58,7 @@ export function FloatingTOCMenu({ headings }: FloatingTOCMenuProps) {
                       actionsRef.current?.close();
                     }}
                     className={cn(
-                      "block w-full cursor-pointer rounded-lg px-3 py-2.5 text-start text-sm [overflow-wrap:anywhere] outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
+                      "block w-full cursor-pointer rounded-lg px-3 py-3 text-start text-sm [overflow-wrap:anywhere] outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
                       depth === 3 && "ps-6 text-muted-foreground",
                     )}
                   >

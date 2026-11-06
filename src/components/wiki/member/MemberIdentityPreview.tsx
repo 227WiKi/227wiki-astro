@@ -32,7 +32,7 @@ export function MemberIdentityPreview({
 
   if (!hasSupplementaryIdentity) {
     return (
-      <div className="flex min-h-9 min-w-0 items-center px-0 py-0.5">
+      <div className="flex min-h-9 min-w-0 items-center px-0 py-1">
         {identityHeader}
       </div>
     );
@@ -46,7 +46,7 @@ export function MemberIdentityPreview({
         render={
           <Button
             aria-label={`查看${primaryName}的姓名详情`}
-            className="h-auto min-h-9 w-full justify-start whitespace-normal border-transparent px-0 py-0.5 text-start hover:bg-accent/60"
+            className="h-auto min-h-9 w-full justify-start whitespace-normal border-transparent px-0 py-1 text-start hover:bg-accent/60"
             type="button"
             variant="ghost"
           />

@@ -54,11 +54,14 @@ const tocItems = [...headings, { slug: "setlist", text: setlistHeading, depth: 2
   <WikiArticleLayout infoboxWidth="wide">
     <Fragment slot="header">
       <Breadcrumbs items={[{ label: "Live", href: "/live/" }, { label: title }]} />
-      <PageHeader eyebrow={`${liveKindLabel(data.kind)}${data.format ? " / Tour" : ""}`} title={title} description={data.titleZh && data.titleZh !== title ? data.titleZh : undefined} />
+      <PageHeader eyebrow={`${liveKindLabel(data.kind)}${data.format ? " / Tour" : ""}`} title={title} />
     </Fragment>
     <LiveInfobox slot="infobox" event={event} />
     <div class="live-detail min-w-0">
-      <WikiArticle><Content /></WikiArticle>
+      <WikiArticle>
+        {data.titleZh && data.titleZh !== title && <p>{data.titleZh}</p>}
+        <Content />
+      </WikiArticle>
       <WikiArticle>
         <section aria-labelledby="setlist">
           <h2 id="setlist" class="sr-only">{setlistHeading}</h2>

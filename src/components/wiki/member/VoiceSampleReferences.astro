@@ -1,0 +1,15 @@
+---
+// Source URLs belong to the page references, not inside the audio controls.
+// Follows docs/ui-rules.md; listed in RULED_FILES in tests/ui-rules.test.mjs.
+import type { VoiceSampleSet } from "@/lib/voice-samples";
+interface Props { sets?: VoiceSampleSet[]; existingContent?: string; }
+const { sets = [], existingContent = "" } = Astro.props;
+const sources = [...new Set(sets.map((set) => set.sourceUrl).filter((url): url is string => Boolean(url)))]
+  .filter((url) => !existingContent.includes(url));
+---
+{sources.length > 0 && <section aria-labelledby="voice-sample-references" class="mt-8">
+  <h2 id="voice-sample-references" class="mb-4 text-xl font-semibold">参考资料与官方链接</h2>
+  <ul class="flex flex-col gap-2">
+    {sources.map((url, index) => <li><a href={url} target="_blank" rel="noopener noreferrer" class="rounded-sm underline underline-offset-4">{sources.length === 1 ? "音频来源" : `音频来源 ${index + 1}`}</a></li>)}
+  </ul>
+</section>}

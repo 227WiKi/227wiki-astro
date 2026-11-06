@@ -92,11 +92,18 @@ export function MemberPhotoViewer({ name, photos }: MemberPhotoViewerProps) {
   }));
 
   const photoTrigger = (
-    <button
+    <a
+      href={selected.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-member-photo-link=""
       aria-label={`放大查看 ${imageAlt}`}
       className="group relative block h-auto w-full overflow-hidden rounded-[var(--wiki-media-radius,var(--radius-sm))] border border-border/60 bg-transparent p-0 text-start outline-none transition-[border-color,opacity] duration-150 hover:border-foreground/30 hover:opacity-95 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none"
-      onClick={() => setLightboxOpen(true)}
-      type="button"
+      onClick={(event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        setLightboxOpen(true);
+      }}
     >
       <img
         alt={imageAlt}
@@ -108,11 +115,11 @@ export function MemberPhotoViewer({ name, photos }: MemberPhotoViewerProps) {
       />
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute right-2 bottom-2 grid size-8 place-items-center rounded-lg bg-black/45 text-white opacity-80 shadow-sm backdrop-blur-sm transition-opacity duration-150 group-hover:opacity-100 motion-reduce:transition-none"
+        className="pointer-events-none absolute right-2 bottom-2 grid size-8 place-items-center rounded-lg border bg-popover text-popover-foreground opacity-80 shadow-xs transition-opacity duration-150 group-hover:opacity-100 motion-reduce:transition-none"
       >
         <ZoomIn className="size-4" />
       </span>
-    </button>
+    </a>
   );
 
   return (
@@ -158,6 +165,14 @@ export function MemberPhotoViewer({ name, photos }: MemberPhotoViewerProps) {
                   <TabsTab
                     className="rounded-none bg-transparent data-active:font-semibold"
                     key={photo.id}
+                    nativeButton={false}
+                    render={<a href={photo.url} target="_blank" rel="noopener noreferrer" data-member-photo-version="" />}
+                    onClick={(event) => {
+                      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                      // Before hydration this remains an ordinary full-image link.
+                      event.preventDefault();
+                      setSelectedId(photo.id);
+                    }}
                     style={{ backgroundColor: "transparent" }}
                     value={photo.id}
                   >

@@ -1,12 +1,13 @@
 ---
 import { githubUrl, navigationGroups, siteName } from "@/config/site";
 import { DesktopNav, MobileNav } from "./HeaderNav";
+import StaticHeaderNav from "./StaticHeaderNav.astro";
 
 const currentPath = Astro.url.pathname;
 ---
 
 <header class="sticky top-0 z-40 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-  <div class="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+  <div class="relative mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
     <a
       href="/"
       class="shrink-0 rounded-md font-heading text-lg font-semibold tracking-tight text-(--wiki-brand) outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -16,7 +17,7 @@ const currentPath = Astro.url.pathname;
       {siteName}
     </a>
 
-    <div class="hidden min-w-0 flex-1 items-center justify-end gap-2 md:flex">
+    <div id="site-nav-desktop" class="hidden min-w-0 flex-1 items-center justify-end gap-2 md:flex">
       <DesktopNav client:load groups={navigationGroups} currentPath={currentPath} />
 
       <a
@@ -29,6 +30,12 @@ const currentPath = Astro.url.pathname;
       </a>
     </div>
 
-    <MobileNav client:load groups={navigationGroups} currentPath={currentPath} githubUrl={githubUrl} />
+    <div id="site-nav-mobile">
+      <MobileNav client:load groups={navigationGroups} currentPath={currentPath} githubUrl={githubUrl} />
+    </div>
+    <noscript>
+      <style is:inline>#site-nav-desktop, #site-nav-mobile { display: none !important; }</style>
+      <StaticHeaderNav />
+    </noscript>
   </div>
 </header>
