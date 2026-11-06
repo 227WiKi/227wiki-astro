@@ -3,12 +3,14 @@
 interface Props {
   eyebrow?: string;
   title: string;
+  /** Set when the title is not Chinese, e.g. "ja" for a Japanese original title. */
+  lang?: string;
 }
 
-const { eyebrow, title } = Astro.props;
+const { eyebrow, title, lang } = Astro.props;
 ---
 
 <header class="flex max-w-3xl flex-col gap-2">
   {eyebrow && <p class="text-sm font-medium text-(--wiki-brand)">{eyebrow}</p>}
-  <h1 class="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h1>
+  <h1 class="font-heading text-3xl font-semibold tracking-tight sm:text-4xl" lang={lang}>{title}</h1>
 </header>

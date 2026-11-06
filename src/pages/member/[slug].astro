@@ -27,14 +27,14 @@ export async function getStaticPaths() {
 }
 
 const { member } = Astro.props;
-const displayName = member.data.nameZh ?? member.data.nameJa;
+const displayName = member.data.nameJa;
 const primaryName = member.data.nameJa;
 const { Content, headings } = await render(member);
 const siblings = await getCollection("members");
 const contextItems = siblings
   .sort((a, b) => (a.data.nameZh ?? a.data.nameJa).localeCompare(b.data.nameZh ?? b.data.nameJa, "zh-CN"))
   .map((entry) => ({
-    label: entry.data.nameZh ?? entry.data.nameJa,
+    label: entry.data.nameJa,
     href: `/member/${entry.id}/`,
     current: entry.id === member.id,
   }));

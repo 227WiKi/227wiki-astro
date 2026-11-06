@@ -8,13 +8,13 @@ import { releaseLabel } from "@/lib/releases";
 
 interface Props { release: CollectionEntry<"releases">; }
 const { data } = Astro.props.release;
-const title = data.titleZh ?? data.titleJa;
+const title = data.titleJa;
 ---
 
 <Infobox label={`${title}发行资料`}>
   {data.cover && <div class="wiki-inset-media"><img src={resourceUrl(data.cover)} alt={title} width="320" height="320" decoding="async" class="aspect-square w-full rounded-[var(--wiki-media-radius)] object-cover" /></div>}
   <MetadataList>
-    {data.titleZh && data.titleZh !== data.titleJa && <MetadataRow label="原题">{data.titleJa}</MetadataRow>}
+    {data.titleZh && data.titleZh !== data.titleJa && <MetadataRow label="中文名">{data.titleZh}</MetadataRow>}
     <MetadataRow label="类型">{data.releaseType === "single" ? "单曲" : "专辑"}</MetadataRow>
     <MetadataRow label="序号">{releaseLabel(data)}</MetadataRow>
     <MetadataRow label="发行日"><time datetime={data.releaseDate}>{data.releaseDate}</time></MetadataRow>

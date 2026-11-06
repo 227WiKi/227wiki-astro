@@ -25,11 +25,11 @@ const hasDuration = tracks.some(({ duration }) => Boolean(duration));
           <th scope="row" class="px-3 py-3 text-left font-normal tabular-nums text-muted-foreground">{track.number}</th>
           <td class="px-3 py-3 [overflow-wrap:anywhere]">
             {track.song ? (
-              <a href={`/discography/songs/${track.song}/`} class:list={["block rounded-sm", track.variant === "off-vocal" ? "font-normal" : "font-medium"]}>{track.titleZh ?? track.titleJa}</a>
+              <a href={`/discography/songs/${track.song}/`} class:list={["block rounded-sm", track.variant === "off-vocal" ? "font-normal" : "font-medium"]} lang="ja">{track.titleJa}</a>
             ) : (
-              <span class:list={["block", track.variant === "off-vocal" ? "text-muted-foreground" : "font-medium"]}>{track.titleZh ?? track.titleJa}</span>
+              <span class:list={["block", track.variant === "off-vocal" ? "text-muted-foreground" : "font-medium"]} lang="ja">{track.titleJa}</span>
             )}
-            {track.titleZh && <span class="mt-1 block text-xs text-muted-foreground">{track.titleJa}</span>}
+            {track.titleZh && track.titleZh !== track.titleJa && <span class="mt-1 block text-xs text-muted-foreground">{track.titleZh}</span>}
           </td>
           {hasDuration && <td class="px-3 py-3 text-right whitespace-nowrap tabular-nums text-muted-foreground">{track.duration}</td>}
         </tr>

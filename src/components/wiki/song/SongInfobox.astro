@@ -6,14 +6,14 @@ import MetadataRow from "@/components/wiki/common/MetadataRow.astro";
 
 interface Props { song: CollectionEntry<"songs">; }
 const { data } = Astro.props.song;
-const title = data.titleZh ?? data.titleJa;
+const title = data.titleJa;
 const hasFacts = Boolean(data.titleZh && data.titleZh !== data.titleJa || data.duration || data.credits?.lyricists.length || data.credits?.composers.length || data.credits?.arrangers.length);
 ---
 
 <Infobox label={`${title}歌曲资料`}>
   {hasFacts && (
     <MetadataList>
-      {data.titleZh && data.titleZh !== data.titleJa && <MetadataRow label="原题">{data.titleJa}</MetadataRow>}
+      {data.titleZh && data.titleZh !== data.titleJa && <MetadataRow label="中文名">{data.titleZh}</MetadataRow>}
       {data.duration && <MetadataRow label="时长">{data.duration}</MetadataRow>}
       {Boolean(data.credits?.lyricists.length) && <MetadataRow label="作词">{data.credits?.lyricists.join("、")}</MetadataRow>}
       {Boolean(data.credits?.composers.length) && <MetadataRow label="作曲">{data.credits?.composers.join("、")}</MetadataRow>}

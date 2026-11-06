@@ -27,7 +27,7 @@ export async function getStaticPaths() {
 
 const { song } = Astro.props;
 const { data } = song;
-const title = data.titleZh ?? data.titleJa;
+const title = data.titleJa;
 const { Content, headings } = await render(song);
 const allReleases = await getCollection("releases");
 // A short window around this song plus a link to the Song Index, never every song.
@@ -50,7 +50,7 @@ const tocItems = [
     <ContextNav slot="context" title="歌曲" collapsedLabel="其他歌曲" items={contextItems} />
     <Fragment slot="header">
       <Breadcrumbs items={[{ label: "Discography", href: "/discography/" }, { label: "歌曲", href: "/discography/songs/" }, { label: title }]} />
-      <PageHeader eyebrow="Song" title={title} />
+      <PageHeader eyebrow="Song" title={title} lang="ja" />
     </Fragment>
     <SongInfobox slot="infobox" song={song} />
     <WikiArticle>

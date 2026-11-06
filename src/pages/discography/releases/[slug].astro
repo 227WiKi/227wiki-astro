@@ -22,13 +22,13 @@ export async function getStaticPaths() {
 
 const { release } = Astro.props;
 const { data } = release;
-const title = data.titleZh ?? data.titleJa;
+const title = data.titleJa;
 const { Content, headings } = await render(release);
 const siblings = await getCollection("releases");
 const contextItems = siblings
   .sort((a, b) => a.data.releaseDate.localeCompare(b.data.releaseDate))
   .map((entry) => ({
-    label: `${releaseLabel(entry.data)} · ${entry.data.titleZh ?? entry.data.titleJa}`,
+    label: `${releaseLabel(entry.data)} · ${entry.data.titleJa}`,
     href: `/discography/releases/${entry.id}/`,
     current: entry.id === release.id,
   }));
@@ -44,7 +44,7 @@ const tocItems = [
     <ContextNav slot="context" title="Discography" collapsedLabel="其他发行作品" items={contextItems} />
     <Fragment slot="header">
       <Breadcrumbs items={[{ label: "Discography", href: "/discography/" }, { label: title }]} />
-      <PageHeader eyebrow={releaseLabel(data)} title={title} />
+      <PageHeader eyebrow={releaseLabel(data)} title={title} lang="ja" />
     </Fragment>
     <ReleaseInfobox slot="infobox" release={release} />
     <WikiArticle>
