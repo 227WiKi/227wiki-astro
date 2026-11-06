@@ -206,7 +206,7 @@ const readCollection = (dir) => {
   }));
 };
 
-test("production songs keep their IDs, Release and Live links, and stay unclassified", () => {
+test("production songs keep their IDs, Release and Live links, and verified classification", () => {
   const songs = readCollection("src/content/songs");
   const releases = readCollection("src/content/releases");
   const events = readCollection("src/content/live-events");
@@ -217,7 +217,9 @@ test("production songs keep their IDs, Release and Live links, and stay unclassi
   const real = buildSongIndex(songs, releases);
   assert.deepEqual(real.map(({ id, href }) => [id, href]).sort(), songs.map(({ id }) => [id, `/discography/songs/${id}/`]).sort());
   for (const entry of real) {
-    assert.deepEqual(entry.categories, [], `${entry.id} has no category data yet`);
+    assert.deepEqual(entry.categories, ["original"], `${entry.id} is a verified original group recording`);
+    assert.equal(entry.versions[0].formation, "group");
+    assert.equal(entry.versions[0].persona, "member");
     assert.equal(entry.versions.length, 1, `${entry.id}: off-vocal tracks are not Versions`);
     assert.equal(entry.firstRelease?.releaseId, "1st-single");
   }
