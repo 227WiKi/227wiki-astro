@@ -3,6 +3,7 @@ import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 import { liveShows, livePerformer, liveReference } from "./lib/live-schema";
 import { checkSongClassification, songCoverOf, songOrigin, songVersions } from "./lib/song-schema";
+import { songLyricsSchema } from "./lib/song-lyrics";
 
 const memberPhotoPath = z.string().min(1).regex(
   /^(?!\/)(?![a-z][a-z0-9+.-]*:)(?!.*(?:^|\/)\.\.(?:\/|$))[^\\?#]+$/i,
@@ -184,12 +185,18 @@ const songs = defineCollection({
     videos: z.array(externalLink.extend({
       type: z.enum(["music-video", "lyric-video", "live", "other"]),
     })).default([]),
+    references: z.array(z.object({ label: z.string().trim().min(1), url: z.url().regex(/^https?:\/\//) })).default([]),
     // Classification and Versions are optional: absent data means no category,
     // with one implicit Version, never a guessed Group Song.
     origin: songOrigin.optional(),
     coverOf: songCoverOf.optional(),
     versions: songVersions.optional(),
   }).superRefine(checkSongClassification),
+});
+
+const songLyrics = defineCollection({
+  loader: glob({ base: "./src/content/song-lyrics", pattern: "**/*.md" }),
+  schema: songLyricsSchema,
 });
 
 const liveEvents = defineCollection({
@@ -208,4 +215,4 @@ const liveEvents = defineCollection({
   }),
 });
 
-export const collections = { members, releases, songs, liveEvents };
+export const collections = { members, releases, songs, songLyrics, liveEvents };

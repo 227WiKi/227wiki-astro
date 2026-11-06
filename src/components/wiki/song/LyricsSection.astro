@@ -1,14 +1,31 @@
 ---
+import { render, type CollectionEntry } from "astro:content";
+interface Props { entries?: CollectionEntry<"songLyrics">[]; }
+const { entries = [] } = Astro.props;
+const texts = await Promise.all([...entries].sort((a, b) => a.data.language.localeCompare(b.data.language)).map(async (entry) => ({
+  ...entry, Content: entry.data.status === "available" ? (await render(entry)).Content : undefined,
+})));
 const hasContent = ["japanese", "translation", "notes"].some((name) => Astro.slots.has(name));
 ---
 
 <section aria-labelledby="lyrics">
   <h2 id="lyrics">歌词</h2>
-  {hasContent ? (
+  {texts.length > 0 ? texts.map(({ data, Content }) => (
+    <section aria-label={data.language === "ja" ? "日本語" : "中文翻译"}>
+      <h3>{data.language === "ja" ? "日本語" : "中文翻译"}</h3>
+      {Content ? <div lang={data.language} class="lyrics-text"><Content /></div> : (
+        <p>全文暂未收录。<a href="#song-references">查看来源与署名</a></p>
+      )}
+    </section>
+  )) : hasContent ? (
     <>
       {Astro.slots.has("japanese") && <section aria-label="日本語"><h3>日本語</h3><slot name="japanese" /></section>}
       {Astro.slots.has("translation") && <section aria-label="中文翻译"><h3>中文翻译</h3><slot name="translation" /></section>}
       {Astro.slots.has("notes") && <section aria-label="注释"><h3>注释</h3><slot name="notes" /></section>}
     </>
-  ) : <p class="text-sm text-muted-foreground">完整歌词暂未收录。</p>}
+  ) : <p class="text-sm text-muted-foreground">完整歌词暂未收录。<a href="/discography/">浏览收录作品</a></p>}
 </section>
+
+<style>
+  .lyrics-text :global(p) { white-space: pre-line; }
+</style>

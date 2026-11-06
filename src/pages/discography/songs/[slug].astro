@@ -16,11 +16,13 @@ import SongLiveHistory from "@/components/wiki/song/SongLiveHistory.astro";
 import { assertSongPerformerReferences, assertSongReferences, getLiveAppearancesForSong, releasesForSong } from "@/lib/songs";
 import { buildSongIndex, songContextItems } from "@/lib/song-index";
 import { songInfoboxFacts } from "@/lib/song-infobox";
+import { assertSongLyrics } from "@/lib/song-lyrics";
 
 interface Props { song: CollectionEntry<"songs">; }
 
 export async function getStaticPaths() {
   const songs = await getCollection("songs");
+  assertSongLyrics(await getCollection("songLyrics"), songs);
   assertSongReferences(await getCollection("releases"), songs);
   assertSongPerformerReferences(songs, await getCollection("members"));
   return songs.map((song) => ({ params: { slug: song.id }, props: { song } }));
@@ -30,6 +32,7 @@ const { song } = Astro.props;
 const { data } = song;
 const title = data.titleJa;
 const { Content, headings } = await render(song);
+const lyrics = (await getCollection("songLyrics")).filter(({ data }) => data.song === song.id);
 const allReleases = await getCollection("releases");
 // A short window around this song plus a link to the Song Index, never every song.
 const indexEntries = buildSongIndex(await getCollection("songs"), allReleases);
@@ -45,6 +48,7 @@ const tocItems = [
   { slug: "lyrics", text: "歌词", depth: 2 },
   { slug: "releases", text: "收录作品", depth: 2 },
   ...(appearances.length > 0 ? [{ slug: "live-history", text: "Live 演出历史", depth: 2 }] : []),
+  ...(lyrics.length > 0 || data.references.length > 0 ? [{ slug: "song-references", text: "参考资料与官方链接", depth: 2 }] : []),
 ];
 ---
 
@@ -60,9 +64,17 @@ const tocItems = [
       <Content />
       <ListeningLinks links={data.listeningLinks} songTitle={title} />
       <SongVideos videos={data.videos} />
-      <LyricsSection />
+      <LyricsSection entries={lyrics} />
       <SongReleaseList releases={releases} />
       <SongLiveHistory appearances={appearances} />
+      {(lyrics.length > 0 || data.references.length > 0) && <section aria-labelledby="song-references">
+        <h2 id="song-references">参考资料与官方链接</h2>
+        <ul>{data.references.map((reference) => <li><a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.label}</a></li>)}</ul>
+        <ul>{lyrics.map(({ data }) => <li>
+          <a href={data.sourceUrl} target="_blank" rel="noopener noreferrer">{data.sourceLabel}</a>
+          <p>{data.attribution}</p>
+        </li>)}</ul>
+      </section>}
     </WikiArticle>
     <FloatingTOC slot="toc" headings={tocItems} />
   </WikiArticleLayout>
