@@ -5,6 +5,8 @@ import fs from "node:fs";
 
 /** Files covered by source checks; inherited styles and rendered layout still need review. */
 export const RULED_FILES = [
+  "src/components/wiki/song/ListeningLinks.astro",
+  "src/pages/lab/listening/[scenario].astro",
   "src/components/wiki/common/SectionCard.astro",
   "src/components/wiki/release/ReleaseInfobox.astro",
   "src/components/wiki/song/SongInfobox.astro",

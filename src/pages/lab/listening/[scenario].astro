@@ -1,0 +1,22 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import WikiArticle from "@/components/wiki/WikiArticle.astro";
+import ListeningLinks from "@/components/wiki/song/ListeningLinks.astro";
+import { listeningFixtures } from "../../../../tests/fixtures/listening";
+
+// Isolated fixtures are available to the dev server only, never generated for production.
+export function getStaticPaths() {
+  return import.meta.env.DEV ? Object.keys(listeningFixtures).map((scenario) => ({ params: { scenario } })) : [];
+}
+const scenario = Astro.params.scenario!;
+---
+<BaseLayout title="试听组件测试" description="试听组件的隔离测试页面。" noindex>
+  <div class="mx-auto max-w-2xl">
+    <h1 class="text-2xl font-semibold">试听组件测试</h1>
+    <p class="my-4">以下为隔离的公开测试内容，不代表 Wiki 歌曲的平台映射。</p>
+    <WikiArticle>
+      <ListeningLinks links={listeningFixtures[scenario]} songTitle="公开测试内容" />
+    </WikiArticle>
+    <a href={scenario === "both" ? "/lab/listening/spotify/" : "/lab/listening/both/"} class="mt-6 inline-block underline">切换测试</a>
+  </div>
+</BaseLayout>

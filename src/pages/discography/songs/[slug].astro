@@ -53,7 +53,7 @@ const tocItems = [
     <SongInfobox slot="infobox" song={song} />
     <WikiArticle>
       <Content />
-      <ListeningLinks links={data.listeningLinks} />
+      <ListeningLinks links={data.listeningLinks} songTitle={title} />
       <SongVideos videos={data.videos} />
       <LyricsSection />
       <SongReleaseList releases={releases} />

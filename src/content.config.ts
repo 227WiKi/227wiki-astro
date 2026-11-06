@@ -175,7 +175,8 @@ const songs = defineCollection({
       composers: z.array(z.string().min(1)).default([]),
       arrangers: z.array(z.string().min(1)).default([]),
     }).optional(),
-    listeningLinks: z.array(externalLink).default([]),
+    // URL strings only; the player helper independently whitelists official embed origins and paths.
+    listeningLinks: z.array(externalLink.extend({ embedUrl: z.string().trim().min(1).optional() })).default([]),
     videos: z.array(externalLink.extend({
       type: z.enum(["music-video", "lyric-video", "live", "other"]),
     })).default([]),
