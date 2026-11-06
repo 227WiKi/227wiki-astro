@@ -1,23 +1,71 @@
 ---
+// Song facts: Release facts come from the Song Index entry (one first-release rule
+// for the index and this box); performer facts are the first Version's only.
+// Follows docs/ui-rules.md; listed in RULED_FILES in tests/ui-rules.test.mjs.
 import type { CollectionEntry } from "astro:content";
 import Infobox from "@/components/wiki/article/Infobox.astro";
 import MetadataList from "@/components/wiki/common/MetadataList.astro";
 import MetadataRow from "@/components/wiki/common/MetadataRow.astro";
+import { resourceUrl } from "@/lib/assets";
+import type { SongInfoboxFacts } from "@/lib/song-infobox";
 
-interface Props { song: CollectionEntry<"songs">; }
-const { data } = Astro.props.song;
-const title = data.titleJa;
-const hasFacts = Boolean(data.titleZh && data.titleZh !== data.titleJa || data.duration || data.credits?.lyricists.length || data.credits?.composers.length || data.credits?.arrangers.length);
+interface Props { song: CollectionEntry<"songs">; facts: SongInfoboxFacts; }
+const { song: { data }, facts } = Astro.props;
+const { version } = facts;
+const prefix = version?.name ?? "";
+const credits = [
+  ["作词", data.credits?.lyricists],
+  ["作曲", data.credits?.composers],
+  ["编曲", data.credits?.arrangers],
+] as const;
+const hasCredits = credits.some(([, names]) => names?.length);
+const hasBasics = Boolean(data.titleZh && data.titleZh !== data.titleJa || data.duration || facts.firstRelease || facts.kind || facts.coverOf || version || facts.versionNames.length);
 ---
 
-<Infobox label={`${title}歌曲资料`}>
-  {hasFacts && (
+<Infobox label={`${data.titleJa}歌曲资料`}>
+  {facts.cover && (
+    <a href={facts.cover.href} class="song-infobox-cover wiki-inset-media block rounded-[var(--wiki-media-radius)]">
+      <img src={resourceUrl(facts.cover.path)} alt={facts.cover.alt} width="320" height="320" decoding="async" class="aspect-square w-full rounded-[var(--wiki-media-radius)] object-cover" />
+    </a>
+  )}
+  {hasBasics && (
     <MetadataList>
       {data.titleZh && data.titleZh !== data.titleJa && <MetadataRow label="中文名">{data.titleZh}</MetadataRow>}
-      {data.duration && <MetadataRow label="时长">{data.duration}</MetadataRow>}
-      {Boolean(data.credits?.lyricists.length) && <MetadataRow label="作词">{data.credits?.lyricists.join("、")}</MetadataRow>}
-      {Boolean(data.credits?.composers.length) && <MetadataRow label="作曲">{data.credits?.composers.join("、")}</MetadataRow>}
-      {Boolean(data.credits?.arrangers.length) && <MetadataRow label="编曲">{data.credits?.arrangers.join("、")}</MetadataRow>}
+      {facts.kind && <MetadataRow label="类型">{facts.kind}</MetadataRow>}
+      {facts.versionNames.length > 0 && <MetadataRow label="录音版本">{facts.versionNames.join("、")}</MetadataRow>}
+      {version?.subCategories && <MetadataRow label={prefix ? `${prefix}类别` : "歌曲类别"}>{version.subCategories}</MetadataRow>}
+      {(version?.unit || version?.performers.length) && (
+        <MetadataRow label={`${prefix}演唱`}>
+          {version.unit && <span class="block" lang="ja">{version.unit}</span>}
+          {version.performers.length > 0 && (
+            <ul class:list={["song-infobox-performers flex flex-wrap gap-x-2", version.unit && "font-normal text-muted-foreground"]}>
+              {version.performers.map((performer) => (
+                <li lang="ja">{performer.href ? <a href={performer.href} class="song-infobox-link">{performer.name}</a> : performer.name}</li>
+              ))}
+            </ul>
+          )}
+        </MetadataRow>
+      )}
+      {facts.coverOf && <MetadataRow label="原曲">{facts.coverOf}</MetadataRow>}
+      {data.duration && <MetadataRow label="时长"><span class="tabular-nums">{data.duration}</span></MetadataRow>}
+      {facts.firstRelease && (
+        <>
+          <MetadataRow label="首次发行"><time datetime={facts.firstRelease.date} class="tabular-nums">{facts.firstRelease.dateText}</time></MetadataRow>
+          <MetadataRow label="首发收录"><a href={facts.firstRelease.href} class="song-infobox-link" lang="ja">{facts.firstRelease.text}</a></MetadataRow>
+        </>
+      )}
+    </MetadataList>
+  )}
+  {hasCredits && (
+    <MetadataList>
+      {credits.map(([label, names]) => names?.length ? <MetadataRow label={label}>{names.join("、")}</MetadataRow> : null)}
     </MetadataList>
   )}
 </Infobox>
+
+<style>
+  .song-infobox-performers { margin: 0; padding: 0; list-style: none; }
+  .song-infobox-link { color: var(--wiki-brand); text-decoration: none; }
+  .song-infobox-link:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+  :is(.song-infobox-link, .song-infobox-cover):focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: var(--radius-sm); }
+</style>

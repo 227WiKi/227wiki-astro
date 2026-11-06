@@ -15,6 +15,7 @@ import SongReleaseList from "@/components/wiki/song/SongReleaseList.astro";
 import SongLiveHistory from "@/components/wiki/song/SongLiveHistory.astro";
 import { assertSongPerformerReferences, assertSongReferences, getLiveAppearancesForSong, releasesForSong } from "@/lib/songs";
 import { buildSongIndex, songContextItems } from "@/lib/song-index";
+import { songInfoboxFacts } from "@/lib/song-infobox";
 
 interface Props { song: CollectionEntry<"songs">; }
 
@@ -33,6 +34,8 @@ const allReleases = await getCollection("releases");
 // A short window around this song plus a link to the Song Index, never every song.
 const indexEntries = buildSongIndex(await getCollection("songs"), allReleases);
 const contextItems = songContextItems(indexEntries, song.id);
+// Same entry as the Song Index, so both show the same first release.
+const infoboxFacts = songInfoboxFacts(indexEntries.find(({ id }) => id === song.id)!, allReleases, new Set((await getCollection("members")).map(({ id }) => id)));
 const releases = releasesForSong(allReleases, song.id);
 const appearances = getLiveAppearancesForSong(await getCollection("liveEvents"), song.id);
 const tocItems = [
@@ -52,7 +55,7 @@ const tocItems = [
       <Breadcrumbs items={[{ label: "Discography", href: "/discography/" }, { label: "歌曲", href: "/discography/songs/" }, { label: title }]} />
       <PageHeader eyebrow="Song" title={title} lang="ja" />
     </Fragment>
-    <SongInfobox slot="infobox" song={song} />
+    <SongInfobox slot="infobox" song={song} facts={infoboxFacts} />
     <WikiArticle>
       <Content />
       <ListeningLinks links={data.listeningLinks} songTitle={title} />
