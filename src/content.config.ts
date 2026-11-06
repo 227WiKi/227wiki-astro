@@ -2,6 +2,7 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 import { liveShows, livePerformer, liveReference } from "./lib/live-schema";
+import { checkSongClassification, songCoverOf, songOrigin, songVersions } from "./lib/song-schema";
 
 const memberPhotoPath = z.string().min(1).regex(
   /^(?!\/)(?![a-z][a-z0-9+.-]*:)(?!.*(?:^|\/)\.\.(?:\/|$))[^\\?#]+$/i,
@@ -116,8 +117,11 @@ const releaseTrack = z.object({
   titleJa: z.string().min(1),
   titleZh: z.string().min(1).optional(),
   duration: z.string().regex(/^\d{1,2}:[0-5]\d$/, "duration must be mm:ss").optional(),
+  // A property of this track, e.g. the instrumental of a vocal recording; never a Song Version.
   variant: z.literal("off-vocal").optional(),
-});
+  // A Version ID declared on `song`; tracks without it belong to the Song's first Version.
+  version: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).optional(),
+}).refine((track) => !track.version || track.song, { path: ["version"], message: "version requires song" });
 
 const audioDisc = z.object({
   label: z.string().min(1).optional(),
@@ -180,7 +184,12 @@ const songs = defineCollection({
     videos: z.array(externalLink.extend({
       type: z.enum(["music-video", "lyric-video", "live", "other"]),
     })).default([]),
-  }),
+    // Classification and Versions are optional: absent data means no category,
+    // with one implicit Version, never a guessed Group Song.
+    origin: songOrigin.optional(),
+    coverOf: songCoverOf.optional(),
+    versions: songVersions.optional(),
+  }).superRefine(checkSongClassification),
 });
 
 const liveEvents = defineCollection({

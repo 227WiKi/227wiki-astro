@@ -13,13 +13,15 @@ import SongVideos from "@/components/wiki/song/SongVideos.astro";
 import LyricsSection from "@/components/wiki/song/LyricsSection.astro";
 import SongReleaseList from "@/components/wiki/song/SongReleaseList.astro";
 import SongLiveHistory from "@/components/wiki/song/SongLiveHistory.astro";
-import { assertSongReferences, getLiveAppearancesForSong, releasesForSong } from "@/lib/songs";
+import { assertSongPerformerReferences, assertSongReferences, getLiveAppearancesForSong, releasesForSong } from "@/lib/songs";
+import { buildSongIndex, songContextItems } from "@/lib/song-index";
 
 interface Props { song: CollectionEntry<"songs">; }
 
 export async function getStaticPaths() {
   const songs = await getCollection("songs");
   assertSongReferences(await getCollection("releases"), songs);
+  assertSongPerformerReferences(songs, await getCollection("members"));
   return songs.map((song) => ({ params: { slug: song.id }, props: { song } }));
 }
 
@@ -27,11 +29,11 @@ const { song } = Astro.props;
 const { data } = song;
 const title = data.titleZh ?? data.titleJa;
 const { Content, headings } = await render(song);
-const songs = await getCollection("songs");
-const contextItems = songs
-  .sort((a, b) => (a.data.titleZh ?? a.data.titleJa).localeCompare(b.data.titleZh ?? b.data.titleJa, "zh-CN"))
-  .map((entry) => ({ label: entry.data.titleZh ?? entry.data.titleJa, href: `/discography/songs/${entry.id}/`, current: entry.id === song.id }));
-const releases = releasesForSong(await getCollection("releases"), song.id);
+const allReleases = await getCollection("releases");
+// A short window around this song plus a link to the Song Index, never every song.
+const indexEntries = buildSongIndex(await getCollection("songs"), allReleases);
+const contextItems = songContextItems(indexEntries, song.id);
+const releases = releasesForSong(allReleases, song.id);
 const appearances = getLiveAppearancesForSong(await getCollection("liveEvents"), song.id);
 const tocItems = [
   ...headings,
@@ -47,7 +49,7 @@ const tocItems = [
   <WikiArticleLayout>
     <ContextNav slot="context" title="歌曲" collapsedLabel="其他歌曲" items={contextItems} />
     <Fragment slot="header">
-      <Breadcrumbs items={[{ label: "Discography", href: "/discography/" }, { label: title }]} />
+      <Breadcrumbs items={[{ label: "Discography", href: "/discography/" }, { label: "歌曲", href: "/discography/songs/" }, { label: title }]} />
       <PageHeader eyebrow="Song" title={title} />
     </Fragment>
     <SongInfobox slot="infobox" song={song} />

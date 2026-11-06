@@ -1,0 +1,177 @@
+---
+// Song Index: every row is server-rendered in default order and works without JS.
+// The script only adds search, category filters, sort and URL state, using the same
+// functions as the build (src/lib/song-index.ts) over a small JSON key list.
+// Follows docs/ui-rules.md; listed in RULED_FILES in tests/ui-rules.test.mjs.
+import { buttonVariants } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { songKindOptions, songSortOptions, songSubCategoryOptions, toSongIndexKey, type SongIndexEntry } from "@/lib/song-index";
+import { cn } from "@/lib/utils";
+import SongIndexItem from "./SongIndexItem.astro";
+
+interface Props { entries: readonly SongIndexEntry[]; }
+const { entries } = Astro.props;
+const keys = JSON.stringify(entries.map(toSongIndexKey));
+const chipClass = cn(
+  buttonVariants({ variant: "outline", size: "sm" }),
+  "cursor-pointer font-normal has-checked:border-primary has-checked:bg-primary has-checked:text-primary-foreground dark:has-checked:bg-primary dark:has-checked:hover:bg-primary has-focus-visible:ring-2 has-focus-visible:ring-ring has-focus-visible:ring-offset-1 has-focus-visible:ring-offset-background",
+);
+---
+
+{entries.length > 0 ? (
+  <div class="song-index flex min-w-0 flex-col gap-4" data-song-index>
+    <script is:inline type="application/json" data-song-index-keys set:html={keys} />
+    <form class="flex min-w-0 flex-col gap-4" role="search" aria-label="歌曲" hidden>
+      <div class="flex min-w-0 items-center gap-2">
+        <label for="song-index-query" class="sr-only">搜索歌名、版本或演唱者</label>
+        <Input nativeInput id="song-index-query" name="q" type="search" autoComplete="off" placeholder="搜索歌名、版本或演唱者" className="max-w-md" />
+        <button type="button" data-clear-query hidden class={buttonVariants({ variant: "ghost", size: "sm" })}>清除</button>
+      </div>
+      <fieldset class="flex min-w-0 flex-col gap-2" data-categories>
+        <legend class="mb-2 text-sm font-medium">类型</legend>
+        <div class="flex flex-wrap gap-2">
+          {songKindOptions.map(({ value, label }) => (
+            <label class={chipClass}><input type="checkbox" class="sr-only" name="category" value={value} />{label}</label>
+          ))}
+        </div>
+      </fieldset>
+      <fieldset class="flex min-w-0 flex-col gap-2" data-subcategories>
+        <legend class="mb-2 text-sm font-medium">歌曲类别</legend>
+        <div class="flex flex-wrap gap-2">
+          {songSubCategoryOptions.map(({ value, label }) => (
+            <label class={chipClass}><input type="checkbox" class="sr-only" name="category" value={value} />{label}</label>
+          ))}
+        </div>
+      </fieldset>
+      <fieldset class="flex min-w-0 flex-col gap-2" data-sort>
+        <legend class="mb-2 text-sm font-medium">排序</legend>
+        <div class="flex flex-wrap gap-2">
+          {songSortOptions.map(({ value, label }) => (
+            <label class={chipClass}><input type="radio" class="sr-only" name="sort" value={value} />{label}</label>
+          ))}
+        </div>
+      </fieldset>
+      <div class="flex min-w-0 flex-wrap items-center gap-2">
+        <p role="status" class="text-sm text-muted-foreground tabular-nums" data-count>共 {entries.length} 首歌曲</p>
+        <button type="button" data-clear-all hidden class={buttonVariants({ variant: "ghost", size: "sm" })}>清除搜索和筛选</button>
+      </div>
+    </form>
+    <ul class="song-index-list @container min-w-0 rounded-xl border bg-card">
+      {entries.map((entry) => <SongIndexItem entry={entry} />)}
+    </ul>
+    <p class="song-index-empty" data-empty hidden>
+      没有符合条件的歌曲。<button type="button" data-clear-all class={buttonVariants({ variant: "link", size: "sm" })}>清除搜索和筛选</button>
+    </p>
+  </div>
+) : (
+  <p class="song-index-empty">已整理的歌曲还没有收录。<a href="/discography/">浏览 Discography</a></p>
+)}
+
+<script>
+  import {
+    filterSongIndex, normalizeSearchText, parseSongIndexState, serializeSongIndexState, songMatchesQuery,
+    type SongCategoryFilter, type SongIndexKey, type SongIndexSort, type SongIndexState,
+  } from "@/lib/song-index";
+
+  function setupSongIndex() {
+    const root = document.querySelector<HTMLElement>("[data-song-index]");
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = "";
+    const keys: SongIndexKey[] = JSON.parse(root.querySelector("[data-song-index-keys]")!.textContent!);
+    const form = root.querySelector("form")!;
+    const list = root.querySelector<HTMLElement>(".song-index-list")!;
+    const items = new Map([...list.querySelectorAll<HTMLElement>("[data-song-id]")].map((item) => [item.dataset.songId!, item]));
+    const query = form.querySelector<HTMLInputElement>("input[name=q]")!;
+    const categoryInputs = [...form.querySelectorAll<HTMLInputElement>("input[name=category]")];
+    const sortInputs = [...form.querySelectorAll<HTMLInputElement>("input[name=sort]")];
+    const count = root.querySelector<HTMLElement>("[data-count]")!;
+    const empty = root.querySelector<HTMLElement>("[data-empty]")!;
+    const clearQuery = root.querySelector<HTMLButtonElement>("[data-clear-query]")!;
+    const clearAll = [...root.querySelectorAll<HTMLButtonElement>("[data-clear-all]")];
+    let state: SongIndexState = parseSongIndexState(new URLSearchParams(location.search));
+
+    const writeControls = () => {
+      query.value = state.query;
+      for (const input of categoryInputs) input.checked = state.categories.includes(input.value as SongCategoryFilter);
+      for (const input of sortInputs) input.checked = input.value === state.sort;
+    };
+
+    // Open a Song's Versions when the query matched a Version but not the Song's titles.
+    const revealVersions = (item: HTMLElement) => {
+      const details = item.querySelector<HTMLDetailsElement>(".song-index-versions");
+      if (!details) return;
+      const terms = state.query.trim();
+      const hit = terms !== "" && !songMatchesQuery(item.dataset.titleSearch ?? "", terms)
+        && [...details.querySelectorAll<HTMLElement>("[data-version-search]")].some((version) => songMatchesQuery(version.dataset.versionSearch ?? "", terms));
+      if (hit) { details.open = true; details.dataset.revealed = ""; }
+      else if (details.dataset.revealed !== undefined) { details.open = false; delete details.dataset.revealed; }
+    };
+
+    const render = () => {
+      const results = filterSongIndex(keys, state);
+      const shown = new Set(results.map(({ id }) => id));
+      list.append(...results.map(({ id }) => items.get(id)!));
+      for (const [id, item] of items) {
+        item.hidden = !shown.has(id);
+        if (!item.hidden) revealVersions(item);
+      }
+      const filtered = normalizeSearchText(state.query) !== "" || state.categories.length > 0;
+      count.textContent = filtered ? `显示 ${results.length} 首歌曲，共 ${keys.length} 首` : `共 ${keys.length} 首歌曲`;
+      list.hidden = results.length === 0;
+      empty.hidden = results.length > 0;
+      clearQuery.hidden = state.query === "";
+      for (const button of clearAll) button.hidden = !filtered;
+      empty.querySelector<HTMLButtonElement>("[data-clear-all]")!.hidden = false;
+      // Keep the router's history state; only the query string changes.
+      history.replaceState(history.state, "", `${location.pathname}${serializeSongIndexState(state)}${location.hash}`);
+    };
+
+    const update = (next: Partial<SongIndexState>) => { state = { ...state, ...next }; render(); };
+    query.addEventListener("input", () => update({ query: query.value }));
+    form.addEventListener("change", (event) => {
+      const target = event.target as HTMLInputElement;
+      if (target.name === "category") update({ categories: categoryInputs.filter((input) => input.checked).map((input) => input.value as SongCategoryFilter) });
+      if (target.name === "sort") update({ sort: target.value as SongIndexSort });
+    });
+    form.addEventListener("submit", (event) => event.preventDefault());
+    clearQuery.addEventListener("click", () => { update({ query: "" }); query.value = ""; query.focus(); });
+    for (const button of clearAll) {
+      button.addEventListener("click", () => {
+        update({ query: "", categories: [] });
+        writeControls();
+        query.focus();
+      });
+    }
+
+    writeControls();
+    form.hidden = false;
+    render();
+  }
+  document.addEventListener("astro:page-load", setupSongIndex);
+</script>
+
+<style>
+  .song-index-empty { margin: 0; }
+  .song-index [hidden] { display: none; }
+  /* The list is not prose; a hairline separates visible rows only, whatever is hidden. */
+  .song-index-list { margin: 0; padding: 0; list-style: none; }
+  .song-index-list :global(.song-index-item:not([hidden]) ~ .song-index-item:not([hidden])) { border-top: 1px solid var(--border); }
+  .song-index-list :global(.song-index-field) { display: inline-flex; min-width: 0; align-items: center; gap: 0.5rem; }
+  .song-index-list :global(.song-index-title) {
+    color: var(--wiki-brand);
+    line-height: 1.5rem;
+    overflow-wrap: anywhere;
+    text-decoration: none;
+  }
+  .song-index-list :global(.song-index-release) { color: inherit; text-decoration: none; }
+  .song-index-list :global(:is(.song-index-title, .song-index-release):hover) {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .song-index-list :global(:is(.song-index-title, .song-index-release):focus-visible) {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+  .song-index-list :global(.song-index-versions ul) { margin: 0.5rem 0 0; list-style: none; }
+</style>

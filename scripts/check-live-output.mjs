@@ -116,6 +116,21 @@ for (const file of files) {
     if (/qa-live-detail|临时 QA/.test(html)) failures.push(`${relative}: QA content remains`);
   }
 }
+// The Song Index lists each Song once, links every Song Detail page, and ships no fixtures.
+const songIndexFile = path.join(root, 'discography/songs/index.html');
+const songDetailIds = fs.existsSync(path.join(root, 'discography/songs'))
+  ? fs.readdirSync(path.join(root, 'discography/songs'), { withFileTypes: true }).filter((entry) => entry.isDirectory()).map((entry) => entry.name) : [];
+let songIndexRows = 0;
+if (!fs.existsSync(songIndexFile)) failures.push('discography/songs/index.html: missing Song Index');
+else {
+  const html = fs.readFileSync(songIndexFile, 'utf8');
+  const rows = [...html.matchAll(/data-song-id="([^"]+)"/g)].map((match) => match[1]);
+  songIndexRows = rows.length;
+  if (new Set(rows).size !== rows.length) failures.push('discography/songs/index.html: duplicate Song rows');
+  if (rows.slice().sort().join() !== songDetailIds.slice().sort().join()) failures.push(`discography/songs/index.html: rows ${rows.join(',')} != Song pages ${songDetailIds.join(',')}`);
+  if (/fixture-|テスト/.test(html)) failures.push('discography/songs/index.html: test fixtures leaked');
+}
+if (fs.existsSync(path.join(root, 'lab/song-index'))) failures.push('Song Index lab route remains in dist');
 if (fs.existsSync(path.join(root, 'qa-live-detail'))) failures.push('Temporary QA route remains in dist');
-console.log(JSON.stringify({ pages: files.length, liveDetails, songPages, songHistory, songReleases, internalLinks: links, failures }, null, 2));
+console.log(JSON.stringify({ pages: files.length, liveDetails, songPages, songIndexRows, songHistory, songReleases, internalLinks: links, failures }, null, 2));
 if (failures.length) process.exitCode = 1;

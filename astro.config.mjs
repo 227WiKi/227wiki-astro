@@ -19,6 +19,7 @@ export default defineConfig({
     optimizeDeps: {
       include: [
         '@base-ui/react/dialog',
+        '@base-ui/react/input',
         '@base-ui/react/menu',
         '@base-ui/react/merge-props',
         '@base-ui/react/popover',

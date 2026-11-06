@@ -1,0 +1,78 @@
+---
+// One Song (the work) in the Song Index. Versions nest inside it and never add rows.
+// Fields render only when the data has them; nothing is guessed.
+// Follows docs/ui-rules.md; listed in RULED_FILES in tests/ui-rules.test.mjs.
+import { CalendarDays, Disc3, Languages, Layers, Mic, Tag } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { formatReleaseDate } from "@/lib/releases";
+import {
+  normalizeSearchText, songCategoryLabel, versionKindLabels, versionSearchText, type SongIndexEntry, type SongVersionView,
+} from "@/lib/song-index";
+import { cn } from "@/lib/utils";
+
+interface Props { entry: SongIndexEntry; }
+const { entry } = Astro.props;
+// The Japanese original is the title; a Chinese title, when different, is a field below it.
+const title = entry.titleJa;
+const chineseTitle = entry.titleZh && entry.titleZh !== entry.titleJa ? entry.titleZh : undefined;
+// Kind first, then sub-categories; with neither, the field is left out.
+const categoryText = [
+  ...entry.categories.map(songCategoryLabel),
+].join("、");
+const [primary] = entry.versions;
+const versions = entry.versions.length > 1 ? entry.versions : [];
+const titleSearch = [entry.titleJa, entry.titleZh].filter((value) => value !== undefined).map(normalizeSearchText).join("\n");
+const iconClass = "size-4 shrink-0 text-muted-foreground";
+const kindText = (version: SongVersionView) => version.name !== versionKindLabels[version.kind] ? versionKindLabels[version.kind] : undefined;
+---
+
+<li class="song-index-item" data-song-id={entry.id} data-title-search={titleSearch}>
+  <div class="flex min-w-0 flex-col gap-2 p-4">
+    <a href={entry.href} class="song-index-title font-medium" lang="ja">{title}</a>
+    <div class="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
+      {chineseTitle && (
+        <span class="song-index-field"><Languages aria-hidden="true" className={iconClass} /><span lang="zh-CN">{chineseTitle}</span></span>
+      )}
+      {categoryText && <span class="song-index-field"><Tag aria-hidden="true" className={iconClass} /><span>{categoryText}</span></span>}
+      {primary.performerText && (
+        <span class="song-index-field"><Mic aria-hidden="true" className={iconClass} /><span>{primary.performerText}</span></span>
+      )}
+      {entry.homeRelease && (
+        <>
+          <span class="song-index-field">
+            <Disc3 aria-hidden="true" className={iconClass} />
+            <a href={entry.homeRelease.href} class="song-index-release" lang="ja">{entry.homeRelease.titleJa}</a>
+          </span>
+          <span class="song-index-field">
+            <CalendarDays aria-hidden="true" className={iconClass} />
+            <time datetime={entry.homeRelease.date} class="tabular-nums">{formatReleaseDate(entry.homeRelease.date)}</time>
+          </span>
+        </>
+      )}
+    </div>
+    {versions.length > 0 && (
+      <details class="song-index-versions">
+        <summary class={cn(buttonVariants({ variant: "secondary", size: "xs" }), "list-none font-normal [&::-webkit-details-marker]:hidden")}>
+          <Layers aria-hidden="true" className={iconClass} />{versions.length} 个版本
+        </summary>
+        <ul class="mt-2 flex flex-col gap-2 border-s ps-4" aria-label={`${title}的版本`}>
+          {versions.map((version) => (
+            <li class="flex min-w-0 flex-col gap-1" data-version-search={versionSearchText(version)}>
+              <span class="font-medium text-foreground text-sm">{version.name}</span>
+              <span class="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
+                {kindText(version) && <span class="song-index-field"><Layers aria-hidden="true" className={iconClass} /><span>{kindText(version)}</span></span>}
+                {version.performerText && <span class="song-index-field"><Mic aria-hidden="true" className={iconClass} /><span>{version.performerText}</span></span>}
+                {version.homeRelease && (
+                  <>
+                    <span class="song-index-field"><Disc3 aria-hidden="true" className={iconClass} /><a href={version.homeRelease.href} class="song-index-release" lang="ja">{version.homeRelease.titleJa}</a></span>
+                    <span class="song-index-field"><CalendarDays aria-hidden="true" className={iconClass} /><time datetime={version.homeRelease.date} class="tabular-nums">{formatReleaseDate(version.homeRelease.date)}</time></span>
+                  </>
+                )}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </details>
+    )}
+  </div>
+</li>

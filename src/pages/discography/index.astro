@@ -4,10 +4,12 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Breadcrumbs from "@/components/wiki/common/Breadcrumbs.astro";
 import PageHeader from "@/components/wiki/common/PageHeader.astro";
 import ReleaseCard from "@/components/wiki/release/ReleaseCard.astro";
+import { buttonVariants } from "@/components/ui/button";
 import { sectionPages } from "@/config/site";
 
 const section = sectionPages.discography;
 const releases = await getCollection("releases");
+const songCount = (await getCollection("songs")).length;
 const groups = [
   { type: "single", title: "Single" },
   { type: "album", title: "Album" },
@@ -20,6 +22,11 @@ const groups = [
     <PageHeader title={section.title} />
 
     <div class="flex flex-col gap-10 sm:gap-12">
+      <section aria-labelledby="songs" class="flex min-w-0 flex-col gap-4">
+        <h2 id="songs" class="font-heading text-xl font-semibold tracking-tight sm:text-2xl">Song</h2>
+        <p class="max-w-2xl">按歌名、类型和首次发行时间浏览已收录的 {songCount} 首歌曲。</p>
+        <a href="/discography/songs/" class:list={[buttonVariants({ variant: "outline" }), "self-start"]}>浏览全部歌曲</a>
+      </section>
       {groups.map((group) => {
         const groupReleases = releases
           .filter(({ data }) => data.releaseType === group.type)

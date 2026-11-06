@@ -1,0 +1,25 @@
+---
+// Follows docs/ui-rules.md; listed in RULED_FILES in tests/ui-rules.test.mjs.
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Breadcrumbs from "@/components/wiki/common/Breadcrumbs.astro";
+import PageHeader from "@/components/wiki/common/PageHeader.astro";
+import SongIndex from "@/components/wiki/song/SongIndex.astro";
+import { buildSongIndex, defaultSongIndexState, filterSongIndex, toSongIndexKey } from "@/lib/song-index";
+import { assertSongPerformerReferences, assertSongReferences } from "@/lib/songs";
+
+const [songs, releases, members] = await Promise.all([getCollection("songs"), getCollection("releases"), getCollection("members")]);
+assertSongReferences(releases, songs);
+assertSongPerformerReferences(songs, members);
+// Server order is the default sort, so the page reads the same before the script runs.
+const entries = filterSongIndex(buildSongIndex(songs, releases).map((entry) => ({ ...toSongIndexKey(entry), entry })), defaultSongIndexState)
+  .map(({ entry }) => entry);
+---
+
+<BaseLayout title="歌曲" description="22/7 歌曲索引，可按歌名、类型和首次发行时间浏览。" wide>
+  <div class="flex min-w-0 max-w-4xl flex-col gap-8">
+    <Breadcrumbs items={[{ label: "Discography", href: "/discography/" }, { label: "歌曲", href: "/discography/songs/" }]} />
+    <PageHeader title="歌曲" />
+    <SongIndex entries={entries} />
+  </div>
+</BaseLayout>

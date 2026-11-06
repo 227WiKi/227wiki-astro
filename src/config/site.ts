@@ -6,7 +6,7 @@ export const resourceBaseUrl = "https://res.227wiki.eu.org";
 export const sectionPages = {
   member: { title: "Member", path: "/member/", description: "22/7 成员索引。" },
   character: { title: "Character", path: "/character/", description: "22/7 角色索引。" },
-  discography: { title: "Discography", path: "/discography/", description: "22/7 单曲与专辑发行索引。" },
+  discography: { title: "Discography", path: "/discography/", description: "22/7 单曲、专辑与歌曲索引。" },
   live: { title: "Live", path: "/live/", description: "22/7 演唱会与现场活动索引。" },
   anime: { title: "Anime", path: "/anime/", description: "22/7 动画入口。" },
   tv: { title: "TV", path: "/tv/", description: "22/7 电视节目索引。" },

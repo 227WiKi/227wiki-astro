@@ -19,6 +19,10 @@ export const RULED_FILES = [
   "src/components/wiki/song/SongLiveCard.tsx",
   "src/components/wiki/song/SongReleaseList.astro",
   "src/components/wiki/song/SongReleaseCard.tsx",
+  "src/components/wiki/song/SongIndex.astro",
+  "src/components/wiki/song/SongIndexItem.astro",
+  "src/pages/discography/songs/index.astro",
+  "src/pages/lab/song-index/[scenario].astro",
 ];
 
 const sources = RULED_FILES.map((file) => ({ file, text: fs.readFileSync(new URL(`../${file}`, import.meta.url), "utf8") }));

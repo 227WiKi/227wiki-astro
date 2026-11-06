@@ -5,21 +5,36 @@ export type SongData = CollectionEntry<"songs">["data"];
 
 /** Fail static route generation instead of emitting a broken canonical link. */
 export function assertSongReferences(
-  releases: readonly CollectionEntry<"releases">[],
-  songs: readonly CollectionEntry<"songs">[],
+  releases: readonly Pick<CollectionEntry<"releases">, "id" | "data">[],
+  songs: readonly Pick<CollectionEntry<"songs">, "id" | "data">[],
 ): void {
-  const songIds = new Set(songs.map(({ id }) => id));
+  const versionIds = new Map(songs.map(({ id, data }) => [id, new Set(data.versions?.map((version) => version.id) ?? [])]));
   for (const release of releases) {
     for (const edition of release.data.editions) {
       for (const [index, disc] of edition.audioDiscs.entries()) {
         for (const track of disc.tracks) {
-          if (track.song && !songIds.has(track.song)) {
-            throw new Error(`Unknown Song "${track.song}" in Release "${release.id}", Edition "${edition.id}", disc ${index + 1}, track ${track.number}`);
+          const at = `Release "${release.id}", Edition "${edition.id}", disc ${index + 1}, track ${track.number}`;
+          if (track.song && !versionIds.has(track.song)) throw new Error(`Unknown Song "${track.song}" in ${at}`);
+          // Only declared Versions are addressable; the implicit one is reached by omitting `version`.
+          if (track.song && track.version && !versionIds.get(track.song)!.has(track.version)) {
+            throw new Error(`Unknown Version "${track.version}" of Song "${track.song}" in ${at}`);
           }
         }
       }
     }
   }
+}
+
+/** Fail the build when a Version credits a Member ID that does not exist. */
+export function assertSongPerformerReferences(
+  songs: readonly Pick<CollectionEntry<"songs">, "id" | "data">[],
+  members: readonly Pick<CollectionEntry<"members">, "id">[],
+): void {
+  const memberIds = new Set(members.map(({ id }) => id));
+  const errors = songs.flatMap(({ id, data }) => (data.versions ?? []).flatMap((version) => (version.performers ?? [])
+    .filter((performer) => performer.type === "member" && performer.ref && !memberIds.has(performer.ref))
+    .map((performer) => `${id}/${version.id}: unknown Member "${performer.ref}"`)));
+  if (errors.length) throw new Error(`Invalid Song performer references:\n${errors.join("\n")}`);
 }
 
 type ReleaseEntry = Pick<CollectionEntry<"releases">, "id" | "data">;

@@ -1,0 +1,23 @@
+---
+// Follows docs/ui-rules.md; listed in RULED_FILES in tests/ui-rules.test.mjs.
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SongIndex from "@/components/wiki/song/SongIndex.astro";
+import { buildSongIndex, defaultSongIndexState, filterSongIndex, toSongIndexKey } from "@/lib/song-index";
+import { fixtureReleases, fixtureSongs, scaleFixture } from "../../../../tests/fixtures/song-index";
+
+// Isolated fixtures are available to the dev server only, never generated for production.
+const scenarios = { fixtures: { songs: fixtureSongs, releases: fixtureReleases }, scale: scaleFixture(400), empty: { songs: [], releases: [] } };
+export function getStaticPaths() {
+  return import.meta.env.DEV ? ["fixtures", "scale", "empty"].map((scenario) => ({ params: { scenario } })) : [];
+}
+const { songs, releases } = scenarios[Astro.params.scenario as keyof typeof scenarios];
+const entries = filterSongIndex(buildSongIndex(songs, releases).map((entry) => ({ ...toSongIndexKey(entry), entry })), defaultSongIndexState)
+  .map(({ entry }) => entry);
+---
+<BaseLayout title="歌曲索引测试" description="歌曲索引的隔离测试页面。" noindex wide>
+  <div class="flex min-w-0 max-w-4xl flex-col gap-8">
+    <h1 class="text-2xl font-semibold">歌曲索引测试</h1>
+    <p>以下为隔离的测试数据，不代表 Wiki 收录的歌曲。</p>
+    <SongIndex entries={entries} />
+  </div>
+</BaseLayout>
