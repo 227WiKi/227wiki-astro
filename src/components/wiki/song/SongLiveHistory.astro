@@ -32,6 +32,98 @@ const hiddenCount = hidden.reduce((count, group) => count + group.appearances.le
   )}
 </section>
 
+<script>
+  // Progressive enhancement only: all links and click-to-expand work without JS.
+  let disposeMenus: (() => void) | undefined;
+  function setupShowMenus() {
+    disposeMenus?.();
+    const events = new AbortController();
+    const { signal } = events;
+    const controls: { details: HTMLDetailsElement; close: () => void }[] = [];
+    const cleanups: (() => void)[] = [];
+    const hover = matchMedia("(hover: hover) and (pointer: fine)");
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+
+    document.querySelectorAll<HTMLDetailsElement>("details[data-live-shows]").forEach((details) => {
+      const summary = details.querySelector("summary")!;
+      const popup = details.querySelector<HTMLElement>("[data-live-shows-popup]")!;
+      let timer: ReturnType<typeof setTimeout> | undefined;
+      let animation: Animation | undefined;
+      let expanded = details.open;
+      const clearTimer = () => clearTimeout(timer);
+      const change = (open: boolean) => {
+        clearTimer();
+        if (expanded === open) return;
+        expanded = open;
+        const current = animation ? getComputedStyle(popup) : undefined;
+        const from = current ? { opacity: current.opacity, transform: current.transform }
+          : { opacity: open ? 0 : 1, transform: open ? "translateY(-4px)" : "translateY(0)" };
+        animation?.cancel();
+        if (open) {
+          for (const other of controls) if (other.details !== details) other.close();
+          details.open = true;
+        }
+        if (reducedMotion.matches) {
+          details.open = open;
+          animation = undefined;
+          return;
+        }
+        animation = popup.animate([
+          from,
+          { opacity: open ? 1 : 0, transform: open ? "translateY(0)" : "translateY(-4px)" },
+        ], { duration: open ? 160 : 120, easing: "ease-out", fill: "both" });
+        animation.onfinish = () => {
+          details.open = expanded;
+          animation?.cancel();
+          animation = undefined;
+        };
+      };
+      const close = () => change(false);
+      controls.push({ details, close });
+      details.addEventListener("pointerenter", (event) => {
+        if (!hover.matches || event.pointerType !== "mouse") return;
+        clearTimer();
+        timer = setTimeout(() => change(true), 80);
+      }, { signal });
+      details.addEventListener("pointerleave", (event) => {
+        if (event.pointerType !== "mouse") return;
+        clearTimer();
+        if (!popup.contains(document.activeElement)) timer = setTimeout(close, 160);
+      }, { signal });
+      summary.addEventListener("click", (event) => {
+        event.preventDefault();
+        // A click after hovering keeps the panel open; keyboard and touch toggle.
+        change(hover.matches && event.detail > 0 ? true : !expanded);
+      }, { signal });
+      details.addEventListener("focusin", clearTimer, { signal });
+      details.addEventListener("focusout", () => {
+        clearTimer();
+        timer = setTimeout(() => {
+          if (!details.contains(document.activeElement) && !details.matches(":hover")) close();
+        }, 160);
+      }, { signal });
+      cleanups.push(() => { clearTimer(); animation?.cancel(); });
+    });
+    document.addEventListener("pointerdown", (event) => {
+      for (const { details, close } of controls) {
+        if (event.target instanceof Node && !details.contains(event.target)) close();
+      }
+    }, { signal });
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      for (const { details, close } of controls) {
+        if (!details.open) continue;
+        if (details.contains(document.activeElement)) details.querySelector("summary")?.focus();
+        close();
+      }
+    }, { signal });
+    disposeMenus = () => { events.abort(); cleanups.forEach((cleanup) => cleanup()); };
+  }
+  setupShowMenus();
+  document.addEventListener("astro:page-load", setupShowMenus);
+  document.addEventListener("astro:before-swap", () => disposeMenus?.());
+</script>
+
 <style>
   .song-live-history .live-history-empty { margin-block: 0; }
   .song-live-history .more-toggle { margin-top: 1rem; }

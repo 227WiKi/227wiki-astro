@@ -11,10 +11,13 @@ const contentRoot = fileURLToPath(new URL('../src/content/live-events/', import.
 const walkMarkdown = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => entry.isDirectory() ? walkMarkdown(path.join(dir, entry.name)) : entry.name.endsWith('.md') ? [path.join(dir, entry.name)] : []);
 const expectedShows = new Map();
 for (const file of walkMarkdown(contentRoot)) {
+  const liveId = path.relative(contentRoot, file).split(path.sep).join('/').replace(/\.md$/, '');
   const data = YAML.parse(fs.readFileSync(file, 'utf8').match(/^---\n([\s\S]*?)\n---/)[1]);
   for (const show of data.shows) {
     for (const song of new Set((show.setlist ?? []).filter((entry) => entry.type === 'song' && entry.song).map((entry) => entry.song))) {
-      expectedShows.set(song, (expectedShows.get(song) ?? 0) + 1);
+      const hrefs = expectedShows.get(song) ?? new Set();
+      hrefs.add(`/live/${liveId}/#show-${show.id}`);
+      expectedShows.set(song, hrefs);
     }
   }
 }
@@ -46,18 +49,24 @@ for (const file of files) {
   if (duplicateIds.length && /^(live|discography\/songs)\//.test(relative)) failures.push(`${relative}: duplicate ids ${duplicateIds.join(', ')}`);
   if (/^discography\/songs\/.+\/index\.html$/.test(relative)) {
     songPages++;
-    // Every Show must be deep-linked, whether as a visible href or inside a "+N 场" menu's island props.
-    const showLinks = [...new Set([...html.matchAll(/\/live\/[a-z0-9/-]+\/#show-show-[a-z0-9-]+/g)].map((match) => match[0]))];
-    for (const href of showLinks) {
-      const [pathname, fragment] = href.split('#');
-      const target = path.join(root, pathname, 'index.html');
-      if (!fs.existsSync(target) || !fs.readFileSync(target, 'utf8').includes(`id="${fragment}"`)) failures.push(`${relative}: missing anchor ${href}`);
+    // Only real, marked <a href> elements count. Island props are not navigation.
+    // Ignore inert markup so a URL in a script, template or comment cannot pass.
+    const navigationHtml = html.replace(/<!--[\s\S]*?-->|<(script|style|template)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, '');
+    const showLinks = new Set();
+    for (const [tag] of navigationHtml.matchAll(/<a\b(?:"[^"]*"|'[^']*'|[^'">])*>/gi)) {
+      const attributes = new Map([...tag.matchAll(/([^\s=<>]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'))?/g)].map(([, name, double, single]) => [name.toLowerCase(), double ?? single ?? '']));
+      if (attributes.has('data-live-show-link') && attributes.has('href')) showLinks.add(attributes.get('href').replaceAll('&amp;', '&'));
     }
     const songId = relative.split('/')[2];
-    const expected = expectedShows.get(songId) ?? 0;
-    if (expected !== showLinks.length) failures.push(`${relative}: Live history links ${showLinks.length} Shows, content has ${expected}`);
-    if (!showLinks.length && !html.includes('已整理的 Setlist 里还没有出现本曲。')) failures.push(`${relative}: missing Live history empty state`);
-    songHistory[relative] = { shows: showLinks.length, expected };
+    const expected = expectedShows.get(songId) ?? new Set();
+    for (const href of expected) {
+      if (!showLinks.has(href)) failures.push(`${relative}: missing HTML Show link ${href}`);
+    }
+    for (const href of showLinks) {
+      if (!expected.has(href)) failures.push(`${relative}: unexpected HTML Show link ${href}`);
+    }
+    if (!showLinks.size && !html.includes('已整理的 Setlist 里还没有出现本曲。')) failures.push(`${relative}: missing Live history empty state`);
+    songHistory[relative] = { shows: showLinks.size, expected: expected.size };
   }
   if (/^live\/\d{4}\/.+\/index\.html$/.test(relative)) {
     liveDetails++;

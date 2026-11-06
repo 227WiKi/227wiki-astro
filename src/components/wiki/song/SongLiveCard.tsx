@@ -1,11 +1,10 @@
 // One LiveEvent within a year. Every card has the same fixed structure (title
 // reserved at two lines, one date row, one venue row) so cards align in height.
-// Single-Show cards render static; multi-Show cards hydrate for the "+N 场" menu.
+// All Show links render statically; native details opens the "+N 场" navigation.
 // Follows docs/ui-rules.md; listed in RULED_FILES in tests/ui-rules.test.mjs.
 import { CalendarDays, MapPin } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardPanel } from "@/components/ui/card";
-import { Menu, MenuLinkItem, MenuPopup, MenuTrigger } from "@/components/ui/menu";
 import type { SongLiveAppearance, SongLiveEventGroup } from "@/lib/songs";
 import { cn } from "@/lib/utils";
 
@@ -22,34 +21,30 @@ function ShowText({ show, venue }: { show: SongLiveAppearance; venue: boolean })
 }
 
 function MoreShows({ shows, title, venue }: { shows: SongLiveAppearance[]; title: string; venue: boolean }) {
-  return <Menu
-    modal={false}
-    // A hover-opened menu would otherwise close on a "patient" click (>500ms after
-    // opening), so a click looks like it does nothing. Clicking the trigger only opens;
-    // Escape, an outside press or moving away still close it.
-    onOpenChange={(open, details) => {
-      if (!open && details.reason === "trigger-press") details.cancel();
-    }}
-  >
-    <MenuTrigger
-      openOnHover
-      delay={80}
-      closeDelay={160}
-      className={cn(buttonVariants({ variant: "secondary", size: "xs" }), "ms-auto shrink-0 font-normal tabular-nums")}
+  return <details data-live-shows="" className="ms-auto shrink-0">
+    <summary
+      className={cn(buttonVariants({ variant: "secondary", size: "xs" }), "list-none font-normal tabular-nums [&::-webkit-details-marker]:hidden")}
     >
       +{shows.length} 场<span className="sr-only">，{title} 的其余公演</span>
-    </MenuTrigger>
-    <MenuPopup align="end" className="max-w-[calc(100vw-2rem)]">
-      {shows.map((show) => <MenuLinkItem key={show.showId} href={show.href} className="items-start text-muted-foreground">
-        <time dateTime={show.date} className="shrink-0 text-foreground tabular-nums">{monthDay(show.date)}</time>
-        {(show.showLabel || venue || show.occurrences > 1) && <span className="flex min-w-0 flex-col">
-          {show.showLabel && <span>{show.showLabel}</span>}
-          {venue && <span>{show.venue}</span>}
-          {show.occurrences > 1 && <span>{show.occurrences} 次</span>}
-        </span>}
-      </MenuLinkItem>)}
-    </MenuPopup>
-  </Menu>;
+    </summary>
+    {/* Transparent padding bridges the hover path across the visible 8px gap. */}
+    <div className="absolute end-0 top-full z-50 w-max max-w-full pt-2">
+      <div data-live-shows-popup="" className="[max-block-size:min(16rem,50vh)] overflow-y-auto rounded-lg border bg-popover p-1 text-muted-foreground">
+        <ul aria-label={`${title} 的其余公演`}>
+          {shows.map((show) => <li key={show.showId}>
+            <a href={show.href} data-live-show-link="" className="live-card-date flex items-start gap-2 rounded-sm p-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:-outline-offset-2 pointer-coarse:py-3">
+              <time dateTime={show.date} className="shrink-0 text-foreground tabular-nums">{monthDay(show.date)}</time>
+              {(show.showLabel || venue || show.occurrences > 1) && <span className="flex min-w-0 flex-col break-words">
+                {show.showLabel && <span>{show.showLabel}</span>}
+                {venue && <span>{show.venue}</span>}
+                {show.occurrences > 1 && <span>{show.occurrences} 次</span>}
+              </span>}
+            </a>
+          </li>)}
+        </ul>
+      </div>
+    </div>
+  </details>;
 }
 
 export function SongLiveCard({ live }: { live: SongLiveEventGroup }) {
@@ -66,7 +61,7 @@ export function SongLiveCard({ live }: { live: SongLiveEventGroup }) {
         title={live.liveTitle}
         className="live-card-title line-clamp-2 font-medium leading-snug"
       >{live.liveTitle}</a>
-      <p className="live-card-dates flex min-w-0 items-center gap-2 text-muted-foreground text-sm">
+      <div className="live-card-dates relative flex min-w-0 items-center gap-2 text-muted-foreground text-sm">
         <CalendarDays aria-hidden="true" className={iconClass} />
         {rest.length === 0
           ? <span className="flex min-w-0 items-center gap-2"><ShowText show={first} venue={false} /></span>
@@ -74,7 +69,7 @@ export function SongLiveCard({ live }: { live: SongLiveEventGroup }) {
               <ShowText show={first} venue={perShowVenue} />
             </a>}
         {rest.length > 0 && <MoreShows shows={rest} title={live.liveTitle} venue={perShowVenue} />}
-      </p>
+      </div>
       <p className="flex min-w-0 items-center gap-2 text-muted-foreground text-sm">
         <MapPin aria-hidden="true" className={iconClass} />
         <span className="truncate" title={venueText}>{venueText}</span>

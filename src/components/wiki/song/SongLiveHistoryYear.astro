@@ -12,8 +12,7 @@ const headingId = `live-history-${group.year}`;
   <ul class="grid gap-2 @xl:grid-cols-2">
     {group.lives.map((live) => (
       <li class="min-w-0">
-        {/* Only multi-Show cards need JS, for their "+N 场" menu; it hydrates when scrolled into view. */}
-        {live.appearances.length > 1 ? <SongLiveCard client:visible live={live} /> : <SongLiveCard live={live} />}
+        <SongLiveCard live={live} />
       </li>
     ))}
   </ul>
