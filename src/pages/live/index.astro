@@ -15,7 +15,7 @@ const kindGroups = groupLiveEventsByKind(liveEvents);
 
 <BaseLayout title={section.title} description={section.description} wide>
   <div class="flex min-w-0 flex-col gap-8">
-    <Breadcrumbs items={[{ label: section.title }]} />
+    <Breadcrumbs items={[{ label: section.title, href: section.path }]} />
     <PageHeader title={section.title} />
 
     {liveEvents.length > 0 ? (

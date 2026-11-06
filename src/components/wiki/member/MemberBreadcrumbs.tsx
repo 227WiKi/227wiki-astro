@@ -43,6 +43,7 @@ export function MemberBreadcrumbs({
         <BreadcrumbItem className="shrink-0">
           <BreadcrumbLink
             aria-label="首页"
+            title="首页"
             href="/"
             className="inline-flex size-7 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
@@ -57,6 +58,7 @@ export function MemberBreadcrumbs({
           <Menu modal={false}>
             <MenuTrigger
               aria-label="切换成员"
+              title="切换成员"
               className="inline-flex size-7 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <Users aria-hidden="true" className="size-4 shrink-0 pointer-events-none" />

@@ -18,7 +18,7 @@ const groups = [
 
 <BaseLayout title={section.title} description={section.description} wide>
   <div class="flex flex-col gap-8">
-    <Breadcrumbs items={[{ label: section.title }]} />
+    <Breadcrumbs items={[{ label: section.title, href: section.path }]} />
     <PageHeader title={section.title} />
 
     <div class="flex flex-col gap-10 sm:gap-12">

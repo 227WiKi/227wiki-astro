@@ -3,27 +3,47 @@ export interface ContextNavItem {
   label: string;
   href: string;
   current?: boolean;
+  /** Short leading marker, e.g. a release number, shown muted before the label. */
+  prefix?: string;
+}
+
+export interface ContextNavGroup {
+  title: string;
+  items: readonly ContextNavItem[];
 }
 
 interface Props {
   title: string;
-  items: readonly ContextNavItem[];
+  /** Flat list; ignored when `groups` is given. */
+  items?: readonly ContextNavItem[];
+  /** Sections with their own headings, e.g. Single and Album. */
+  groups?: readonly ContextNavGroup[];
   collapsedLabel?: string;
 }
 
-const { title, items, collapsedLabel = title } = Astro.props;
+const { title, items = [], groups, collapsedLabel = title } = Astro.props;
+const sections: readonly (ContextNavGroup & { heading: boolean })[] = groups
+  ? groups.filter((group) => group.items.length > 0).map((group) => ({ ...group, heading: true }))
+  : [{ title, items, heading: false }];
 const linkClass = "block min-w-0 rounded-lg px-3 py-3 text-sm [overflow-wrap:anywhere] outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset";
 ---
 
 <div class="context-nav">
   <nav aria-label={title} class="hidden xl:block">
     <p class="mb-3 px-3 text-sm font-semibold">{title}</p>
-    <ul class="flex flex-col gap-1">
-      {items.map((item) => (
-        <li><a href={item.href} aria-current={item.current ? "page" : undefined}
-          class:list={[linkClass, item.current ? "bg-accent font-medium text-foreground" : "text-muted-foreground"]}>{item.label}</a></li>
+    <div class="flex flex-col gap-4">
+      {sections.map((section) => (
+        <div class="flex flex-col gap-1">
+          {section.heading && <p class="px-3 text-xs font-medium text-muted-foreground">{section.title}</p>}
+          <ul class="flex flex-col gap-1" aria-label={section.heading ? section.title : undefined}>
+            {section.items.map((item) => (
+              <li><a href={item.href} aria-current={item.current ? "page" : undefined}
+                class:list={[linkClass, item.current ? "bg-accent font-medium text-foreground" : "text-muted-foreground"]}>{item.prefix && <span class="me-2 tabular-nums text-muted-foreground">{item.prefix}</span>}<span lang={item.prefix ? "ja" : undefined}>{item.label}</span></a></li>
+            ))}
+          </ul>
+        </div>
       ))}
-    </ul>
+    </div>
   </nav>
   <details class="group rounded-xl border bg-background xl:hidden">
     <summary class="flex cursor-pointer list-none items-center justify-between rounded-[max(0px,calc(var(--radius-xl)-1px))] px-4 py-3 text-sm font-medium outline-none transition-colors duration-(--duration-fast,130ms) ease-(--ease-out-subtle) hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset group-open:rounded-b-none [&::-webkit-details-marker]:hidden">
@@ -33,12 +53,19 @@ const linkClass = "block min-w-0 rounded-lg px-3 py-3 text-sm [overflow-wrap:any
     <div class="disclosure-content">
       <div class="disclosure-inner">
         <nav aria-label={title} class="max-h-[50dvh] overflow-y-auto border-t p-2">
-          <ul class="flex flex-col gap-1">
-            {items.map((item) => (
-              <li><a href={item.href} aria-current={item.current ? "page" : undefined}
-                class:list={[linkClass, item.current ? "bg-accent font-medium text-foreground" : "text-muted-foreground"]}>{item.label}</a></li>
+          <div class="flex flex-col gap-4">
+            {sections.map((section) => (
+              <div class="flex flex-col gap-1">
+                {section.heading && <p class="px-3 pt-2 text-xs font-medium text-muted-foreground">{section.title}</p>}
+                <ul class="flex flex-col gap-1" aria-label={section.heading ? section.title : undefined}>
+                  {section.items.map((item) => (
+                    <li><a href={item.href} aria-current={item.current ? "page" : undefined}
+                      class:list={[linkClass, item.current ? "bg-accent font-medium text-foreground" : "text-muted-foreground"]}>{item.prefix && <span class="me-2 tabular-nums text-muted-foreground">{item.prefix}</span>}<span lang={item.prefix ? "ja" : undefined}>{item.label}</span></a></li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
+          </div>
         </nav>
       </div>
     </div>

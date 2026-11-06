@@ -25,13 +25,19 @@ const { data } = release;
 const title = data.titleJa;
 const { Content, headings } = await render(release);
 const siblings = await getCollection("releases");
-const contextItems = siblings
-  .sort((a, b) => a.data.releaseDate.localeCompare(b.data.releaseDate))
-  .map((entry) => ({
-    label: `${releaseLabel(entry.data)} · ${entry.data.titleJa}`,
-    href: `/discography/releases/${entry.id}/`,
-    current: entry.id === release.id,
-  }));
+// Two sections, Single then Album, each in release-number order.
+const contextGroups = ([["single", "单曲"], ["album", "专辑"]] as const).map(([type, groupTitle]) => ({
+  title: groupTitle,
+  items: siblings
+    .filter((entry) => entry.data.releaseType === type)
+    .sort((a, b) => a.data.releaseNumber - b.data.releaseNumber || a.id.localeCompare(b.id))
+    .map((entry) => ({
+      prefix: releaseLabel(entry.data).split(" ")[0],
+      label: entry.data.titleJa,
+      href: `/discography/releases/${entry.id}/`,
+      current: entry.id === release.id,
+    })),
+}));
 const tocItems = [
   ...headings,
   { slug: "editions", text: "版本与收录内容", depth: 2 },
@@ -41,7 +47,7 @@ const tocItems = [
 
 <BaseLayout title={title} description={`${releaseLabel(data)} · ${data.titleJa}，发行于 ${data.releaseDate}。`} wide>
   <WikiArticleLayout>
-    <ContextNav slot="context" title="Discography" collapsedLabel="其他发行作品" items={contextItems} />
+    <ContextNav slot="context" title="Discography" collapsedLabel="其他发行作品" groups={contextGroups} />
     <Fragment slot="header">
       <Breadcrumbs items={[{ label: "Discography", href: "/discography/" }, { label: title }]} />
       <PageHeader eyebrow={releaseLabel(data)} title={title} lang="ja" />

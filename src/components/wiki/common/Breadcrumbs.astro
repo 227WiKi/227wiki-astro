@@ -9,9 +9,11 @@ import {
 } from "@/components/ui/breadcrumb";
 import { cn } from "@/lib/utils";
 import { Home } from "lucide-react";
+import { breadcrumbIcons } from "./breadcrumb-icons";
 
 export interface BreadcrumbItem {
   label: string;
+  /** Link target; on the last item it only identifies the page (and its icon). */
   href?: string;
 }
 
@@ -26,6 +28,7 @@ const { items, className } = Astro.props;
 const normalizedItems = items.filter(
   (item) => !(item.href === "/" || item.label === "首页"),
 );
+const iconClass = "inline-flex size-7 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 ---
 
 <Breadcrumb className={cn("min-w-0 text-sm", className)}>
@@ -33,8 +36,9 @@ const normalizedItems = items.filter(
     <BreadcrumbItem className="shrink-0">
       <BreadcrumbLink
         aria-label="首页"
+        title="首页"
         href="/"
-        className="inline-flex size-7 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className={iconClass}
       >
         <Home aria-hidden="true" className="size-4 shrink-0 pointer-events-none" />
       </BreadcrumbLink>
@@ -43,12 +47,23 @@ const normalizedItems = items.filter(
     {
       normalizedItems.map((item, index) => {
         const isLast = index === normalizedItems.length - 1;
+        const Icon = item.href ? breadcrumbIcons[item.href] : undefined;
 
         return (
           <>
             <BreadcrumbSeparator className="shrink-0" />
-            <BreadcrumbItem className={isLast ? "min-w-0" : "shrink-0"}>
-              {item.href && !isLast ? (
+            <BreadcrumbItem className={isLast && !Icon ? "min-w-0" : "shrink-0"}>
+              {Icon ? (
+                isLast ? (
+                  <BreadcrumbPage aria-label={item.label} title={item.label} className="inline-flex size-7 items-center justify-center text-foreground">
+                    <Icon aria-hidden="true" className="size-4 shrink-0" />
+                  </BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink href={item.href} aria-label={item.label} title={item.label} className={iconClass}>
+                    <Icon aria-hidden="true" className="size-4 shrink-0 pointer-events-none" />
+                  </BreadcrumbLink>
+                )
+              ) : item.href && !isLast ? (
                 <BreadcrumbLink
                   href={item.href}
                   className="rounded-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
